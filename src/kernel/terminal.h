@@ -55,6 +55,8 @@ int printf(const char *format, ...);
 
 int sprintf(char *out, const char *format, ...);
 
+int puts ( const char * str );
+
 void clrscr();
 
 void setcolor(enum TERMINAL_COLOR fg, enum TERMINAL_COLOR bg);

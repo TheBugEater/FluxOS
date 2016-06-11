@@ -5,7 +5,7 @@ CC_C = gcc
 ASM_Flags = -f elf32
 C_Flags = -fno-stack-protector -m32 $(EXTRA)
 CPP_Flags = -m32 -ffreestanding -O2 -Wall -Wextra -fno-exceptions -fno-rtti $(EXTRA)
-LNK_Flags = -m elf_i386
+LNK_Flags = -m elf_i386 
 
 SOURCEDIR = src
 BUILDDIR = build
@@ -24,7 +24,7 @@ EXECUTABLE = FluxOS.bin
 all: init compile create_grub
 
 compile: $(C_OBJECTS) $(CPP_OBJECTS) $(ASM_OBJECTS)
-	ld -T linker.ld $(LNK_Flags) $(foreach file,$(^F),$(BUILDDIR)/$(file)) -o $(EXECUTABLEDIR)/$(EXECUTABLE)
+	ld -T linker.ld $(LNK_Flags) $(foreach file,$(^F),$(BUILDDIR)/$(file)) -o $(EXECUTABLEDIR)/$(EXECUTABLE) 
 
 debug: all
 	objcopy --only-keep-debug $(EXECUTABLEDIR)/$(EXECUTABLE) $(BUILDDIR)/kernel.sym
@@ -33,7 +33,7 @@ debug: all
 	$(CC_CPP) $(CPP_Flags) -c $< -o $(BUILDDIR)/$(@F)
 
 .c.o:
-	$(CC_C) $(C_Flags) -c $< -o $(BUILDDIR)/$(@F)
+	$(CC_C) $(C_Flags) -c $< -o $(BUILDDIR)/$(@F) 
 
 .s.o:
 	$(CC_ASM) $(ASM_Flags) $< -o $(BUILDDIR)/$(@F)

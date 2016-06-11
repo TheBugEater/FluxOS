@@ -182,11 +182,32 @@ unsigned int strlen(const char* message)
 
 }
 
+int puts ( const char * str )
+{
+    printf(str);
+}
+
 int putchar(int character)
 {
     unsigned short* pGraphicDevice = (unsigned short*)GRAPHIC_DEVICE;
 
     const unsigned int index = currentCursor.Y * TERMINAL_WIDTH + currentCursor.X;
+    if(character == '\n')
+    {
+        currentCursor.X = 0;
+        currentCursor.Y++;
+        return character;
+    }
+    else if(character == '\t')
+    {
+        currentCursor.X += 10;
+        if(currentCursor.X > TERMINAL_WIDTH)
+        {
+            currentCursor.X = TERMINAL_WIDTH;
+        }
+        return character;
+    }
+
 	pGraphicDevice[index] = character | terminalColor << 8;
 
 	if ( ++currentCursor.X >= TERMINAL_WIDTH )
@@ -196,7 +217,10 @@ int putchar(int character)
 		{
 			currentCursor.Y = 0;
 		}
+        return character;
 	}
+
+    return 0;
 }
 
 void setcolor(enum TERMINAL_COLOR fg, enum TERMINAL_COLOR bg)
@@ -225,4 +249,24 @@ void terminal_initialize()
 {
    setcolor(COLOR_LIGHT_GREY, COLOR_BLACK);
    clrscr();
+
+    char *logonMessage = 
+      {
+            "\t******************************************\n"
+            "\t# ##### #     #   # #   #    ##### ##### #\n"
+            "\t# #     #     #   #  # #     #   # #     #\n"
+            "\t# ####  #     #   #   #      #   #  ###  #\n"
+            "\t# #     #     #   #  # #     #   #     # #\n" 
+            "\t# #     ##### ##### #   #    ##### ##### #\n"
+            "\t******************************************"
+      };
+   
+    printf("%s", logonMessage);
+    printf("\n\n");
+
+    while(1)
+    {
+        printf("\nroot@FluxOS:");
+        while(1);
+    }
 }

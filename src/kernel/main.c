@@ -9,4 +9,7 @@ int d = 10;
 
 printf("Hello World! %d", d);
 
+
+while(1);
+
 }
