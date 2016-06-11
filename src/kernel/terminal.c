@@ -1,6 +1,6 @@
 #include "terminal.h"
 
-static void printchar(char **str, int c)
+void printchar(char **str, int c)
 {
 	extern int putchar(int c);
 	
@@ -14,7 +14,7 @@ static void printchar(char **str, int c)
 #define PAD_RIGHT 1
 #define PAD_ZERO 2
 
-static int prints(char **out, const char *string, int width, int pad)
+int prints(char **out, const char *string, int width, int pad)
 {
 	register int pc = 0, padchar = ' ';
 
@@ -47,7 +47,7 @@ static int prints(char **out, const char *string, int width, int pad)
 /* the following should be enough for 32 bit int */
 #define PRINT_BUF_LEN 12
 
-static int printi(char **out, int i, int b, int sg, int width, int pad, int letbase)
+int printi(char **out, int i, int b, int sg, int width, int pad, int letbase)
 {
 	char print_buf[PRINT_BUF_LEN];
 	register char *s;
@@ -90,7 +90,7 @@ static int printi(char **out, int i, int b, int sg, int width, int pad, int letb
 	return pc + prints (out, s, width, pad);
 }
 
-static int print(char **out, const char *format, va_list args )
+int print(char **out, const char *format, va_list args )
 {
 	register int width, pad;
 	register int pc = 0;
@@ -172,7 +172,7 @@ int sprintf(char *out, const char *format, ...)
 
 ///////////////////////////////////////////////////
 /////////// Terminal Functions ////////////////////
-static unsigned int strlen(const char* message)
+unsigned int strlen(const char* message)
 {
 	unsigned int ret = 0;
 	while(message[ret] != 0)
@@ -182,8 +182,47 @@ static unsigned int strlen(const char* message)
 
 }
 
-static int putchar(int c)
+int putchar(int character)
 {
+    unsigned short* pGraphicDevice = (unsigned short*)GRAPHIC_DEVICE;
+
+    const unsigned int index = currentCursor.Y * TERMINAL_WIDTH + currentCursor.X;
+	pGraphicDevice[index] = character | terminalColor << 8;
+
+	if ( ++currentCursor.X >= TERMINAL_WIDTH )
+	{
+		currentCursor.X = 0;
+		if ( ++currentCursor.Y >= TERMINAL_HEIGHT )
+		{
+			currentCursor.Y = 0;
+		}
+	}
 }
 
+void setcolor(enum TERMINAL_COLOR fg, enum TERMINAL_COLOR bg)
+{
+	terminalColor = fg | bg << 4;
+}
 
+void clrscr()
+{
+    currentCursor  = (TerminalVector){.X = 0,.Y = 0};
+
+ 	unsigned short *pGraphicDevice = (unsigned short*)GRAPHIC_DEVICE;
+
+	for(unsigned int y = 0; y < TERMINAL_WIDTH; y++)
+	{
+		for(unsigned int x = 0; x < TERMINAL_HEIGHT; x++)
+		{
+			int index = y * TERMINAL_WIDTH + x;
+			pGraphicDevice[index] = ' ' | terminalColor << 8;
+		}	
+	}
+   
+}
+
+void terminal_initialize()
+{
+   setcolor(COLOR_LIGHT_GREY, COLOR_BLACK);
+   clrscr();
+}

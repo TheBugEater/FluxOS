@@ -1,4 +1,12 @@
+#ifndef __TERMINAL_H__
+#define __TERMINAL_H__
+
+#include <stdarg.h>
+
 #define GRAPHIC_DEVICE 0xB8000
+
+#define TERMINAL_WIDTH 80
+#define TERMINAL_HEIGHT 25
 
 // Type Declarations
 enum TERMINAL_COLOR
@@ -25,35 +33,31 @@ typedef struct _TerminalVector
 {
     unsigned int X;
     unsigned int Y;
-
-    TerminalVector()
-    {
-        X = 0;
-        Y = 0;
-    }
-}TerminalVector{ 0,0 };
+} TerminalVector;
 
 // Variable Declarations
-TerminalVector currentCursor;
-unsigned char terminalColor;
+static TerminalVector currentCursor = {.X = 0,.Y = 0};
+static unsigned char terminalColor;
 
 // Function Declarations
-static unsigned int strlen(const char* message);
-static int putchar(int c);
+unsigned int strlen(const char* message);
+int putchar(int c);
 
-static void printchar(char **str, int c);
+void printchar(char **str, int c);
 
-static int prints(char **out, const char *string, int width, int pad);
+int prints(char **out, const char *string, int width, int pad);
 
-static int printi(char **out, int i, int b, int sg, int width, int pad, int letbase);
+int printi(char **out, int i, int b, int sg, int width, int pad, int letbase);
 
-static int print(char **out, const char *format, va_list args );
+int print(char **out, const char *format, va_list args );
 
-static int printf(const char *format, ...);
+int printf(const char *format, ...);
 
-static int sprintf(char *out, const char *format, ...);
+int sprintf(char *out, const char *format, ...);
 
-static void clrscr();
+void clrscr();
 
-static void setcolor(TERMINAL_COLOR fg, TERMINAL_COLOR bg);
+void setcolor(enum TERMINAL_COLOR fg, enum TERMINAL_COLOR bg);
 
+void terminal_initialize();
+#endif
