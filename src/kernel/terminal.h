@@ -8,6 +8,9 @@
 #define TERMINAL_WIDTH 80
 #define TERMINAL_HEIGHT 25
 
+extern char inb(unsigned short port);
+extern void outb(unsigned short port, char ch);
+
 // Type Declarations
 enum TERMINAL_COLOR
 {
@@ -57,9 +60,14 @@ int sprintf(char *out, const char *format, ...);
 
 int puts ( const char * str );
 
+// Terminal Declarations
 void clrscr();
 
 void setcolor(enum TERMINAL_COLOR fg, enum TERMINAL_COLOR bg);
+
+void scroll();
+
+void updatecursor();
 
 void terminal_initialize();
 #endif

@@ -1,4 +1,5 @@
 #include "terminal.h"
+#include "system.h"
 
 void printchar(char **str, int c)
 {
@@ -192,10 +193,12 @@ int putchar(int character)
     unsigned short* pGraphicDevice = (unsigned short*)GRAPHIC_DEVICE;
 
     const unsigned int index = currentCursor.Y * TERMINAL_WIDTH + currentCursor.X;
+
     if(character == '\n')
     {
         currentCursor.X = 0;
         currentCursor.Y++;
+        scroll();
         return character;
     }
     else if(character == '\t')
@@ -205,6 +208,7 @@ int putchar(int character)
         {
             currentCursor.X = TERMINAL_WIDTH;
         }
+        scroll();
         return character;
     }
 
@@ -217,6 +221,7 @@ int putchar(int character)
 		{
 			currentCursor.Y = 0;
 		}
+        scroll();
         return character;
 	}
 
@@ -245,6 +250,35 @@ void clrscr()
    
 }
 
+void scroll()
+{
+ 	unsigned short *pGraphicDevice = (unsigned short*)GRAPHIC_DEVICE;
+
+    if(currentCursor.Y >= TERMINAL_HEIGHT)
+    {
+       // Get the array index after skipping the FluxOS ~10 lines
+        
+       unsigned int startPos = 9 * TERMINAL_WIDTH;
+       unsigned int copyStart = 10 * TERMINAL_WIDTH;
+       unsigned int lastLine = TERMINAL_WIDTH * (TERMINAL_HEIGHT - 1);
+        
+       memcpy(pGraphicDevice + startPos, pGraphicDevice + copyStart,2 * TERMINAL_WIDTH * (TERMINAL_HEIGHT - 9));
+       memset(pGraphicDevice + lastLine, 0, TERMINAL_WIDTH);
+        
+       currentCursor.Y = TERMINAL_HEIGHT - 1;
+    }
+}
+
+void updatecursor()
+{
+    unsigned int pos = currentCursor.Y * TERMINAL_WIDTH + currentCursor.X;
+
+    outb(0x3D4, 14);
+    outb(0x3D5, pos >> 8);
+    outb(0x3D4, 15);
+    outb(0x3D5, pos);
+}
+
 void terminal_initialize()
 {
    setcolor(COLOR_LIGHT_GREY, COLOR_BLACK);
@@ -267,6 +301,7 @@ void terminal_initialize()
     while(1)
     {
         printf("\nroot@FluxOS:");
+        updatecursor();
         while(1);
     }
 }

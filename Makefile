@@ -3,8 +3,8 @@ CC_CPP = g++
 CC_C = gcc
 
 ASM_Flags = -f elf32
-C_Flags = -fno-stack-protector -m32 $(EXTRA)
-CPP_Flags = -m32 -ffreestanding -O2 -Wall -Wextra -fno-exceptions -fno-rtti $(EXTRA)
+C_Flags = -fno-stack-protector -fno-builtin -m32 $(EXTRA)
+CPP_Flags = -m32 -ffreestanding -O2 -Wall -Wextra -fno-builtin -fno-exceptions -fno-rtti $(EXTRA)
 LNK_Flags = -m elf_i386 
 
 SOURCEDIR = src
