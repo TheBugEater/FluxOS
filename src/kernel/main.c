@@ -1,7 +1,10 @@
+#include "gdt.h"
 #include "terminal.h"
 
 void kmain(void)
 {
+gdt_install();
+idt_install();
 
 terminal_initialize();
 

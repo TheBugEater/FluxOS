@@ -1,3 +1,4 @@
+#include "system.h"
 
 void *memcpy(void* dest, const void* src, int count)
 {
