@@ -1,9 +1,5 @@
-addons:
-  apt:
-    packages:
-      - nasm
-      - xorriso
-      - grub
+install:
+- sudo apt-get install nasm gcc-multilib grub-common xorriso
 
 script:
   - make clean
