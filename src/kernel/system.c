@@ -1,6 +1,6 @@
 #include "system.h"
 
-void *memcpy(void* dest, const void* src, int count)
+void* memcpy(void* dest, const void* src, int count)
 {
     unsigned char* destref = (unsigned char*)dest;
 
