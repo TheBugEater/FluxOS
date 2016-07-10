@@ -1,0 +1,117 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ASM_Flags	Makefile	/^ASM_Flags = -f elf32$/;"	m
+ASM_OBJECTS	Makefile	/^ASM_OBJECTS = $(ASM_SOURCES:.s=.o)$/;"	m
+ASM_SOURCES	Makefile	/^ASM_SOURCES = $(wildcard $(SOURCEDIR)\/**\/*.s)$/;"	m
+BUILDDIR	Makefile	/^BUILDDIR = build$/;"	m
+CC_ASM	Makefile	/^CC_ASM = nasm$/;"	m
+CC_C	Makefile	/^CC_C = gcc$/;"	m
+CC_CPP	Makefile	/^CC_CPP = g++ $/;"	m
+COLOR_BLACK	src/kernel/terminal.h	/^	COLOR_BLACK = 0,$/;"	e	enum:TERMINAL_COLOR
+COLOR_BLUE	src/kernel/terminal.h	/^	COLOR_BLUE = 1,$/;"	e	enum:TERMINAL_COLOR
+COLOR_BROWN	src/kernel/terminal.h	/^	COLOR_BROWN = 6,$/;"	e	enum:TERMINAL_COLOR
+COLOR_CYAN	src/kernel/terminal.h	/^	COLOR_CYAN = 3,$/;"	e	enum:TERMINAL_COLOR
+COLOR_DARK_GREY	src/kernel/terminal.h	/^	COLOR_DARK_GREY = 8,$/;"	e	enum:TERMINAL_COLOR
+COLOR_GREEN	src/kernel/terminal.h	/^	COLOR_GREEN = 2,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_BLUE	src/kernel/terminal.h	/^	COLOR_LIGHT_BLUE = 9,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_BROWN	src/kernel/terminal.h	/^	COLOR_LIGHT_BROWN = 14,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_CYAN	src/kernel/terminal.h	/^	COLOR_LIGHT_CYAN = 11,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_GREEN	src/kernel/terminal.h	/^	COLOR_LIGHT_GREEN = 10,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_GREY	src/kernel/terminal.h	/^	COLOR_LIGHT_GREY = 7,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_MAGENTA	src/kernel/terminal.h	/^	COLOR_LIGHT_MAGENTA = 13,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_RED	src/kernel/terminal.h	/^	COLOR_LIGHT_RED = 12,$/;"	e	enum:TERMINAL_COLOR
+COLOR_MAGENTA	src/kernel/terminal.h	/^	COLOR_MAGENTA = 5,$/;"	e	enum:TERMINAL_COLOR
+COLOR_RED	src/kernel/terminal.h	/^	COLOR_RED = 4,$/;"	e	enum:TERMINAL_COLOR
+COLOR_WHITE	src/kernel/terminal.h	/^	COLOR_WHITE = 15,$/;"	e	enum:TERMINAL_COLOR
+CPP_Flags	Makefile	/^CPP_Flags = -m32 -ffreestanding -O2 -Wall -Wextra -fno-builtin -fno-exceptions -fno-rtti $(EXTRA)$/;"	m
+CPP_OBJECTS	Makefile	/^CPP_OBJECTS = $(CPP_SOURCES:.cpp=.o)$/;"	m
+CPP_SOURCES	Makefile	/^CPP_SOURCES = $(wildcard $(SOURCEDIR)\/**\/*.cpp)$/;"	m
+C_Flags	Makefile	/^C_Flags = -fno-stack-protector -w -fno-builtin -m32 $(EXTRA)$/;"	m
+C_OBJECTS	Makefile	/^C_OBJECTS = $(C_SOURCES:.c=.o)$/;"	m
+C_SOURCES	Makefile	/^C_SOURCES = $(wildcard $(SOURCEDIR)\/**\/*.c)$/;"	m
+EXECUTABLE	Makefile	/^EXECUTABLE = FluxOS.bin$/;"	m
+EXECUTABLEDIR	Makefile	/^EXECUTABLEDIR = bin$/;"	m
+GRAPHIC_DEVICE	src/kernel/terminal.h	6;"	d
+LNK_Flags	Makefile	/^LNK_Flags = -m elf_i386 $/;"	m
+PAD_RIGHT	src/kernel/terminal.c	15;"	d	file:
+PAD_ZERO	src/kernel/terminal.c	16;"	d	file:
+PRINT_BUF_LEN	src/kernel/terminal.c	49;"	d	file:
+SOURCEDIR	Makefile	/^SOURCEDIR = src$/;"	m
+TERMINAL_COLOR	src/kernel/terminal.h	/^enum TERMINAL_COLOR$/;"	g
+TERMINAL_HEIGHT	src/kernel/terminal.h	9;"	d
+TERMINAL_WIDTH	src/kernel/terminal.h	8;"	d
+TerminalVector	src/kernel/terminal.h	/^} TerminalVector;$/;"	t	typeref:struct:_TerminalVector
+X	src/kernel/terminal.h	/^    unsigned int X;$/;"	m	struct:_TerminalVector
+Y	src/kernel/terminal.h	/^    unsigned int Y;$/;"	m	struct:_TerminalVector
+_TerminalVector	src/kernel/terminal.h	/^typedef struct _TerminalVector$/;"	s
+__GDT_H__	src/kernel/gdt.h	2;"	d
+__SYSTEM_H__	src/kernel/system.h	2;"	d
+__TERMINAL_H__	src/kernel/terminal.h	2;"	d
+access	src/kernel/gdt.h	/^    unsigned char access;$/;"	m	struct:gdt_entry
+always0	src/kernel/idt.h	/^    unsigned char always0;     \/* This will ALWAYS be set to 0! *\/$/;"	m	struct:idt_entry
+base	src/kernel/gdt.h	/^    unsigned int base;$/;"	m	struct:gdt_ptr
+base	src/kernel/idt.h	/^    unsigned int base;$/;"	m	struct:idt_ptr
+base_hi	src/kernel/idt.h	/^    unsigned short base_hi;$/;"	m	struct:idt_entry
+base_high	src/kernel/gdt.h	/^    unsigned char base_high;$/;"	m	struct:gdt_entry
+base_lo	src/kernel/idt.h	/^    unsigned short base_lo;$/;"	m	struct:idt_entry
+base_low	src/kernel/gdt.h	/^    unsigned short base_low;$/;"	m	struct:gdt_entry
+base_middle	src/kernel/gdt.h	/^    unsigned char base_middle;$/;"	m	struct:gdt_entry
+clrscr	src/kernel/terminal.c	/^void clrscr()$/;"	f
+currentCursor	src/kernel/terminal.h	/^static TerminalVector currentCursor = {.X = 0,.Y = 0};$/;"	v
+extern	src/boot/boot.s	/^extern gp          $/;"	l
+extern	src/boot/boot.s	/^extern idtp$/;"	l
+extern	src/boot/boot.s	/^extern kmain$/;"	l
+flags	src/kernel/idt.h	/^    unsigned char flags;       \/* Set using the above table! *\/$/;"	m	struct:idt_entry
+flush2	src/boot/boot.s	/^flush2:$/;"	l
+gdt	src/kernel/gdt.h	/^struct gdt_entry gdt[3];$/;"	v	typeref:struct:gdt_entry
+gdt_entry	src/kernel/gdt.h	/^struct gdt_entry$/;"	s
+gdt_flush	src/boot/boot.s	/^gdt_flush:$/;"	l
+gdt_install	src/kernel/gdt.c	/^void gdt_install()$/;"	f
+gdt_ptr	src/kernel/gdt.h	/^struct gdt_ptr$/;"	s
+gdt_set_gate	src/kernel/gdt.c	/^void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran)$/;"	f
+global	src/boot/boot.s	/^global gdt_flush    $/;"	l
+global	src/boot/boot.s	/^global idt_load$/;"	l
+global	src/boot/boot.s	/^global inb$/;"	l
+global	src/boot/boot.s	/^global outb$/;"	l
+global	src/boot/boot.s	/^global start$/;"	l
+gp	src/kernel/gdt.h	/^struct gdt_ptr gp;$/;"	v	typeref:struct:gdt_ptr
+granularity	src/kernel/gdt.h	/^    unsigned char granularity;$/;"	m	struct:gdt_entry
+idt	src/kernel/idt.h	/^struct idt_entry idt[256];$/;"	v	typeref:struct:idt_entry
+idt_entry	src/kernel/idt.h	/^struct idt_entry$/;"	s
+idt_install	src/kernel/idt.c	/^void idt_install()$/;"	f
+idt_load	src/boot/boot.s	/^idt_load:$/;"	l
+idt_ptr	src/kernel/idt.h	/^struct idt_ptr$/;"	s
+idt_set_gate	src/kernel/idt.c	/^void idt_set_gate(unsigned char num, unsigned long base, unsigned short sel, unsigned char flags)$/;"	f
+idtp	src/kernel/idt.h	/^struct idt_ptr idtp;$/;"	v	typeref:struct:idt_ptr
+inb	src/boot/boot.s	/^inb:$/;"	l
+kmain	src/kernel/main.c	/^void kmain(void)$/;"	f
+limit	src/kernel/gdt.h	/^    unsigned short limit;$/;"	m	struct:gdt_ptr
+limit	src/kernel/idt.h	/^    unsigned short limit;$/;"	m	struct:idt_ptr
+limit_low	src/kernel/gdt.h	/^    unsigned short limit_low;$/;"	m	struct:gdt_entry
+memcpy	src/kernel/system.c	/^void *memcpy(void* dest, const void* src, int count)$/;"	f
+memset	src/kernel/system.c	/^void* memset(void* dest, unsigned char val, int count)$/;"	f
+outb	src/boot/boot.s	/^outb:$/;"	l
+print	src/kernel/terminal.c	/^int print(char **out, const char *format, va_list args )$/;"	f
+printchar	src/kernel/terminal.c	/^void printchar(char **str, int c)$/;"	f
+printf	src/kernel/terminal.c	/^int printf(const char *format, ...)$/;"	f
+printi	src/kernel/terminal.c	/^int printi(char **out, int i, int b, int sg, int width, int pad, int letbase)$/;"	f
+prints	src/kernel/terminal.c	/^int prints(char **out, const char *string, int width, int pad)$/;"	f
+putchar	src/kernel/terminal.c	/^int putchar(int character)$/;"	f
+puts	src/kernel/terminal.c	/^int puts ( const char * str )$/;"	f
+resb	src/boot/boot.s	/^resb 8192$/;"	l
+scroll	src/kernel/terminal.c	/^void scroll()$/;"	f
+section	src/boot/boot.s	/^section .bss$/;"	l
+section	src/boot/boot.s	/^section .text$/;"	l
+sel	src/kernel/idt.h	/^    unsigned short sel;        \/* Our kernel segment goes here! *\/$/;"	m	struct:idt_entry
+setcolor	src/kernel/terminal.c	/^void setcolor(enum TERMINAL_COLOR fg, enum TERMINAL_COLOR bg)$/;"	f
+sprintf	src/kernel/terminal.c	/^int sprintf(char *out, const char *format, ...)$/;"	f
+stack_memory	src/boot/boot.s	/^stack_memory:$/;"	l
+start	src/boot/boot.s	/^start:$/;"	l
+strlen	src/kernel/terminal.c	/^unsigned int strlen(const char* message)$/;"	f
+terminalColor	src/kernel/terminal.h	/^static unsigned char terminalColor;$/;"	v
+terminal_initialize	src/kernel/terminal.c	/^void terminal_initialize()$/;"	f
+updatecursor	src/kernel/terminal.c	/^void updatecursor()$/;"	f

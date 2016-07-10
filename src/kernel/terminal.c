@@ -152,6 +152,7 @@ int print(char **out, const char *format, va_list args )
 	}
 	if (out) **out = '\0';
 	va_end( args );
+    updatecursor();
 	return pc;
 }
 
@@ -298,10 +299,8 @@ void terminal_initialize()
     printf("%s", logonMessage);
     printf("\n\n");
 
-    while(1)
     {
         printf("\nroot@FluxOS:");
         updatecursor();
-        while(1);
     }
 }

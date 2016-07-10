@@ -14,7 +14,7 @@ start:
     cli
     mov esp, stack_memory
     call kmain
-    hlt
+    jmp $ 
 
 inb:
     mov edx, [esp + 4]
