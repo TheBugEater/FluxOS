@@ -1,3 +1,20 @@
+#ifndef _IDT_H_
+#define _IDT_H_
+
+typedef void (*interupt_callback)();
+
+interupt_callback irq_procedures[16] =
+{
+    0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0
+};
+
+void set_irq_handle(unsigned int num, interupt_callback callback);
+void clear_irq_handle(unsigned int num, interupt_callback callback);
+
+void irq_remap();
+void irq_install();
+
 /* Defines an IDT entry */
 struct idt_entry
 {
@@ -63,4 +80,61 @@ extern void isr29();
 extern void isr30();
 extern void isr31();
 
+extern void irq0();
+extern void irq1();
+extern void irq2();
+extern void irq3();
+extern void irq4();
+extern void irq5();
+extern void irq6();
+extern void irq7();
+extern void irq8();
+extern void irq9();
+extern void irq10();
+extern void irq11();
+extern void irq12();
+extern void irq13();
+extern void irq14();
+extern void irq15();
 
+unsigned char *exception_messages[] =
+{
+    "Division By Zero",
+    "Debug",
+    "Non Maskable Interrupt",
+    "Breakpoint",
+    "Into Detected Overflow",
+    "Out of Bounds",
+    "Invalid Opcode",
+    "No Coprocessor",
+    "Double Fault",
+    "Coprocessor Segment Overrun",
+    "Bad TSS",
+    "Segment Not Present",
+    "Stack Fault",
+    "General Protection Fault",
+    "Page Fault",
+    "Unknown Interrupt",
+    "Coprocessor Fault",
+    "Alignment Check",
+    "Machine Check",
+
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved",
+    "Reserved"
+};
+
+void keyboard_interupt();
+
+#endif

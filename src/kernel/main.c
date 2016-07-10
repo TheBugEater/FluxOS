@@ -13,7 +13,6 @@ void kmain(void)
     // Trigger a division Zero interupt
     //
     int d = 10;
-    d = d/0;
     printf("Hello World! %d", d);
 
     for(;;);
