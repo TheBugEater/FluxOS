@@ -28,7 +28,7 @@ struct gdt_ptr gp;
 
 /* This will be a function in start.asm. We use this to properly
 *  reload the new segment registers */
-extern void gdt_flush();
+extern void gdt_flush(unsigned long* gdtptr);
 
 #endif
 

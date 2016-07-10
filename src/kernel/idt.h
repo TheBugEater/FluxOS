@@ -28,7 +28,7 @@ void init_isr();
 void kernel_isr_handler(unsigned char interuptNumber, unsigned char errno);
 
 /* This exists in 'start.asm', and is used to load our IDT */
-extern void idt_load();
+extern void idt_load(unsigned long* idtptr);
 
 extern void isr0();
 extern void isr1();

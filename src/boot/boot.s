@@ -28,15 +28,15 @@ outb:
     ret
 
 global idt_load
-extern idtp
 idt_load:
-    lidt [idtp]
+    mov eax, [esp + 4]
+    lidt [eax]
     ret
 
 global gdt_flush    
-extern gp          
 gdt_flush:
-    lgdt [gp]     
+    mov eax, [esp + 4]
+    lgdt [eax]     
     mov ax, 0x10 
     mov ds, ax
     mov es, ax

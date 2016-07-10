@@ -44,5 +44,5 @@ void gdt_install()
     gdt_set_gate(2, 0, 0xFFFFFFFF, 0x92, 0xCF);
 
     /* Flush out the old GDT and install the new changes! */
-    gdt_flush();
+    gdt_flush((unsigned long*)&gp);
 }

@@ -31,7 +31,7 @@ void idt_install()
     /* Add any new ISRs to the IDT here using idt_set_gate */
 
     /* Points the processor's internal register to the new IDT */
-    idt_load();
+    idt_load((unsigned long*)&idtp);
 
 
     init_isr();
