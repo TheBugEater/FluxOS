@@ -255,9 +255,10 @@ void scroll()
 {
  	unsigned short *pGraphicDevice = (unsigned short*)GRAPHIC_DEVICE;
 
-    if(currentCursor.Y >= TERMINAL_HEIGHT)
+    // TERMINAL_HEIGHT - 1 = Last Line
+    if(currentCursor.Y >= TERMINAL_HEIGHT - 1)
     {
-       // Get the array index after skipping the FluxOS ~10 lines
+       // Get the array index after skipping the FluxOS ~10 lines:
         
        unsigned int startPos = 9 * TERMINAL_WIDTH;
        unsigned int copyStart = 10 * TERMINAL_WIDTH;
@@ -266,7 +267,7 @@ void scroll()
        memcpy(pGraphicDevice + startPos, pGraphicDevice + copyStart,2 * TERMINAL_WIDTH * (TERMINAL_HEIGHT - 9));
        memset(pGraphicDevice + lastLine, 0, TERMINAL_WIDTH);
         
-       currentCursor.Y = TERMINAL_HEIGHT - 1;
+       currentCursor.Y = TERMINAL_HEIGHT - 2;
     }
 }
 

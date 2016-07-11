@@ -55,6 +55,10 @@ void irq_remap()
     outb(0x21, 0);
     outb(0xA1, 0);
     
+    int divisor = 11000000;
+    outb(0x43, 0x36);
+    outb(0x40, divisor & 0xFF);
+    outb(0x40, divisor >> 8);
 }
 
 void irq_install()
@@ -79,6 +83,7 @@ void irq_install()
     idt_set_gate(47, (unsigned)irq15, 0x08, 0x8E);
 
     set_irq_handle(1, keyboard_interupt);
+//    set_irq_handle(0, timer_interupt);
 }
 
 void init_isr()
@@ -126,10 +131,59 @@ void clear_irq_handle(unsigned int num, interupt_callback callback)
 {
     irq_procedures[num] = 0;
 }
+unsigned char kbdus[128] =
+{
+    0,  27, '1', '2', '3', '4', '5', '6', '7', '8',	/* 9 */
+  '9', '0', '-', '=', '\b',	/* Backspace */
+  '\t',			/* Tab */
+  'q', 'w', 'e', 'r',	/* 19 */
+  't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n',		/* Enter key */
+    0,			/* 29   - Control */
+  'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';',	/* 39 */
+ '\'', '`',   0,		/* Left shift */
+ '\\', 'z', 'x', 'c', 'v', 'b', 'n',			/* 49 */
+  'm', ',', '.', '/',   0,					/* Right shift */
+  '*',
+    0,	/* Alt */
+  ' ',	/* Space bar */
+    0,	/* Caps lock */
+    0,	/* 59 - F1 key ... > */
+    0,   0,   0,   0,   0,   0,   0,   0,
+    0,	/* < ... F10 */
+    0,	/* 69 - Num lock*/
+    0,	/* Scroll Lock */
+    0,	/* Home key */
+    0,	/* Up Arrow */
+    0,	/* Page Up */
+  '-',
+    0,	/* Left Arrow */
+    0,
+    0,	/* Right Arrow */
+  '+',
+    0,	/* 79 - End key*/
+    0,	/* Down Arrow */
+    0,	/* Page Down */
+    0,	/* Insert Key */
+    0,	/* Delete Key */
+    0,   0,   0,
+    0,	/* F11 Key */
+    0,	/* F12 Key */
+    0,	/* All other keys are undefined */
+};
 
 void keyboard_interupt()
 {
-    printf("Key Pressed");
+    unsigned char scancode = inb(0x60);
+    if(!(scancode & 0x80))
+    {
+        printf("%c",kbdus[scancode]);
+        updatecursor();
+    }
+}
+
+void timer_interupt()
+{
+    printf("Timer Interupt Triggered");
 }
 
 void kernel_isr_handler(unsigned char interuptNumber, unsigned char errno)

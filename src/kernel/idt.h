@@ -136,5 +136,6 @@ unsigned char *exception_messages[] =
 };
 
 void keyboard_interupt();
+void timer_interupt();
 
 #endif
