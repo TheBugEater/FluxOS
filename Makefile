@@ -50,7 +50,7 @@ init:
 create_grub:
 	@echo "Creating Bootable Image" $<
 	@mkdir -p $(BUILDDIR)/isodir/boot/grub
-	@cp $(EXECUTABLEDIR)/$(EXECUTABLE) $(BUILDDIR)/isodir/boot/myos.bin
+	@cp $(EXECUTABLEDIR)/$(EXECUTABLE) $(BUILDDIR)/isodir/boot/$(EXECUTABLE)
 	@cp grub.cfg $(BUILDDIR)/isodir/boot/grub/grub.cfg
 	grub-mkrescue -o myos.iso $(BUILDDIR)/isodir
 
