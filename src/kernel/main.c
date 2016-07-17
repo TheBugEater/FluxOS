@@ -8,6 +8,8 @@ void kmain()
 
     install_idt();
 
+    enable_irq();
+
     terminal_initialize();
     while(1);
 }
