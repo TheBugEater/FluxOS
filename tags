@@ -11,216 +11,106 @@ BUILDDIR	Makefile	/^BUILDDIR = build$/;"	m
 CC_ASM	Makefile	/^CC_ASM = nasm$/;"	m
 CC_C	Makefile	/^CC_C = gcc$/;"	m
 CC_CPP	Makefile	/^CC_CPP = g++ $/;"	m
-COLOR_BLACK	src/kernel/terminal.h	/^	COLOR_BLACK = 0,$/;"	e	enum:TERMINAL_COLOR
-COLOR_BLUE	src/kernel/terminal.h	/^	COLOR_BLUE = 1,$/;"	e	enum:TERMINAL_COLOR
-COLOR_BROWN	src/kernel/terminal.h	/^	COLOR_BROWN = 6,$/;"	e	enum:TERMINAL_COLOR
-COLOR_CYAN	src/kernel/terminal.h	/^	COLOR_CYAN = 3,$/;"	e	enum:TERMINAL_COLOR
-COLOR_DARK_GREY	src/kernel/terminal.h	/^	COLOR_DARK_GREY = 8,$/;"	e	enum:TERMINAL_COLOR
-COLOR_GREEN	src/kernel/terminal.h	/^	COLOR_GREEN = 2,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_BLUE	src/kernel/terminal.h	/^	COLOR_LIGHT_BLUE = 9,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_BROWN	src/kernel/terminal.h	/^	COLOR_LIGHT_BROWN = 14,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_CYAN	src/kernel/terminal.h	/^	COLOR_LIGHT_CYAN = 11,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_GREEN	src/kernel/terminal.h	/^	COLOR_LIGHT_GREEN = 10,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_GREY	src/kernel/terminal.h	/^	COLOR_LIGHT_GREY = 7,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_MAGENTA	src/kernel/terminal.h	/^	COLOR_LIGHT_MAGENTA = 13,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_RED	src/kernel/terminal.h	/^	COLOR_LIGHT_RED = 12,$/;"	e	enum:TERMINAL_COLOR
-COLOR_MAGENTA	src/kernel/terminal.h	/^	COLOR_MAGENTA = 5,$/;"	e	enum:TERMINAL_COLOR
-COLOR_RED	src/kernel/terminal.h	/^	COLOR_RED = 4,$/;"	e	enum:TERMINAL_COLOR
-COLOR_WHITE	src/kernel/terminal.h	/^	COLOR_WHITE = 15,$/;"	e	enum:TERMINAL_COLOR
+COLOR_BLACK	src/include/terminal.h	/^	COLOR_BLACK = 0,$/;"	e	enum:TERMINAL_COLOR
+COLOR_BLUE	src/include/terminal.h	/^	COLOR_BLUE = 1,$/;"	e	enum:TERMINAL_COLOR
+COLOR_BROWN	src/include/terminal.h	/^	COLOR_BROWN = 6,$/;"	e	enum:TERMINAL_COLOR
+COLOR_CYAN	src/include/terminal.h	/^	COLOR_CYAN = 3,$/;"	e	enum:TERMINAL_COLOR
+COLOR_DARK_GREY	src/include/terminal.h	/^	COLOR_DARK_GREY = 8,$/;"	e	enum:TERMINAL_COLOR
+COLOR_GREEN	src/include/terminal.h	/^	COLOR_GREEN = 2,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_BLUE	src/include/terminal.h	/^	COLOR_LIGHT_BLUE = 9,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_BROWN	src/include/terminal.h	/^	COLOR_LIGHT_BROWN = 14,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_CYAN	src/include/terminal.h	/^	COLOR_LIGHT_CYAN = 11,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_GREEN	src/include/terminal.h	/^	COLOR_LIGHT_GREEN = 10,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_GREY	src/include/terminal.h	/^	COLOR_LIGHT_GREY = 7,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_MAGENTA	src/include/terminal.h	/^	COLOR_LIGHT_MAGENTA = 13,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_RED	src/include/terminal.h	/^	COLOR_LIGHT_RED = 12,$/;"	e	enum:TERMINAL_COLOR
+COLOR_MAGENTA	src/include/terminal.h	/^	COLOR_MAGENTA = 5,$/;"	e	enum:TERMINAL_COLOR
+COLOR_RED	src/include/terminal.h	/^	COLOR_RED = 4,$/;"	e	enum:TERMINAL_COLOR
+COLOR_WHITE	src/include/terminal.h	/^	COLOR_WHITE = 15,$/;"	e	enum:TERMINAL_COLOR
 CPP_Flags	Makefile	/^CPP_Flags = -m32 -ffreestanding -O2 -Wall -Wextra -fno-builtin -fno-exceptions -fno-rtti $(EXTRA)$/;"	m
 CPP_OBJECTS	Makefile	/^CPP_OBJECTS = $(CPP_SOURCES:.cpp=.o)$/;"	m
 CPP_SOURCES	Makefile	/^CPP_SOURCES = $(wildcard $(SOURCEDIR)\/**\/*.cpp)$/;"	m
-C_Flags	Makefile	/^C_Flags = -fno-stack-protector -w -std=c99 -fno-builtin -m32 $(EXTRA)$/;"	m
+C_Flags	Makefile	/^C_Flags = -fno-stack-protector -w -std=c99 -fno-builtin -m32 $(INC) $(EXTRA)$/;"	m
 C_OBJECTS	Makefile	/^C_OBJECTS = $(C_SOURCES:.c=.o)$/;"	m
 C_SOURCES	Makefile	/^C_SOURCES = $(wildcard $(SOURCEDIR)\/**\/*.c)$/;"	m
 EXECUTABLE	Makefile	/^EXECUTABLE = FluxOS.bin$/;"	m
 EXECUTABLEDIR	Makefile	/^EXECUTABLEDIR = bin$/;"	m
-GRAPHIC_DEVICE	src/kernel/terminal.h	6;"	d
+GRAPHIC_DEVICE	src/include/terminal.h	6;"	d
+IDT_SIZE	src/include/idt.h	4;"	d
+INC	Makefile	/^INC =-I$(SOURCEDIR)\/include$/;"	m
 LNK_Flags	Makefile	/^LNK_Flags = -m elf_i386 $/;"	m
+MULTIBOOT_CHECKSUM	src/boot/boot.s	/^MULTIBOOT_CHECKSUM          equ -(MULTIBOOT_MAGIC_NUMBER + MULTIBOOT_FLAGS)$/;"	d
+MULTIBOOT_FLAGS	src/boot/boot.s	/^MULTIBOOT_FLAGS             equ MULTIBOOT_PAGE_ALIGN | MULTIBOOT_MEMORY_INFO$/;"	d
+MULTIBOOT_MAGIC_NUMBER	src/boot/boot.s	/^MULTIBOOT_MAGIC_NUMBER      equ 0x1BADB002$/;"	d
+MULTIBOOT_MEMORY_INFO	src/boot/boot.s	/^MULTIBOOT_MEMORY_INFO       equ 1<<1$/;"	d
+MULTIBOOT_PAGE_ALIGN	src/boot/boot.s	/^MULTIBOOT_PAGE_ALIGN        equ 1<<0$/;"	d
 PAD_RIGHT	src/kernel/terminal.c	15;"	d	file:
 PAD_ZERO	src/kernel/terminal.c	16;"	d	file:
 PRINT_BUF_LEN	src/kernel/terminal.c	49;"	d	file:
-SECTION	src/kernel/isr.s	/^SECTION .text$/;"	l
+SECTION	src/boot/boot.s	/^SECTION .bss$/;"	l
+SECTION	src/boot/boot.s	/^SECTION .data$/;"	l
+SECTION	src/boot/boot.s	/^SECTION .text$/;"	l
+SECTION	src/kernel/core.s	/^SECTION .bss$/;"	l
+SECTION	src/kernel/core.s	/^SECTION .data$/;"	l
+SECTION	src/kernel/core.s	/^SECTION .text$/;"	l
+SECTION	src/utility/util.s	/^SECTION .bss$/;"	l
+SECTION	src/utility/util.s	/^SECTION .data$/;"	l
+SECTION	src/utility/util.s	/^SECTION .text$/;"	l
 SOURCEDIR	Makefile	/^SOURCEDIR = src$/;"	m
-TERMINAL_COLOR	src/kernel/terminal.h	/^enum TERMINAL_COLOR$/;"	g
-TERMINAL_HEIGHT	src/kernel/terminal.h	9;"	d
-TERMINAL_WIDTH	src/kernel/terminal.h	8;"	d
-TerminalVector	src/kernel/terminal.h	/^} TerminalVector;$/;"	t	typeref:struct:_TerminalVector
-X	src/kernel/terminal.h	/^    unsigned int X;$/;"	m	struct:_TerminalVector
-Y	src/kernel/terminal.h	/^    unsigned int Y;$/;"	m	struct:_TerminalVector
-_IDT_H_	src/kernel/idt.h	2;"	d
-_TerminalVector	src/kernel/terminal.h	/^typedef struct _TerminalVector$/;"	s
-__GDT_H__	src/kernel/gdt.h	2;"	d
-__SYSTEM_H__	src/kernel/system.h	2;"	d
-__TERMINAL_H__	src/kernel/terminal.h	2;"	d
-access	src/kernel/gdt.h	/^    unsigned char access;$/;"	m	struct:gdt_entry
-always0	src/kernel/idt.h	/^    unsigned char always0;     \/* This will ALWAYS be set to 0! *\/$/;"	m	struct:idt_entry
-base	src/kernel/gdt.h	/^    unsigned int base;$/;"	m	struct:gdt_ptr
-base	src/kernel/idt.h	/^    unsigned int base;$/;"	m	struct:idt_ptr
-base_hi	src/kernel/idt.h	/^    unsigned short base_hi;$/;"	m	struct:idt_entry
-base_high	src/kernel/gdt.h	/^    unsigned char base_high;$/;"	m	struct:gdt_entry
-base_lo	src/kernel/idt.h	/^    unsigned short base_lo;$/;"	m	struct:idt_entry
-base_low	src/kernel/gdt.h	/^    unsigned short base_low;$/;"	m	struct:gdt_entry
-base_middle	src/kernel/gdt.h	/^    unsigned char base_middle;$/;"	m	struct:gdt_entry
-clear_irq_handle	src/kernel/idt.c	/^void clear_irq_handle(unsigned int num, interupt_callback callback)$/;"	f
+StackPointer	src/boot/boot.s	/^StackPointer:$/;"	l
+TERMINAL_COLOR	src/include/terminal.h	/^enum TERMINAL_COLOR$/;"	g
+TERMINAL_HEIGHT	src/include/terminal.h	9;"	d
+TERMINAL_WIDTH	src/include/terminal.h	8;"	d
+TerminalVector	src/include/terminal.h	/^} TerminalVector;$/;"	t	typeref:struct:_TerminalVector
+X	src/include/terminal.h	/^    unsigned int X;$/;"	m	struct:_TerminalVector
+Y	src/include/terminal.h	/^    unsigned int Y;$/;"	m	struct:_TerminalVector
+_TerminalVector	src/include/terminal.h	/^typedef struct _TerminalVector$/;"	s
+__IDT_H__	src/include/idt.h	2;"	d
+__TERMINAL_H__	src/include/terminal.h	2;"	d
+__UTILITY_H_	src/include/utility.h	2;"	d
+base	src/include/idt.h	/^    unsigned int base;$/;"	m	struct:idt_ptr
 clrscr	src/kernel/terminal.c	/^void clrscr()$/;"	f
-currentCursor	src/kernel/terminal.h	/^static TerminalVector currentCursor = {.X = 0,.Y = 0};$/;"	v
-exception_messages	src/kernel/idt.h	/^unsigned char *exception_messages[] =$/;"	v
+create_idt_entry	src/kernel/idt.c	/^void create_idt_entry(unsigned short num, unsigned int handler, unsigned short selector, unsigned char type) $/;"	f
+currentCursor	src/include/terminal.h	/^static TerminalVector currentCursor = {.X = 0,.Y = 0};$/;"	v
+disable_irq	src/utility/util.s	/^disable_irq:$/;"	l
+enable_irq	src/utility/util.s	/^enable_irq:$/;"	l
 extern	src/boot/boot.s	/^extern kmain$/;"	l
-extern	src/kernel/isr.s	/^extern kernel_isr_handler$/;"	l
-flags	src/kernel/idt.h	/^    unsigned char flags;       \/* Set using the above table! *\/$/;"	m	struct:idt_entry
-flush2	src/boot/boot.s	/^flush2:$/;"	l
-gdt	src/kernel/gdt.h	/^struct gdt_entry gdt[3];$/;"	v	typeref:struct:gdt_entry
-gdt_entry	src/kernel/gdt.h	/^struct gdt_entry$/;"	s
-gdt_flush	src/boot/boot.s	/^gdt_flush:$/;"	l
-gdt_install	src/kernel/gdt.c	/^void gdt_install()$/;"	f
-gdt_ptr	src/kernel/gdt.h	/^struct gdt_ptr$/;"	s
-gdt_set_gate	src/kernel/gdt.c	/^void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran)$/;"	f
-global	src/boot/boot.s	/^global gdt_flush    $/;"	l
-global	src/boot/boot.s	/^global idt_load$/;"	l
-global	src/boot/boot.s	/^global inb$/;"	l
-global	src/boot/boot.s	/^global outb$/;"	l
 global	src/boot/boot.s	/^global start$/;"	l
-global	src/kernel/isr.s	/^global irq0$/;"	l
-global	src/kernel/isr.s	/^global irq1$/;"	l
-global	src/kernel/isr.s	/^global irq10$/;"	l
-global	src/kernel/isr.s	/^global irq11$/;"	l
-global	src/kernel/isr.s	/^global irq12$/;"	l
-global	src/kernel/isr.s	/^global irq13$/;"	l
-global	src/kernel/isr.s	/^global irq14$/;"	l
-global	src/kernel/isr.s	/^global irq15$/;"	l
-global	src/kernel/isr.s	/^global irq2$/;"	l
-global	src/kernel/isr.s	/^global irq3$/;"	l
-global	src/kernel/isr.s	/^global irq4$/;"	l
-global	src/kernel/isr.s	/^global irq5$/;"	l
-global	src/kernel/isr.s	/^global irq6$/;"	l
-global	src/kernel/isr.s	/^global irq7$/;"	l
-global	src/kernel/isr.s	/^global irq8$/;"	l
-global	src/kernel/isr.s	/^global irq9$/;"	l
-global	src/kernel/isr.s	/^global isr0$/;"	l
-global	src/kernel/isr.s	/^global isr1$/;"	l
-global	src/kernel/isr.s	/^global isr10$/;"	l
-global	src/kernel/isr.s	/^global isr11$/;"	l
-global	src/kernel/isr.s	/^global isr12$/;"	l
-global	src/kernel/isr.s	/^global isr13$/;"	l
-global	src/kernel/isr.s	/^global isr14$/;"	l
-global	src/kernel/isr.s	/^global isr15$/;"	l
-global	src/kernel/isr.s	/^global isr16$/;"	l
-global	src/kernel/isr.s	/^global isr17$/;"	l
-global	src/kernel/isr.s	/^global isr18$/;"	l
-global	src/kernel/isr.s	/^global isr19$/;"	l
-global	src/kernel/isr.s	/^global isr2$/;"	l
-global	src/kernel/isr.s	/^global isr20$/;"	l
-global	src/kernel/isr.s	/^global isr21$/;"	l
-global	src/kernel/isr.s	/^global isr22$/;"	l
-global	src/kernel/isr.s	/^global isr23$/;"	l
-global	src/kernel/isr.s	/^global isr24$/;"	l
-global	src/kernel/isr.s	/^global isr25$/;"	l
-global	src/kernel/isr.s	/^global isr26$/;"	l
-global	src/kernel/isr.s	/^global isr27$/;"	l
-global	src/kernel/isr.s	/^global isr28$/;"	l
-global	src/kernel/isr.s	/^global isr29$/;"	l
-global	src/kernel/isr.s	/^global isr3$/;"	l
-global	src/kernel/isr.s	/^global isr30$/;"	l
-global	src/kernel/isr.s	/^global isr31$/;"	l
-global	src/kernel/isr.s	/^global isr4$/;"	l
-global	src/kernel/isr.s	/^global isr5$/;"	l
-global	src/kernel/isr.s	/^global isr6$/;"	l
-global	src/kernel/isr.s	/^global isr7$/;"	l
-global	src/kernel/isr.s	/^global isr8$/;"	l
-global	src/kernel/isr.s	/^global isr9$/;"	l
-global	src/kernel/isr.s	/^global isr_handler$/;"	l
-gp	src/kernel/gdt.h	/^struct gdt_ptr gp;$/;"	v	typeref:struct:gdt_ptr
-granularity	src/kernel/gdt.h	/^    unsigned char granularity;$/;"	m	struct:gdt_entry
-idt	src/kernel/idt.h	/^struct idt_entry idt[256];$/;"	v	typeref:struct:idt_entry
-idt_entry	src/kernel/idt.h	/^struct idt_entry$/;"	s
-idt_install	src/kernel/idt.c	/^void idt_install()$/;"	f
-idt_load	src/boot/boot.s	/^idt_load:$/;"	l
-idt_ptr	src/kernel/idt.h	/^struct idt_ptr$/;"	s
-idt_set_gate	src/kernel/idt.c	/^void idt_set_gate(unsigned char num, unsigned long base, unsigned short sel, unsigned char flags)$/;"	f
-idtp	src/kernel/idt.h	/^struct idt_ptr idtp;$/;"	v	typeref:struct:idt_ptr
-inb	src/boot/boot.s	/^inb:$/;"	l
-init_isr	src/kernel/idt.c	/^void init_isr()$/;"	f
-interupt_callback	src/kernel/idt.h	/^typedef void (*interupt_callback)();$/;"	t
-irq0	src/kernel/isr.s	/^irq0:$/;"	l
-irq1	src/kernel/isr.s	/^irq1:$/;"	l
-irq10	src/kernel/isr.s	/^irq10:$/;"	l
-irq11	src/kernel/isr.s	/^irq11:$/;"	l
-irq12	src/kernel/isr.s	/^irq12:$/;"	l
-irq13	src/kernel/isr.s	/^irq13:$/;"	l
-irq14	src/kernel/isr.s	/^irq14:$/;"	l
-irq15	src/kernel/isr.s	/^irq15:$/;"	l
-irq2	src/kernel/isr.s	/^irq2:$/;"	l
-irq3	src/kernel/isr.s	/^irq3:$/;"	l
-irq4	src/kernel/isr.s	/^irq4:$/;"	l
-irq5	src/kernel/isr.s	/^irq5:$/;"	l
-irq6	src/kernel/isr.s	/^irq6:$/;"	l
-irq7	src/kernel/isr.s	/^irq7:$/;"	l
-irq8	src/kernel/isr.s	/^irq8:$/;"	l
-irq9	src/kernel/isr.s	/^irq9:$/;"	l
-irq_install	src/kernel/idt.c	/^void irq_install()$/;"	f
-irq_procedures	src/kernel/idt.h	/^interupt_callback irq_procedures[16] =$/;"	v
-irq_remap	src/kernel/idt.c	/^void irq_remap()$/;"	f
-isr0	src/kernel/isr.s	/^isr0:$/;"	l
-isr1	src/kernel/isr.s	/^isr1:$/;"	l
-isr10	src/kernel/isr.s	/^isr10:$/;"	l
-isr11	src/kernel/isr.s	/^isr11:$/;"	l
-isr12	src/kernel/isr.s	/^isr12:$/;"	l
-isr13	src/kernel/isr.s	/^isr13:$/;"	l
-isr14	src/kernel/isr.s	/^isr14:$/;"	l
-isr15	src/kernel/isr.s	/^isr15:$/;"	l
-isr16	src/kernel/isr.s	/^isr16:$/;"	l
-isr17	src/kernel/isr.s	/^isr17:$/;"	l
-isr18	src/kernel/isr.s	/^isr18:$/;"	l
-isr19	src/kernel/isr.s	/^isr19:$/;"	l
-isr2	src/kernel/isr.s	/^isr2:$/;"	l
-isr20	src/kernel/isr.s	/^isr20:$/;"	l
-isr21	src/kernel/isr.s	/^isr21:$/;"	l
-isr22	src/kernel/isr.s	/^isr22:$/;"	l
-isr23	src/kernel/isr.s	/^isr23:$/;"	l
-isr24	src/kernel/isr.s	/^isr24:$/;"	l
-isr25	src/kernel/isr.s	/^isr25:$/;"	l
-isr26	src/kernel/isr.s	/^isr26:$/;"	l
-isr27	src/kernel/isr.s	/^isr27:$/;"	l
-isr28	src/kernel/isr.s	/^isr28:$/;"	l
-isr29	src/kernel/isr.s	/^isr29:$/;"	l
-isr3	src/kernel/isr.s	/^isr3:$/;"	l
-isr30	src/kernel/isr.s	/^isr30:$/;"	l
-isr31	src/kernel/isr.s	/^isr31:$/;"	l
-isr4	src/kernel/isr.s	/^isr4:$/;"	l
-isr5	src/kernel/isr.s	/^isr5:$/;"	l
-isr6	src/kernel/isr.s	/^isr6:$/;"	l
-isr7	src/kernel/isr.s	/^isr7:$/;"	l
-isr8	src/kernel/isr.s	/^isr8:$/;"	l
-isr9	src/kernel/isr.s	/^isr9:$/;"	l
-isr_handler	src/kernel/isr.s	/^isr_handler:$/;"	l
-kernel_isr_handler	src/kernel/idt.c	/^void kernel_isr_handler(unsigned char interuptNumber, unsigned char errno)$/;"	f
-keyboard_interupt	src/kernel/idt.c	/^void keyboard_interupt()$/;"	f
-kmain	src/kernel/main.c	/^void kmain(void)$/;"	f
-limit	src/kernel/gdt.h	/^    unsigned short limit;$/;"	m	struct:gdt_ptr
-limit	src/kernel/idt.h	/^    unsigned short limit;$/;"	m	struct:idt_ptr
-limit_low	src/kernel/gdt.h	/^    unsigned short limit_low;$/;"	m	struct:gdt_entry
-memcpy	src/kernel/system.c	/^void* memcpy(void* dest, const void* src, int count)$/;"	f
-memset	src/kernel/system.c	/^void* memset(void* dest, unsigned char val, int count)$/;"	f
-outb	src/boot/boot.s	/^outb:$/;"	l
+global	src/kernel/core.s	/^global load_idt$/;"	l
+global	src/utility/util.s	/^global disable_irq$/;"	l
+global	src/utility/util.s	/^global enable_irq$/;"	l
+global	src/utility/util.s	/^global inb$/;"	l
+global	src/utility/util.s	/^global outb$/;"	l
+idt	src/include/idt.h	/^struct idt_entry idt[IDT_SIZE];$/;"	v	typeref:struct:idt_entry
+idt_entry	src/include/idt.h	/^struct idt_entry$/;"	s
+idt_ptr	src/include/idt.h	/^struct idt_ptr$/;"	s
+idtp	src/include/idt.h	/^struct idt_ptr idtp;$/;"	v	typeref:struct:idt_ptr
+inb	src/utility/util.s	/^inb:$/;"	l
+install_idt	src/kernel/idt.c	/^void install_idt()$/;"	f
+kmain	src/kernel/main.c	/^void kmain()$/;"	f
+limit	src/include/idt.h	/^    unsigned short limit;$/;"	m	struct:idt_ptr
+load_idt	src/kernel/core.s	/^load_idt:$/;"	l
+memcpy	src/utility/utility.c	/^void* memcpy(void* dest, const void* src, int count)$/;"	f
+memset	src/utility/utility.c	/^void* memset(void* dest, unsigned char val, int count)$/;"	f
+offset_high	src/include/idt.h	/^    unsigned short offset_high;$/;"	m	struct:idt_entry
+offset_low	src/include/idt.h	/^    unsigned short offset_low;$/;"	m	struct:idt_entry
+outb	src/utility/util.s	/^outb:$/;"	l
 print	src/kernel/terminal.c	/^int print(char **out, const char *format, va_list args )$/;"	f
 printchar	src/kernel/terminal.c	/^void printchar(char **str, int c)$/;"	f
-printf	src/kernel/terminal.c	/^int printf(const char *format, ...)$/;"	f
 printi	src/kernel/terminal.c	/^int printi(char **out, int i, int b, int sg, int width, int pad, int letbase)$/;"	f
+printk	src/kernel/terminal.c	/^int printk(const char *format, ...)$/;"	f
 prints	src/kernel/terminal.c	/^int prints(char **out, const char *string, int width, int pad)$/;"	f
 putchar	src/kernel/terminal.c	/^int putchar(int character)$/;"	f
 puts	src/kernel/terminal.c	/^int puts ( const char * str )$/;"	f
 resb	src/boot/boot.s	/^resb 8192$/;"	l
 scroll	src/kernel/terminal.c	/^void scroll()$/;"	f
-section	src/boot/boot.s	/^section .bss$/;"	l
-section	src/boot/boot.s	/^section .text$/;"	l
-sel	src/kernel/idt.h	/^    unsigned short sel;        \/* Our kernel segment goes here! *\/$/;"	m	struct:idt_entry
-set_irq_handle	src/kernel/idt.c	/^void set_irq_handle(unsigned int num, interupt_callback callback)$/;"	f
+selector	src/include/idt.h	/^    unsigned short selector;$/;"	m	struct:idt_entry
 setcolor	src/kernel/terminal.c	/^void setcolor(enum TERMINAL_COLOR fg, enum TERMINAL_COLOR bg)$/;"	f
-sprintf	src/kernel/terminal.c	/^int sprintf(char *out, const char *format, ...)$/;"	f
-stack_memory	src/boot/boot.s	/^stack_memory:$/;"	l
+sprintk	src/kernel/terminal.c	/^int sprintk(char *out, const char *format, ...)$/;"	f
 start	src/boot/boot.s	/^start:$/;"	l
 strlen	src/kernel/terminal.c	/^unsigned int strlen(const char* message)$/;"	f
-terminalColor	src/kernel/terminal.h	/^static unsigned char terminalColor;$/;"	v
+terminalColor	src/include/terminal.h	/^static unsigned char terminalColor;$/;"	v
 terminal_initialize	src/kernel/terminal.c	/^void terminal_initialize()$/;"	f
+type_attr	src/include/idt.h	/^    unsigned char type_attr;$/;"	m	struct:idt_entry
 updatecursor	src/kernel/terminal.c	/^void updatecursor()$/;"	f
+zero	src/include/idt.h	/^    unsigned char zero;$/;"	m	struct:idt_entry
