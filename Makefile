@@ -2,14 +2,17 @@ CC_ASM = nasm
 CC_CPP = g++ 
 CC_C = gcc
 
+INC =-I$(SOURCEDIR)/include
+
 ASM_Flags = -f elf32
-C_Flags = -fno-stack-protector -w -std=c99 -fno-builtin -m32 $(EXTRA)
+C_Flags = -fno-stack-protector -w -std=c99 -fno-builtin -m32 $(INC) $(EXTRA)
 CPP_Flags = -m32 -ffreestanding -O2 -Wall -Wextra -fno-builtin -fno-exceptions -fno-rtti $(EXTRA)
 LNK_Flags = -m elf_i386 
 
 SOURCEDIR = src
 BUILDDIR = build
 EXECUTABLEDIR = bin
+
 
 C_SOURCES = $(wildcard $(SOURCEDIR)/**/*.c)
 CPP_SOURCES = $(wildcard $(SOURCEDIR)/**/*.cpp)
