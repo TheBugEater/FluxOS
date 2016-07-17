@@ -2,8 +2,8 @@ SECTION .text
 
 global inb
 global outb
-global disable_irq
-global enable_irq
+global disable_interrupts
+global enable_interrupts
 
 inb:
     mov edx, [esp + 4]
@@ -16,11 +16,11 @@ outb:
     out dx, al
     ret
 
-disable_irq:
+disable_interrupts:
     cli
     ret
 
-enable_irq:
+enable_interrupts:
     sti
     ret
 

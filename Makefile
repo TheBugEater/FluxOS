@@ -26,7 +26,7 @@ EXECUTABLE = FluxOS.bin
 
 all: init compile create_grub
 
-compile: $(C_OBJECTS) $(CPP_OBJECTS) $(ASM_OBJECTS)
+compile:$(ASM_OBJECTS) $(C_OBJECTS) $(CPP_OBJECTS) 
 	@echo "Linking the Object files..."
 	@ld -T linker.ld $(LNK_Flags) $(foreach file,$(^F),$(BUILDDIR)/$(file)) -o $(EXECUTABLEDIR)/$(EXECUTABLE) 
 

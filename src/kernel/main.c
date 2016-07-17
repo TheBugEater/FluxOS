@@ -2,18 +2,22 @@
 #include "idt.h"
 #include "gdt.h"
 #include "utility.h"
+#include "keyboard.h"
 
 void kmain()
 {
     terminal_initialize();
 
-    // Disable IRQ's
-    disable_irq();
+    // Disable Interrupts
+    disable_interrupts();
 
     install_gdt();
     install_idt();
 
-    enable_irq();
+    // Enable Interrupts
+    enable_interrupts();
 
+    install_keyboard();
+  
     while(1);
 }

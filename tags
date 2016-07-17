@@ -36,8 +36,10 @@ C_SOURCES	Makefile	/^C_SOURCES = $(wildcard $(SOURCEDIR)\/**\/*.c)$/;"	m
 EXECUTABLE	Makefile	/^EXECUTABLE = FluxOS.bin$/;"	m
 EXECUTABLEDIR	Makefile	/^EXECUTABLEDIR = bin$/;"	m
 GRAPHIC_DEVICE	src/include/terminal.h	6;"	d
+IDT_GATE	src/include/idt.h	6;"	d
 IDT_SIZE	src/include/idt.h	4;"	d
 INC	Makefile	/^INC =-I$(SOURCEDIR)\/include$/;"	m
+KERNEL_CODE_SEGMENT	src/include/idt.h	5;"	d
 LNK_Flags	Makefile	/^LNK_Flags = -m elf_i386 $/;"	m
 MULTIBOOT_CHECKSUM	src/boot/boot.s	/^MULTIBOOT_CHECKSUM          equ -(MULTIBOOT_MAGIC_NUMBER + MULTIBOOT_FLAGS)$/;"	d
 MULTIBOOT_FLAGS	src/boot/boot.s	/^MULTIBOOT_FLAGS             equ MULTIBOOT_PAGE_ALIGN | MULTIBOOT_MEMORY_INFO$/;"	d
@@ -65,30 +67,126 @@ TerminalVector	src/include/terminal.h	/^} TerminalVector;$/;"	t	typeref:struct:_
 X	src/include/terminal.h	/^    unsigned int X;$/;"	m	struct:_TerminalVector
 Y	src/include/terminal.h	/^    unsigned int Y;$/;"	m	struct:_TerminalVector
 _TerminalVector	src/include/terminal.h	/^typedef struct _TerminalVector$/;"	s
+__GDT_H__	src/include/gdt.h	2;"	d
 __IDT_H__	src/include/idt.h	2;"	d
+__KEYBOARD_H__	src/include/keyboard.h	2;"	d
 __TERMINAL_H__	src/include/terminal.h	2;"	d
 __UTILITY_H_	src/include/utility.h	2;"	d
+access	src/include/gdt.h	/^    unsigned char access;$/;"	m	struct:gdt_entry
+add_interrupt_handler	src/kernel/idt.c	/^void add_interrupt_handler(unsigned int interrupt_num, interrupt_handler_fn* function)$/;"	f
+assert_interrupt	src/kernel/idt.c	/^void assert_interrupt(struct cpu_state cpu, struct stack_state stack)$/;"	f
+base	src/include/gdt.h	/^    unsigned int base;$/;"	m	struct:gdt_ptr
 base	src/include/idt.h	/^    unsigned int base;$/;"	m	struct:idt_ptr
+base_high	src/include/gdt.h	/^    unsigned char base_high;$/;"	m	struct:gdt_entry
+base_low	src/include/gdt.h	/^    unsigned short base_low;$/;"	m	struct:gdt_entry
+base_middle	src/include/gdt.h	/^    unsigned char base_middle;$/;"	m	struct:gdt_entry
 clrscr	src/kernel/terminal.c	/^void clrscr()$/;"	f
-create_idt_entry	src/kernel/idt.c	/^void create_idt_entry(unsigned short num, unsigned int handler, unsigned short selector, unsigned char type) $/;"	f
+cpu_state	src/include/idt.h	/^struct cpu_state$/;"	s
+create_idt_entry	src/kernel/idt.c	/^void create_idt_entry(unsigned short num, unsigned long handler, unsigned short selector, unsigned char type) $/;"	f
+cs	src/include/idt.h	/^    unsigned int eip, cs, eflags;$/;"	m	struct:stack_state
 currentCursor	src/include/terminal.h	/^static TerminalVector currentCursor = {.X = 0,.Y = 0};$/;"	v
-disable_irq	src/utility/util.s	/^disable_irq:$/;"	l
-enable_irq	src/utility/util.s	/^enable_irq:$/;"	l
+disable_interrupts	src/utility/util.s	/^disable_interrupts:$/;"	l
+eax	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+ebp	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+ebx	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+ecx	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+edi	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+edx	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+eflags	src/include/idt.h	/^    unsigned int eip, cs, eflags;$/;"	m	struct:stack_state
+eip	src/include/idt.h	/^    unsigned int eip, cs, eflags;$/;"	m	struct:stack_state
+enable_interrupts	src/utility/util.s	/^enable_interrupts:$/;"	l
+error_code	src/include/idt.h	/^    unsigned int interrupt_num, error_code;$/;"	m	struct:stack_state
+esi	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+esp	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
 extern	src/boot/boot.s	/^extern kmain$/;"	l
+extern	src/kernel/core.s	/^extern kernel_idt_handler$/;"	l
+flushjump	src/kernel/core.s	/^flushjump:$/;"	l
+gdt	src/include/gdt.h	/^struct gdt_entry gdt[3];$/;"	v	typeref:struct:gdt_entry
+gdt_entry	src/include/gdt.h	/^struct gdt_entry$/;"	s
+gdt_flush	src/kernel/core.s	/^gdt_flush:$/;"	l
+gdt_ptr	src/include/gdt.h	/^struct gdt_ptr$/;"	s
+gdt_set_gate	src/kernel/gdt.c	/^void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran)$/;"	f
 global	src/boot/boot.s	/^global start$/;"	l
+global	src/kernel/core.s	/^global gdt_flush    $/;"	l
+global	src/kernel/core.s	/^global irq_%1$/;"	l
+global	src/kernel/core.s	/^global isr_%1$/;"	l
 global	src/kernel/core.s	/^global load_idt$/;"	l
-global	src/utility/util.s	/^global disable_irq$/;"	l
-global	src/utility/util.s	/^global enable_irq$/;"	l
+global	src/utility/util.s	/^global disable_interrupts$/;"	l
+global	src/utility/util.s	/^global enable_interrupts$/;"	l
 global	src/utility/util.s	/^global inb$/;"	l
 global	src/utility/util.s	/^global outb$/;"	l
+gp	src/include/gdt.h	/^struct gdt_ptr gp;$/;"	v	typeref:struct:gdt_ptr
+granularity	src/include/gdt.h	/^    unsigned char granularity;$/;"	m	struct:gdt_entry
 idt	src/include/idt.h	/^struct idt_entry idt[IDT_SIZE];$/;"	v	typeref:struct:idt_entry
 idt_entry	src/include/idt.h	/^struct idt_entry$/;"	s
+idt_handle	src/kernel/core.s	/^idt_handle:$/;"	l
 idt_ptr	src/include/idt.h	/^struct idt_ptr$/;"	s
 idtp	src/include/idt.h	/^struct idt_ptr idtp;$/;"	v	typeref:struct:idt_ptr
 inb	src/utility/util.s	/^inb:$/;"	l
+install_gdt	src/kernel/gdt.c	/^void install_gdt()$/;"	f
 install_idt	src/kernel/idt.c	/^void install_idt()$/;"	f
+install_irq	src/kernel/idt.c	/^void install_irq()$/;"	f
+install_isr	src/kernel/idt.c	/^void install_isr()$/;"	f
+install_keyboard	src/kernel/keyboard.c	/^void install_keyboard()$/;"	f
+interrupt_handler_fn	src/include/idt.h	/^typedef void (*interrupt_handler_fn)(struct cpu_state cpu, struct stack_state stack);$/;"	t
+interrupt_handlers	src/include/idt.h	/^interrupt_handler_fn interrupt_handlers[IDT_SIZE];$/;"	v
+interrupt_num	src/include/idt.h	/^    unsigned int interrupt_num, error_code;$/;"	m	struct:stack_state
+irq_handle	src/kernel/core.s	/^irq_handle 0, 32$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 1, 33$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 10, 42$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 11, 43$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 12, 44$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 13, 45$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 14, 46$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 15, 47$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 2, 34$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 3, 35$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 4, 36$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 5, 37$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 6, 38$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 7, 39$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 8, 40$/;"	l
+irq_handle	src/kernel/core.s	/^irq_handle 9, 41$/;"	l
+irq_remap	src/kernel/idt.c	/^void irq_remap()$/;"	f
+isr_with_error_code	src/kernel/core.s	/^isr_with_error_code 10$/;"	l
+isr_with_error_code	src/kernel/core.s	/^isr_with_error_code 11$/;"	l
+isr_with_error_code	src/kernel/core.s	/^isr_with_error_code 12$/;"	l
+isr_with_error_code	src/kernel/core.s	/^isr_with_error_code 13$/;"	l
+isr_with_error_code	src/kernel/core.s	/^isr_with_error_code 14$/;"	l
+isr_with_error_code	src/kernel/core.s	/^isr_with_error_code 17$/;"	l
+isr_with_error_code	src/kernel/core.s	/^isr_with_error_code 8$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 0$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 1$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 15$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 16$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 18$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 19$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 2$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 20$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 21$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 22$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 23$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 24$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 25$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 26$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 27$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 28$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 29$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 3$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 30$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 31$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 4$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 5$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 6$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 7$/;"	l
+isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 9$/;"	l
+kernel_assert	src/utility/utility.c	/^void kernel_assert(unsigned int condition)$/;"	f
+kernel_idt_handler	src/kernel/idt.c	/^void kernel_idt_handler(struct cpu_state cpu, struct stack_state stack)$/;"	f
+keyboard_handler	src/kernel/keyboard.c	/^void keyboard_handler(struct cpu_state cpu, struct stack_state stack)$/;"	f
 kmain	src/kernel/main.c	/^void kmain()$/;"	f
+limit	src/include/gdt.h	/^    unsigned short limit;$/;"	m	struct:gdt_ptr
 limit	src/include/idt.h	/^    unsigned short limit;$/;"	m	struct:idt_ptr
+limit_low	src/include/gdt.h	/^    unsigned short limit_low;$/;"	m	struct:gdt_entry
 load_idt	src/kernel/core.s	/^load_idt:$/;"	l
 memcpy	src/utility/utility.c	/^void* memcpy(void* dest, const void* src, int count)$/;"	f
 memset	src/utility/utility.c	/^void* memset(void* dest, unsigned char val, int count)$/;"	f
@@ -102,11 +200,12 @@ printk	src/kernel/terminal.c	/^int printk(const char *format, ...)$/;"	f
 prints	src/kernel/terminal.c	/^int prints(char **out, const char *string, int width, int pad)$/;"	f
 putchar	src/kernel/terminal.c	/^int putchar(int character)$/;"	f
 puts	src/kernel/terminal.c	/^int puts ( const char * str )$/;"	f
-resb	src/boot/boot.s	/^resb 8192$/;"	l
+resb	src/boot/boot.s	/^resb 16384$/;"	l
 scroll	src/kernel/terminal.c	/^void scroll()$/;"	f
 selector	src/include/idt.h	/^    unsigned short selector;$/;"	m	struct:idt_entry
 setcolor	src/kernel/terminal.c	/^void setcolor(enum TERMINAL_COLOR fg, enum TERMINAL_COLOR bg)$/;"	f
 sprintk	src/kernel/terminal.c	/^int sprintk(char *out, const char *format, ...)$/;"	f
+stack_state	src/include/idt.h	/^struct stack_state$/;"	s
 start	src/boot/boot.s	/^start:$/;"	l
 strlen	src/kernel/terminal.c	/^unsigned int strlen(const char* message)$/;"	f
 terminalColor	src/include/terminal.h	/^static unsigned char terminalColor;$/;"	v

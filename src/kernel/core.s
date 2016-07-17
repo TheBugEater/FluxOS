@@ -36,8 +36,17 @@ isr_%1:
 global isr_%1
 isr_%1:
     cli
-    push 0
+    push dword 0
     push dword %1
+    jmp idt_handle
+%endmacro
+
+%macro irq_handle 2
+global irq_%1
+irq_%1:
+    cli
+    push dword 0
+    push dword %2
     jmp idt_handle
 %endmacro
 
@@ -74,11 +83,31 @@ isr_without_error_code 29
 isr_without_error_code 30
 isr_without_error_code 31
 
+irq_handle 0, 32
+irq_handle 1, 33
+irq_handle 2, 34
+irq_handle 3, 35
+irq_handle 4, 36
+irq_handle 5, 37
+irq_handle 6, 38
+irq_handle 7, 39
+irq_handle 8, 40
+irq_handle 9, 41
+irq_handle 10, 42
+irq_handle 11, 43
+irq_handle 12, 44
+irq_handle 13, 45
+irq_handle 14, 46
+irq_handle 15, 47
+
 idt_handle:
-    
+    pushad
     call kernel_idt_handler
+    popad
     add esp, 8
     iretd
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;#############################################
 
 SECTION .data
 

@@ -23,7 +23,7 @@ start:
 SECTION .data
 
 SECTION .bss
-; Define an 8KB Stack
-resb 8192
+; Define an 16KB Stack
+resb 16384
 StackPointer:
 

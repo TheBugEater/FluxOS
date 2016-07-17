@@ -7,6 +7,7 @@
 
 extern void load_idt(unsigned long*);
 
+
 struct idt_entry
 {
     unsigned short offset_low;
@@ -22,8 +23,23 @@ struct idt_ptr
     unsigned int base;
 }__attribute__((packed));
 
+struct cpu_state
+{
+    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;
+}__attribute__((packed));
+
+struct stack_state
+{
+    unsigned int interrupt_num, error_code;
+    unsigned int eip, cs, eflags;
+}__attribute__((packed));
+
+
 struct idt_entry idt[IDT_SIZE];
 struct idt_ptr idtp;
+
+typedef void (*interrupt_handler_fn)(struct cpu_state cpu, struct stack_state stack);
+interrupt_handler_fn interrupt_handlers[IDT_SIZE];
 
 // ISR Handlers
 extern void isr_0();
@@ -59,15 +75,37 @@ extern void isr_29();
 extern void isr_30();
 extern void isr_31();
 
+extern void irq_0();
+extern void irq_1();
+extern void irq_2();
+extern void irq_3();
+extern void irq_4();
+extern void irq_5();
+extern void irq_6();
+extern void irq_7();
+extern void irq_8();
+extern void irq_9();
+extern void irq_10();
+extern void irq_11();
+extern void irq_12();
+extern void irq_13();
+extern void irq_14();
+extern void irq_15();
+
 // Functions
 
 void create_idt_entry(unsigned short num, unsigned long handler, unsigned short selector, unsigned char type);
 
 void install_idt();
 
+void irq_remap();
 void install_isr();
 void install_irq();
 
-void kernel_idt_handler(unsigned int num, unsigned int error);
+void kernel_idt_handler(struct cpu_state, struct stack_state);
+
+void add_interrupt_handler(unsigned int interrupt_num, interrupt_handler_fn* function);
+
+void assert_interrupt(struct cpu_state cpu, struct stack_state stack);
 
 #endif

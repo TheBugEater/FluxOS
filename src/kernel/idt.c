@@ -20,12 +20,34 @@ void install_idt()
     idtp.base = &idt;
     
     memset(&idt, 0, sizeof(struct idt_entry) * IDT_SIZE);
+    memset(&interrupt_handlers, 0, sizeof(interrupt_handler_fn) * IDT_SIZE);
 
     load_idt((unsigned long*)&idtp);
 
     install_isr();
+    install_irq();
+
+    interrupt_handlers[81] = assert_interrupt;
 
     printk("IDT Installed Successfully...\n");
+}
+
+void irq_remap()
+{
+    outb(0x20, 0x11);
+    outb(0xA0, 0x11);
+
+    outb(0x21, 0x20);
+    outb(0xA1, 0x28);
+
+    outb(0x21, 0x04);
+    outb(0xA1, 0x02);
+
+    outb(0x21, 0x01);
+    outb(0xA1, 0x01);
+
+    outb(0x21, 0);
+    outb(0xA1, 0);
 }
 
 void install_isr()
@@ -64,17 +86,60 @@ void install_isr()
     create_idt_entry(31, isr_31, KERNEL_CODE_SEGMENT, IDT_GATE);
 }
 
-void kernel_idt_handler(unsigned int num, unsigned int error)
+void install_irq()
 {
-    printk("Interrupt : %d Occurred!\n", num);
-    if(num < 32)
+    irq_remap();
+
+    create_idt_entry(32, irq_0, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(33, irq_1, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(34, irq_2, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(35, irq_3, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(36, irq_4, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(37, irq_5, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(38, irq_6, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(39, irq_7, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(40, irq_8, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(41, irq_9, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(42, irq_10, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(43, irq_11, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(44, irq_12, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(45, irq_13, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(46, irq_14, KERNEL_CODE_SEGMENT, IDT_GATE);
+    create_idt_entry(47, irq_15, KERNEL_CODE_SEGMENT, IDT_GATE);
+}
+
+void kernel_idt_handler(struct cpu_state cpu, struct stack_state stack)
+{
+    kernel_assert(stack.interrupt_num < IDT_SIZE);
+
+    if(stack.interrupt_num < 32)
     {
-        while(1);
+        printk("Exception : %d Occurred! ErrorCode:%d\n", stack.interrupt_num, stack.error_code);
+        for(;;);
+    }
+
+    if(stack.interrupt_num > 40)
+    {
+        outb(0xA0, 0x20);
+    }
+
+    outb(0x20, 0x20);
+    
+    if(interrupt_handlers[stack.interrupt_num])
+    {
+        interrupt_handlers[stack.interrupt_num](cpu, stack);
     }
 }
 
-void install_irq()
+void add_interrupt_handler(unsigned int interrupt_num, interrupt_handler_fn* function)
 {
+    kernel_assert(interrupt_num < IDT_SIZE);
+
+    interrupt_handlers[interrupt_num] = function;
+    printk("Added Interrupt Handler for %d\n",interrupt_num);
 }
 
-
+void assert_interrupt(struct cpu_state cpu, struct stack_state stack)
+{
+    printk("Asserted Kernel\n");
+}
