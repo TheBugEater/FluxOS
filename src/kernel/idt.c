@@ -8,10 +8,14 @@ void create_idt_entry(unsigned short num, unsigned long handler, unsigned short 
     idt[num].zero = 0;
     idt[num].selector = selector;
     idt[num].type_attr = type;
+    
+    printk("Created ISR %d...\n", num);
 }
 
 void install_idt()
 {
+    printk("Installing IDT...\n");
+
     idtp.limit = (sizeof(struct idt_entry) * IDT_SIZE) - 1;
     idtp.base = &idt;
     
@@ -20,6 +24,8 @@ void install_idt()
     load_idt((unsigned long*)&idtp);
 
     install_isr();
+
+    printk("IDT Installed Successfully...\n");
 }
 
 void install_isr()
@@ -60,7 +66,7 @@ void install_isr()
 
 void kernel_idt_handler(unsigned int num, unsigned int error)
 {
-    printk("Interrupt : %d Occurred!", num);
+    printk("Interrupt : %d Occurred!\n", num);
     if(num < 32)
     {
         while(1);

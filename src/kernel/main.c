@@ -1,8 +1,11 @@
 #include "terminal.h"
 #include "idt.h"
+#include "utility.h"
 
 void kmain()
 {
+    terminal_initialize();
+
     // Disable IRQ's
     disable_irq();
 
@@ -10,6 +13,5 @@ void kmain()
 
     enable_irq();
 
-    terminal_initialize();
     while(1);
 }
