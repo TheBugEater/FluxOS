@@ -4,6 +4,8 @@ SECTIONS
 {
     . = 0x00100000; /* the code should be loaded at 1 MB */
 
+    kernel_start = .;
+
     .text ALIGN (0x1000) :
     {
         *(.text)
@@ -30,4 +32,5 @@ SECTIONS
     /* all data sections from all files */
     /* all COMMON sections from all files */
     /* all bss sections from all files */
+    kernel_end = .;
 }

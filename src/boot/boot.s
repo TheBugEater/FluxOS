@@ -1,3 +1,6 @@
+extern kernel_start
+extern kernel_end
+
 MULTIBOOT_MAGIC_NUMBER      equ 0x1BADB002
 MULTIBOOT_PAGE_ALIGN        equ 1<<0
 MULTIBOOT_MEMORY_INFO       equ 1<<1
@@ -17,6 +20,10 @@ extern kmain
 start:
     cli
     mov esp, StackPointer
+    push ebx
+    push eax
+    push kernel_start
+    push kernel_end
     call kmain
     jmp $
 

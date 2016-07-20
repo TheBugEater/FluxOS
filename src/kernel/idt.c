@@ -8,8 +8,6 @@ void create_idt_entry(unsigned short num, unsigned long handler, unsigned short 
     idt[num].zero = 0;
     idt[num].selector = selector;
     idt[num].type_attr = type;
-    
-    printk("Created ISR %d...\n", num);
 }
 
 void install_idt()
