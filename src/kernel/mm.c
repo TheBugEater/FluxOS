@@ -22,17 +22,17 @@ void install_mm(kernel_boot_info_t* info)
     printk("Allocation Starts at %x\n", alloc_start);
 
     unsigned long mem_size = info->mbi->mem_upper * 1024;
-    printk("Available Physical Memory : %d\n", mem_size >> 20);
+    printk("Available Physical Memory : %dmb\n", mem_size >> 20);
 
     unsigned long last_page = round_previous_page(mem_size);
-    printk("Last Page : %x\n", last_page);
+    printk("Last Block : %x\n", last_page);
 
     num_blocks = (last_page - (unsigned long)alloc_start)/PAGE_SIZE;
-    printk("Number of Pages: %d\n", num_blocks);
+    printk("Number of Blocks: %d\n", num_blocks);
 
     // Allocate memory for Mem Map
     mem_map = alloc_start;
-    mem_map_size = num_blocks/BITS_PER_BYTE/4;
+    mem_map_size = num_blocks/(BITS_PER_BYTE*4);
     
     // set new allocation start Point
     alloc_start = mem_map + mem_map_size;
@@ -40,9 +40,18 @@ void install_mm(kernel_boot_info_t* info)
 
     // Make sure it starts on a new Block
     alloc_start = round_next_page(alloc_start);
-    printk("Allocation Starts at %x\n", alloc_start);
+    printk("Real Allocation Starts at %x\n", alloc_start);
 
     memset(mem_map, 0, mem_map_size * sizeof(unsigned long));
+
+    printk("##########################\n");
+    printk("### TESTING ALLOCATION ###\n");
+    printk("##########################\n");
+
+    char* p = (char*)new_block();
+    p = "Hello Wolrd!, I'm at a Dynamically Allocated Block\n";
+    printk("%s",p);
+
 }
 
 void* new_block()
