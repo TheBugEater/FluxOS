@@ -1,6 +1,8 @@
 #ifndef __PAGING_H__
 #define __PAGING_H__
 
+#include <utility.h>
+
 /*
  * Paging Break Down
  *
@@ -78,15 +80,44 @@
 
 #define PAGE_SIZE           4096
 
-typedef unsigned long pte_entry;
-typedef unsigned long pde_entry;
+/*
+ * Page directory entry datatype.
+ * If marked as present, it specifies the physical address
+ * and permissions of a page table.
+ */
+typedef struct {
+    unsigned long present:1;
+    unsigned long flags:4;
+    unsigned long accesed:1;
+    unsigned long reserved:1;
+    unsigned long largePages:1;
+    unsigned long globalPage:1;
+    unsigned long kernelInfo:3;
+    unsigned long pageTableBaseAddr:20;
+} pde_t;
+
+/*
+ * Page table entry datatype.
+ * If marked as present, it specifies the physical address
+ * and permissions of a page of memory.
+ */
+typedef struct {
+    unsigned long present:1;
+    unsigned long flags:4;
+    unsigned long accesed:1;
+    unsigned long dirty:1;
+    unsigned long pteAttribute:1;
+    unsigned long globalPage:1;
+    unsigned long kernelInfo:3;
+    unsigned long pageBaseAddr:20;
+} pte_t;
 
 static unsigned long *page_directory = (unsigned long *) 0x9C000;
 static unsigned long *page_tables = (unsigned long *) 0x9D000;
 
-void create_page_table_entry(pte_entry* entry, unsigned long attribs, unsigned long frame);
-void create_page_directory_entry(pde_entry* entry, unsigned long attribs, unsigned long frame);
+void create_page_table_entry(pte_t* entry, unsigned long attribs, unsigned long frame);
+void create_page_directory_entry(pde_t* entry, unsigned long attribs, unsigned long frame);
 
-void install_paging(unsigned long end);
+void install_paging(kernel_boot_info_t* info);
 
 #endif //__PAGING_H__

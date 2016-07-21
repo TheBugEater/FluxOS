@@ -1,19 +1,17 @@
 #include <paging.h>
-#include <utility.h>
 
-void create_page_table_entry(pte_entry* entry, unsigned long attribs, unsigned long frame)
+void create_page_table_entry(pte_t* entry, unsigned long attribs, unsigned long frame)
 {
-    *entry = attribs | (frame >> 12 & PTE_FRAME);
+//    *entry = attribs | (frame >> 12 & PTE_FRAME);
 }
 
-void create_page_directory_entry(pde_entry* entry, unsigned long attribs, unsigned long frame)
+void create_page_directory_entry(pde_t* entry, unsigned long attribs, unsigned long frame)
 {
-    *entry = attribs | (frame >> 12 & PDE_FRAME);
+//    *entry = attribs | (frame >> 12 & PDE_FRAME);
 }
 
-void install_paging(unsigned long end)
+void install_paging(kernel_boot_info_t* info)
 {
-
 
     unsigned long cr0 = get_cr0();
     unsigned long cr3 = get_cr3();

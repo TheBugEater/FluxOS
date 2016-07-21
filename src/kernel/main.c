@@ -4,18 +4,9 @@
 #include "utility.h"
 #include "keyboard.h"
 #include "paging.h"
-#include <multiboot.h>
+#include <mm.h>
 
-struct kernel_boot_info
-{
-    unsigned long kernel_end;
-    unsigned long kernel_start;
-    unsigned long magic_number;
-    multiboot_info_t* mbi;
-
-}__attribute__((packed));
-
-void kmain(struct kernel_boot_info info)
+void kmain(kernel_boot_info_t info)
 {
     if(info.magic_number != MULTIBOOT_BOOTLOADER_MAGIC)
     {
@@ -39,6 +30,8 @@ void kmain(struct kernel_boot_info info)
     enable_interrupts();
 
     install_keyboard();
+
+    install_mm(&info);
    
     while(1);
 }

@@ -1,5 +1,7 @@
 #ifndef __UTILITY_H__
-#define __UTILITY_H_
+#define __UTILITY_H__ 
+
+#include <multiboot.h>
 
 typedef unsigned short          uint16_t;
 typedef unsigned int            uint32_t;
@@ -22,5 +24,15 @@ void* memcpy(void* dest, const void* src, int count);
 void* memset(void* dest, unsigned char val, int count);
 
 void kernel_assert(unsigned int condition);
+
+struct kernel_boot_info
+{
+    unsigned long kernel_end;
+    unsigned long kernel_start;
+    unsigned long magic_number;
+    multiboot_info_t* mbi;
+
+}__attribute__((packed));
+typedef struct kernel_boot_info kernel_boot_info_t;
 
 #endif
