@@ -3,6 +3,10 @@
 
 #include <multiboot.h>
 
+#define BIT_CHECK(val, bit)     ((val) & 1 << bit)
+#define BIT_SET(val, bit)       val |= 1 << bit
+#define BIT_CLEAR(val, bit)       val &= ~(1 << bit)
+
 typedef unsigned short          uint16_t;
 typedef unsigned int            uint32_t;
 typedef unsigned long long      uint64_t;

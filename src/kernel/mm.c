@@ -70,9 +70,9 @@ void* new_block()
         for(int j = 0; j < 4 * BITS_PER_BYTE; j++)
         {
             // Is the Block Empty
-            if(!((current) & (1 << j)))
+            if(!BIT_CHECK(current, j))
             {
-                current = current | 1 << j;
+                BIT_SET(current, j);
                 mem_map[i] = current;
                 unsigned int frame = (i * 4 * BITS_PER_BYTE + j);
                 unsigned long* address = ((unsigned long)alloc_start) + (frame * PAGE_SIZE);
@@ -92,7 +92,7 @@ void remove_block(void* ptr)
     unsigned long mem_map_offset = frame / (BITS_PER_BYTE * 4);
     unsigned short bit_offset = frame % (BITS_PER_BYTE * 4);
 
-    mem_map[mem_map_offset] &= ~(1 << bit_offset);
+    BIT_CLEAR(mem_map[mem_map_offset], bit_offset);
     printk("Removed Block At frame=%d Address:%x\n",frame, ptr);
 }
 

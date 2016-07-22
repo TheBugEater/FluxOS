@@ -38,6 +38,11 @@ void install_paging(kernel_boot_info_t* info)
 
 void page_fault_handler(struct cpu_state cpu, struct stack_state stack)
 {
-    printk("Page Fault Occurred! %x",get_cr2());
+    page_fault_error_t* fault = (page_fault_error_t*)&stack.error_code;
+    if(!fault->page_present)
+    {
+        printk("Page doesn't excist\n");
+    }
+    printk("Page Fault Occurred! %x | Error Code %d\n",get_cr2(), stack.error_code);
     for(;;);
 }

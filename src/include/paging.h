@@ -95,7 +95,7 @@ typedef struct {
     unsigned long global_page:1;
     unsigned long kernel_info:3;
     unsigned long page_table_base_addr:20;
-}__attribute((packed)) pde_t;
+}pde_t;
 
 /*
  * Page table entry datatype.
@@ -111,7 +111,17 @@ typedef struct {
     unsigned long global_page:1;
     unsigned long kernel_info:3;
     unsigned long page_base_addr:20;
-}__attribute((packed)) pte_t;
+}pte_t;
+
+typedef struct 
+{
+    unsigned long page_present:1;
+    unsigned long read_write:1;
+    unsigned long user_mode:1;
+    unsigned long reserved_overwrite:1;
+    unsigned long instruction_fetch:1;
+    unsigned long unused:27;
+}__attribute__((packked)) page_fault_error_t;
 
 // Make the Page Directory and Page Table Point to 0
 static unsigned long *page_directory = (unsigned long *) 0x0;
