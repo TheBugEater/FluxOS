@@ -32,6 +32,7 @@ void kmain(kernel_boot_info_t info)
     install_keyboard();
 
     install_mm(&info);
+    install_paging(&info);
    
     while(1);
 }

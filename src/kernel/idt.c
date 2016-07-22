@@ -110,7 +110,8 @@ void kernel_idt_handler(struct cpu_state cpu, struct stack_state stack)
 {
     kernel_assert(stack.interrupt_num < IDT_SIZE);
 
-    if(stack.interrupt_num < 32)
+    // If there is a seperate handle for the exception don't handle it here
+    if(stack.interrupt_num < 32 && !(interrupt_handlers[stack.interrupt_num]))
     {
         printk("Exception : %d Occurred! ErrorCode:%d\n", stack.interrupt_num, stack.error_code);
         for(;;);

@@ -4,6 +4,7 @@ global inb
 global outb
 global disable_interrupts
 global enable_interrupts
+global get_cr2
 global get_cr0
 global write_cr0
 global get_cr3
@@ -39,6 +40,10 @@ write_cr0:
 
 get_cr3:
     mov eax, cr3
+    ret
+
+get_cr2:
+    mov eax, cr2
     ret
 
 write_cr3:

@@ -2,6 +2,7 @@
 #define __PAGING_H__
 
 #include <utility.h>
+#include <idt.h>
 
 /*
  * Paging Break Down
@@ -90,11 +91,11 @@ typedef struct {
     unsigned long flags:4;
     unsigned long accesed:1;
     unsigned long reserved:1;
-    unsigned long largePages:1;
-    unsigned long globalPage:1;
-    unsigned long kernelInfo:3;
-    unsigned long pageTableBaseAddr:20;
-} pde_t;
+    unsigned long large_pages:1;
+    unsigned long global_page:1;
+    unsigned long kernel_info:3;
+    unsigned long page_table_base_addr:20;
+}__attribute((packed)) pde_t;
 
 /*
  * Page table entry datatype.
@@ -106,18 +107,16 @@ typedef struct {
     unsigned long flags:4;
     unsigned long accesed:1;
     unsigned long dirty:1;
-    unsigned long pteAttribute:1;
-    unsigned long globalPage:1;
-    unsigned long kernelInfo:3;
-    unsigned long pageBaseAddr:20;
-} pte_t;
+    unsigned long pte_attribute:1;
+    unsigned long global_page:1;
+    unsigned long kernel_info:3;
+    unsigned long page_base_addr:20;
+}__attribute((packed)) pte_t;
 
-static unsigned long *page_directory = (unsigned long *) 0x9C000;
-static unsigned long *page_tables = (unsigned long *) 0x9D000;
-
-void create_page_table_entry(pte_t* entry, unsigned long attribs, unsigned long frame);
-void create_page_directory_entry(pde_t* entry, unsigned long attribs, unsigned long frame);
+// Make the Page Directory and Page Table Point to 0
+static unsigned long *page_directory = (unsigned long *) 0x0;
 
 void install_paging(kernel_boot_info_t* info);
+void page_fault_handler(struct cpu_state cpu, struct stack_state stack);
 
 #endif //__PAGING_H__

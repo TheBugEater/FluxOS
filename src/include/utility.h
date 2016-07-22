@@ -14,6 +14,7 @@ extern void disable_interrupts(void);
 extern void enable_interrupts(void);
 
 extern unsigned int get_cr0();
+extern unsigned int get_cr2();
 extern unsigned int get_cr3();
 
 extern void write_cr0(unsigned int value);

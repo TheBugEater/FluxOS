@@ -28,7 +28,6 @@ void install_mm(kernel_boot_info_t* info)
     printk("Last Block : %x\n", last_page);
 
     num_blocks = (last_page - (unsigned long)alloc_start)/PAGE_SIZE;
-    printk("Number of Blocks: %d\n", num_blocks);
 
     // Allocate memory for Mem Map
     mem_map = alloc_start;
@@ -42,6 +41,9 @@ void install_mm(kernel_boot_info_t* info)
     alloc_start = round_next_page(alloc_start);
     printk("Real Allocation Starts at %x\n", alloc_start);
 
+    num_blocks = (last_page - (unsigned long)alloc_start)/PAGE_SIZE;
+    printk("Number of Blocks: %d\n", num_blocks);
+
     memset(mem_map, 0, mem_map_size * sizeof(unsigned long));
 
     printk("##########################\n");
@@ -52,6 +54,12 @@ void install_mm(kernel_boot_info_t* info)
     p = "Hello Wolrd!, I'm at a Dynamically Allocated Block\n";
     printk("%s",p);
 
+    /*
+    for(int i=0; i<num_blocks;i++)
+    {
+        void* p = new_block();
+    }
+    */
 }
 
 void* new_block()

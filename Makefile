@@ -4,7 +4,7 @@ CC_C = gcc
 
 INC =-I$(SOURCEDIR)/include
 
-ASM_Flags = -f elf32
+ASM_Flags = -f elf32 $(ASM_EXTRA)
 C_Flags = -fno-stack-protector -w -std=c99 -fno-builtin -m32 $(INC) $(EXTRA)
 CPP_Flags = -m32 -ffreestanding -O2 -Wall -Wextra -fno-builtin -fno-exceptions -fno-rtti $(EXTRA)
 LNK_Flags = -m elf_i386 
@@ -63,7 +63,7 @@ run:
 
 run_debug:
 	@echo "Running in Debug Mode..." $<
-	@qemu-system-i386 -s -S -cdrom myos.iso
+	@qemu-system-i386 -s -S -d int,cpu_reset -cdrom myos.iso
 
 clean:
 	@echo "Cleaning Build Directories and Files..." $<
