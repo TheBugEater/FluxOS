@@ -4,62 +4,6 @@
 #include <utility.h>
 #include <idt.h>
 
-/*
- * Paging Break Down
- *
- * PTE(Page Table Entry) Structure
- * PDE(Page Directory Entry) Structure
- * PDT
-
-########## Page Table Entry ################################
-    Bit 0 (P): Present flag
-        0: Page is not in memory
-        1: Page is present (in memory)
-    Bit 1 (R/W): Read/Write flag
-        0: Page is read only
-        1: Page is writable
-    Bit 2 (U/S):User mode/Supervisor mode flag
-        0: Page is kernel (supervisor) mode
-        1: Page is user mode. Cannot read or write supervisor pages
-    Bits 3-4 (RSVD): Reserved by Intel
-    Bit 5 (A): Access flag. Set by processor
-        0: Page has not been accessed
-        1: Page has been accessed
-    Bit 6 (D): Dirty flag. Set by processor
-        0: Page has not been written to
-        1: Page has been written to
-    Bits 7-8 (RSVD): Reserved
-    Bits 9-11 (AVAIL): Available for use
-     Bits 12-31 (FRAME): Frame address
-
-########## Page Directory Entry ################################
-    Bit 0 (P): Present flag
-        0: Page is not in memory
-        1: Page is present (in memory)
-    Bit 1 (R/W): Read/Write flag
-        0: Page is read only
-        1: Page is writable
-    Bit 2 (U/S):User mode/Supervisor mode flag
-        0: Page is kernel (supervisor) mode
-        1: Page is user mode. Cannot read or write supervisor pages
-    Bit 3 (PWT):Write-through flag
-        0: Write back caching is enabled
-        1: Write through caching is enabled
-    Bit 4 (PCD):Cache disabled
-        0: Page table will not be cached
-        1: Page table will be cached
-    Bit 5 (A): Access flag. Set by processor
-        0: Page has not been accessed
-        1: Page has been accessed
-    Bit 6 (D): Reserved by Intel
-    Bit 7 (PS): Page Size
-        0: 4 KB pages
-        1: 4 MB pages
-    Bit 8 (G): Global Page (Ignored)
-    Bits 9-11 (AVAIL): Available for use
-    Bits 12-31 (FRAME): Page Table Base address
- * */
-
 #define PTE_PRESENT         1 << 0
 #define PTE_WRITABLE        1 << 1
 #define PTE_USER_MODE       1 << 2
@@ -88,7 +32,10 @@
  */
 typedef struct {
     unsigned long present:1;
-    unsigned long flags:4;
+    unsigned long writable:1;
+    unsigned long user_mode:1;
+    unsigned long write_through:1;
+    unsigned long cache_disabled:1;
     unsigned long accesed:1;
     unsigned long reserved:1;
     unsigned long large_pages:1;
@@ -123,10 +70,12 @@ typedef struct
     unsigned long unused:27;
 }__attribute__((packked)) page_fault_error_t;
 
-// Make the Page Directory and Page Table Point to 0
-static unsigned long *page_directory = (unsigned long *) 0x0;
+static unsigned long* page_directory = (unsigned long *)0;
+static unsigned long* kernel_page_table = (unsigned long *)0;
 
 void install_paging(kernel_boot_info_t* info);
+
+BOOL add_page_for_virtual(unsigned long* virtual_addr, unsigned long attribs);
 void page_fault_handler(struct cpu_state cpu, struct stack_state stack);
 
 #endif //__PAGING_H__

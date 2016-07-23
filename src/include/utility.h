@@ -3,13 +3,21 @@
 
 #include <multiboot.h>
 
+#define TRUE    1
+#define FALSE   0
+
 #define BIT_CHECK(val, bit)     ((val) & 1 << bit)
 #define BIT_SET(val, bit)       val |= 1 << bit
 #define BIT_CLEAR(val, bit)       val &= ~(1 << bit)
 
+#define VIRTUAL_ADDR_DIR(x) ((unsigned long)x >> 22)
+#define VIRTUAL_ADDR_PAGE(x) (((unsigned long)x >> 12) & 0x3FF)
+#define VIRTUAL_ADDR_OFFSET(x) ((unsigned long)x & 0x3FF)
+
 typedef unsigned short          uint16_t;
 typedef unsigned int            uint32_t;
 typedef unsigned long long      uint64_t;
+typedef unsigned char           BOOL;
  
 extern char inb(unsigned short port);
 extern void outb(unsigned short port, char ch);
@@ -17,12 +25,9 @@ extern void outb(unsigned short port, char ch);
 extern void disable_interrupts(void);
 extern void enable_interrupts(void);
 
-extern unsigned int get_cr0();
-extern unsigned int get_cr2();
-extern unsigned int get_cr3();
-
-extern void write_cr0(unsigned int value);
-extern void write_cr3(unsigned int value);
+extern unsigned int get_page_fault_addr();
+extern void switch_page_directory(unsigned long value);
+extern void invalidate_addr(unsigned long* addr);
 
 void* memcpy(void* dest, const void* src, int count);
 

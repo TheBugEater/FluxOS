@@ -3,7 +3,7 @@
 
 #include <stdarg.h>
 
-#define GRAPHIC_DEVICE 0xB8000
+#define GRAPHIC_DEVICE 0xC00B8000
 
 #define TERMINAL_WIDTH 80
 #define TERMINAL_HEIGHT 25
