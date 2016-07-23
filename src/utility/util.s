@@ -49,7 +49,7 @@ switch_page_directory:
 
 invalidate_addr:
     mov eax, [esp + 4]
-    invlpg[eax]
+    invlpg [eax]
     ret
 
 SECTION .data

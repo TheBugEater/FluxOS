@@ -3,10 +3,6 @@
 
 #include <utility.h>
 
-#define BITS_PER_BYTE   8
-#define KERNEL_VIRTUAL_BASE 0xC0000000
-#define KERNEL_DIR_INDEX (KERNEL_VIRTUAL_BASE >> 22)
-
 static unsigned long* phys_alloc_start= 0;
 static unsigned long num_blocks = 0;
 
