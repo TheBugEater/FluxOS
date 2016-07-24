@@ -56,15 +56,13 @@ typedef struct
     unsigned long unused:27;
 }__attribute__((packked)) page_fault_error_t;
 
-static unsigned long* page_directory = (unsigned long *)0;
-static unsigned long* kernel_page_table = (unsigned long *)0;
+static unsigned long* page_directory = 0xFFFFF000;
 
 void install_paging(kernel_boot_info_t* info);
 
 pte_t create_new_pte_entry(BOOL usr_mode, void* phys_addr);
 pde_t create_new_pde_entry(BOOL usr_mode, void* phys_addr);
 
-BOOL add_page_for_virtual(unsigned long* virtual_addr, unsigned long attribs);
 void page_fault_handler(struct cpu_state cpu, struct stack_state stack);
 
 // Returns a New Page from Kernel Heap

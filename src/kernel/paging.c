@@ -4,6 +4,62 @@
 void install_paging(kernel_boot_info_t* info)
 {
     add_interrupt_handler(14, page_fault_handler);
+    /****************************************************
+     ***********************************|PDE ENTRIES|PDE|
+     ****************************************************
+     We will Map Page Directory and Page Tables to 
+     Virtual Space
+     * **************************************************/
+    unsigned long* temp_page_directory = (unsigned long*)new_block();
+    unsigned long* kernel_page_table = (unsigned long*)new_block();
+    unsigned long* recursive_page_table = (unsigned long*)new_block();
+
+    unsigned long* v_page_directory = ADDR_TO_KERNEL_BASE(temp_page_directory);
+    unsigned long* v_kernel_page_table = ADDR_TO_KERNEL_BASE(kernel_page_table);
+    unsigned long* v_recursive_page_table = ADDR_TO_KERNEL_BASE(recursive_page_table);
+
+    for(unsigned int i = 0; i < 1024; i++)
+    {
+        // Set the Address and Make it Present and Writable
+        v_kernel_page_table[i] = (i * 0x1000) | 3;
+    }
+
+    for(unsigned int i = 1; i < 1024; i++)
+    {
+        v_page_directory[i] = 2;
+    }
+    // Map Kernel
+    v_page_directory[768] = ((unsigned long)kernel_page_table & 0xFFFFF000) | 3;
+    // Recusrive Page Table
+    v_page_directory[1023] = ((unsigned long)recursive_page_table & 0xFFFFF000) | 3; 
+
+    /***************************************************
+     * This Block Sets the Last Index of the Page Table to Map to Page
+     * Directory*/
+    for(unsigned int i = 0; i < 1023; i++)
+    {
+        // Set the Address and Make it Present and Writable
+        v_recursive_page_table[i] = 2;
+    }
+    v_recursive_page_table[1023] = ((unsigned long)temp_page_directory & 0xFFFFF000) | 3;
+    v_recursive_page_table[768] = ((unsigned long)kernel_page_table & 0xFFFFF000) | 3;
+    /***************************************************/
+
+    switch_page_directory(temp_page_directory);
+
+    printk("##########################\n");
+    printk("### TESTING ALLOCATION ###\n");
+    printk("##########################\n");
+    
+    int* a = (int*)0xAFF00000;
+    *a = 10;
+    printk("Value is %d",*a);
+ }
+
+void install_paging_t(kernel_boot_info_t* info)
+{
+/*
+    add_interrupt_handler(14, page_fault_handler);
     
     // Page Directory and Page Table Takes 4mb for Full Address Space
     // Reserve That
@@ -24,8 +80,8 @@ void install_paging(kernel_boot_info_t* info)
     for(unsigned int i = 0; i < 1024; i++)
     {
         unsigned long* temp_page_table = (unsigned long*)new_block();
-        pde_t p_dir = create_new_page_dir(0, temp_page_table);
-        v_page_directory[i] = pde_t;
+        pde_t p_dir = create_new_pde_entry(0, temp_page_table);
+        v_page_directory[i] = *(unsigned long*)&p_dir;
     }
 
     v_page_directory[768] = ((unsigned long)page_table & 0xFFFFF000) | 3;
@@ -41,7 +97,7 @@ void install_paging(kernel_boot_info_t* info)
     
     int* a = (int*)0xAE50FFFF;
     *a = 10;
-    /*
+    *
     for(int i=0; i<7000;i++)
     {
         void* p = (unsigned long)new_block() + KERNEL_VIRTUAL_BASE;
@@ -50,17 +106,7 @@ void install_paging(kernel_boot_info_t* info)
         printk("A = i x 10 = %d\n",a*i);
     }
 */ 
-}
 
-BOOL add_page_for_virtual(unsigned long* virtual_addr, unsigned long attribs)
-{
-    unsigned long dir_index = VIRTUAL_ADDR_DIR(virtual_addr);
-    unsigned long page_index = VIRTUAL_ADDR_PAGE(virtual_addr);
-    unsigned long offset = VIRTUAL_ADDR_OFFSET(virtual_addr);
-    unsigned long *new_directory = 0;
-    unsigned long* v_page_directory = ADDR_TO_KERNEL_BASE(page_directory);
-
-    return TRUE;
 }
 
 pte_t create_new_pte_entry(BOOL usr_mode, void* phys_addr)
@@ -85,13 +131,11 @@ pde_t create_new_pde_entry(BOOL usr_mode, void* phys_addr)
 
 void* get_new_page()
 {
-    unsigned long* v_page_directory = ADDR_TO_KERNEL_BASE(page_directory);
-
     // Convert it to a Virtual Block of Kernel Heap
-    unsigned long dir_index = VIRTUAL_ADDR_DIR(virtual_heap_top);
-    unsigned long page_index = VIRTUAL_ADDR_PAGE(virtual_heap_top);
+    unsigned long dir_index = GET_PAGE_TABLE_INDEX(virtual_heap_top);
+    unsigned long page_index = GET_PAGE_INDEX(virtual_heap_top);
 
-    pde_t page_dir = *(pde_t*)&v_page_directory[dir_index];
+    pde_t page_dir = *(pde_t*)&page_directory[dir_index];
     if(!page_dir.present)
     {
         // Page Dir not set, Create One
@@ -123,6 +167,7 @@ void page_fault_handler(struct cpu_state cpu, struct stack_state stack)
 
     void* fault_addr = get_page_fault_addr();
     printk("Page Fault Occurred! %x | Error Code %d\n",get_page_fault_addr(), stack.error_code);
-  
+
     for(;;);
+  
 }

@@ -14,9 +14,9 @@
 #define BIT_SET(val, bit)       val |= 1 << bit
 #define BIT_CLEAR(val, bit)       val &= ~(1 << bit)
 
-#define VIRTUAL_ADDR_DIR(x) ((unsigned long)x >> 22)
-#define VIRTUAL_ADDR_PAGE(x) (((unsigned long)x >> 12) & 0x3FF)
-#define VIRTUAL_ADDR_OFFSET(x) ((unsigned long)x & 0x3FF)
+#define GET_PAGE_TABLE_INDEX(x) ((unsigned long)x >> 22)
+#define GET_PAGE_INDEX(x) ( (( (unsigned long)x) >> 12) & 0x3FF)
+#define GET_PAGE_OFFSET(x) ((unsigned long)x & 0xFFF)
 #define ADDR_TO_KERNEL_BASE(x) ((unsigned long)x + KERNEL_VIRTUAL_BASE)
 
 typedef unsigned short          uint16_t;
