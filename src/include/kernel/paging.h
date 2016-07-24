@@ -4,25 +4,9 @@
 #include <utility/utility.h>
 #include <kernel/idt.h>
 
-#define PTE_PRESENT         1 << 0
-#define PTE_WRITABLE        1 << 1
-#define PTE_USER_MODE       1 << 2
-#define PTE_ACCESSED        1 << 5
-#define PTE_DIRTY           1 << 6
-#define PTE_FRAME           0xFFFFF000
-#define PTE_KERNEL_WRITABLE PTE_PRESENT | PTE_WRITABLE
-
-#define PDE_PRESENT         1 << 0
-#define PDE_WRITABLE        1 << 1
-#define PDE_USER_MODE       1 << 2
-#define PDE_WRITE_THROUGH   1 << 3
-#define PDE_CACHE_ENABLED   1 << 4
-#define PDE_ACCESSED        1 << 5
-#define PDE_4MB_PAGE        1 << 7
-#define PDE_GLOBAL_PAGE     1 << 8
-#define PDE_FRAME           0xFFFFF000
-#define PDE_KERNEL_WRITABLE PDE_PRESENT | PDE_WRITABLE
-
+// Kernel Heap Starts from 128mb from Base
+#define KERNEL_HEAP_BASE    KERNEL_VIRTUAL_BASE + (128 << 20)
+#define KERNEL_HEAP_SIZE    (256 << 20)
 #define PAGE_SIZE           4096
 
 /*
@@ -51,7 +35,9 @@ typedef struct {
  */
 typedef struct {
     unsigned long present:1;
-    unsigned long flags:4;
+    unsigned long writable:1;
+    unsigned long user_mode:1;
+    unsigned long reserved:2;
     unsigned long accesed:1;
     unsigned long dirty:1;
     unsigned long pte_attribute:1;
@@ -75,7 +61,18 @@ static unsigned long* kernel_page_table = (unsigned long *)0;
 
 void install_paging(kernel_boot_info_t* info);
 
+pte_t create_new_pte_entry(BOOL usr_mode, void* phys_addr);
+pde_t create_new_pde_entry(BOOL usr_mode, void* phys_addr);
+
 BOOL add_page_for_virtual(unsigned long* virtual_addr, unsigned long attribs);
 void page_fault_handler(struct cpu_state cpu, struct stack_state stack);
+
+// Returns a New Page from Kernel Heap
+void* get_new_page();
+
+// Removes a Page 
+void delete_page(void* ptr);
+
+static void* virtual_heap_top = 0;
 
 #endif //__PAGING_H__

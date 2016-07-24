@@ -23,13 +23,17 @@ void install_paging(kernel_boot_info_t* info)
 
     for(unsigned int i = 0; i < 1024; i++)
     {
-        v_page_directory[i] = 2;
+        unsigned long* temp_page_table = (unsigned long*)new_block();
+        pde_t p_dir = create_new_page_dir(0, temp_page_table);
+        v_page_directory[i] = pde_t;
     }
 
     v_page_directory[768] = ((unsigned long)page_table & 0xFFFFF000) | 3;
     printk("%x\n",v_page_directory[768]);
  
     switch_page_directory(page_directory);
+
+    virtual_heap_top = KERNEL_HEAP_BASE;
 
     printk("##########################\n");
     printk("### TESTING ALLOCATION ###\n");
@@ -59,6 +63,54 @@ BOOL add_page_for_virtual(unsigned long* virtual_addr, unsigned long attribs)
     return TRUE;
 }
 
+pte_t create_new_pte_entry(BOOL usr_mode, void* phys_addr)
+{
+    pte_t page_entry;
+    page_entry.present = TRUE;
+    page_entry.writable = TRUE;
+    page_entry.user_mode = usr_mode;
+    page_entry.page_base_addr = (unsigned long)phys_addr & 0xFFFFF000;
+    return page_entry;
+}
+
+pde_t create_new_pde_entry(BOOL usr_mode, void* phys_addr)
+{
+    pde_t dir_entry;
+    dir_entry.present = TRUE;
+    dir_entry.writable = TRUE;
+    dir_entry.user_mode = usr_mode;
+    dir_entry.page_table_base_addr = (unsigned long)phys_addr & 0xFFFFF000;
+    return dir_entry;
+}
+
+void* get_new_page()
+{
+    unsigned long* v_page_directory = ADDR_TO_KERNEL_BASE(page_directory);
+
+    // Convert it to a Virtual Block of Kernel Heap
+    unsigned long dir_index = VIRTUAL_ADDR_DIR(virtual_heap_top);
+    unsigned long page_index = VIRTUAL_ADDR_PAGE(virtual_heap_top);
+
+    pde_t page_dir = *(pde_t*)&v_page_directory[dir_index];
+    if(!page_dir.present)
+    {
+        // Page Dir not set, Create One
+        void* phys_dir_block = new_block();
+        page_dir = create_new_pde_entry(0, phys_dir_block);
+    }
+   
+    // Get A Physical Block
+    void* phys_block = new_block();
+
+    create_new_pte_entry(0, phys_block);
+
+    // Increase offset
+    virtual_heap_top = (unsigned long)virtual_heap_top + PAGE_SIZE;
+}
+
+void delete_page(void* ptr)
+{
+}
 
 void page_fault_handler(struct cpu_state cpu, struct stack_state stack)
 {
