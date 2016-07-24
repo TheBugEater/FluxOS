@@ -1,6 +1,6 @@
-#include <mm.h>
-#include <paging.h>
-#include <terminal.h>
+#include <kernel/mm.h>
+#include <kernel/paging.h>
+#include <kernel/terminal.h>
 
 unsigned long round_next_page(unsigned long address)
 {

@@ -1,5 +1,5 @@
-#include "terminal.h"
-#include "utility.h"
+#include <kernel/terminal.h>
+#include <utility/utility.h>
 
 void printchar(char **str, int c)
 {

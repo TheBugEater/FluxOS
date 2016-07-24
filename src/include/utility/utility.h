@@ -1,7 +1,7 @@
 #ifndef __UTILITY_H__
 #define __UTILITY_H__ 
 
-#include <multiboot.h>
+#include <boot/multiboot.h>
 
 #define TRUE    1
 #define FALSE   0

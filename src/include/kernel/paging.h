@@ -1,8 +1,8 @@
 #ifndef __PAGING_H__
 #define __PAGING_H__
 
-#include <utility.h>
-#include <idt.h>
+#include <utility/utility.h>
+#include <kernel/idt.h>
 
 #define PTE_PRESENT         1 << 0
 #define PTE_WRITABLE        1 << 1

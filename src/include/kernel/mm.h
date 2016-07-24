@@ -1,7 +1,7 @@
 #ifndef __MM_H__
 #define __MM_H__
 
-#include <utility.h>
+#include <utility/utility.h>
 
 static unsigned long* phys_alloc_start= 0;
 static unsigned long num_blocks = 0;

@@ -1,5 +1,5 @@
-#include "idt.h"
-#include "utility.h"
+#include <kernel/idt.h>
+#include <utility/utility.h>
 
 void create_idt_entry(unsigned short num, unsigned long handler, unsigned short selector, unsigned char type) 
 {

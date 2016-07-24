@@ -1,4 +1,4 @@
-#include "keyboard.h"
+#include <kernel/keyboard.h>
 
 void install_keyboard()
 {
