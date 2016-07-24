@@ -65,6 +65,9 @@ pde_t create_new_pde_entry(BOOL usr_mode, void* phys_addr);
 
 void page_fault_handler(struct cpu_state cpu, struct stack_state stack);
 
+void add_page_mapping(unsigned long* physical_addr, unsigned long* virtual_addr);
+void remove_page_mapping(unsigned long* virtual_addr);
+
 // Returns a New Page from Kernel Heap
 void* get_new_page();
 

@@ -51,7 +51,9 @@ void install_paging(kernel_boot_info_t* info)
     printk("### TESTING ALLOCATION ###\n");
     printk("##########################\n");
     
+    void* p = new_block();
     int* a = (int*)0xAFF00000;
+    add_page_mapping(p, a);
     *a = 10;
     printk("Value is %d",*a);
  }
@@ -127,6 +129,36 @@ pde_t create_new_pde_entry(BOOL usr_mode, void* phys_addr)
     dir_entry.user_mode = usr_mode;
     dir_entry.page_table_base_addr = (unsigned long)phys_addr & 0xFFFFF000;
     return dir_entry;
+}
+
+void add_page_mapping(unsigned long* physical_addr, unsigned long* virtual_addr)
+{
+    unsigned long table_index = GET_PAGE_TABLE_INDEX(virtual_addr);
+    unsigned long page_index = GET_PAGE_INDEX(virtual_addr);
+
+    pde_t page_table = *(pde_t*)&page_directory[table_index];
+    if(page_table.present)
+    {
+        printk("Page Table Present\n");
+        /**** WIP | First Making the Not Present Case *////
+    }
+    else
+    {
+        printk("Page Table Not Present\n");
+
+        void* new_table = new_block();
+        unsigned long* virt_table = (unsigned long*)(0xFFC00000 + table_index * 0x1000);
+
+        page_directory[table_index] = (unsigned long)new_table | 3;
+        printk("Virtual Table: %x | Page Table: %x\n", virt_table, page_directory[table_index]);
+
+        virt_table[page_index] = (unsigned long)physical_addr | 3;
+        printk("Page Table Created\n");
+    }
+}
+
+void remove_page_mapping(unsigned long* virtual_addr)
+{
 }
 
 void* get_new_page()
