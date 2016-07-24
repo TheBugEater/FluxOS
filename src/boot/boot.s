@@ -54,7 +54,7 @@ virtual_kernel:
     jmp $
 
 SECTION .data
-align 0x1000
+align 4096
 boot_time_pages:
     dd 0x00000083   ; First 4MB, which will be unmapped later
     times (KERNEL_PAGE_NUM - 1) dd 0    ; Pages before kernel
