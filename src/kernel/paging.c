@@ -10,11 +10,11 @@ void install_paging(kernel_boot_info_t* info)
      We will Map Page Directory and Page Tables to 
      Virtual Space
      * **************************************************/
-    unsigned long* temp_page_directory = (unsigned long*)new_block();
+    page_directory_phys_addr = (unsigned long*)new_block();
     unsigned long* kernel_page_table = (unsigned long*)new_block();
     unsigned long* recursive_page_table = (unsigned long*)new_block();
 
-    unsigned long* v_page_directory = ADDR_TO_KERNEL_BASE(temp_page_directory);
+    unsigned long* v_page_directory = ADDR_TO_KERNEL_BASE(page_directory_phys_addr);
     unsigned long* v_kernel_page_table = ADDR_TO_KERNEL_BASE(kernel_page_table);
     unsigned long* v_recursive_page_table = ADDR_TO_KERNEL_BASE(recursive_page_table);
 
@@ -41,11 +41,11 @@ void install_paging(kernel_boot_info_t* info)
         // Set the Address and Make it Present and Writable
         v_recursive_page_table[i] = 2;
     }
-    v_recursive_page_table[1023] = ((unsigned long)temp_page_directory & 0xFFFFF000) | 3;
+    v_recursive_page_table[1023] = ((unsigned long)page_directory_phys_addr & 0xFFFFF000) | 3;
     v_recursive_page_table[768] = ((unsigned long)kernel_page_table & 0xFFFFF000) | 3;
     /***************************************************/
 
-    switch_page_directory(temp_page_directory);
+    switch_page_directory(page_directory_phys_addr);
 
     printk("##########################\n");
     printk("### TESTING ALLOCATION ###\n");
@@ -200,6 +200,8 @@ void page_fault_handler(struct cpu_state cpu, struct stack_state stack)
     void* fault_addr = get_page_fault_addr();
     printk("Page Fault Occurred! %x | Error Code %d\n",get_page_fault_addr(), stack.error_code);
 
+    unsigned long table_dir = GET_PAGE_TABLE_INDEX(fault_addr);
+    unsigned long page_index = GET_PAGE_INDEX(fault_addr);
+    printk("Page Directory: %d | Page Table:%d | Address in Page Table:%x \n", table_dir, page_index, page_directory[page_index]);
     for(;;);
-  
 }

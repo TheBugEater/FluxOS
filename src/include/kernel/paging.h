@@ -57,6 +57,7 @@ typedef struct
 }__attribute__((packked)) page_fault_error_t;
 
 static unsigned long* page_directory = 0xFFFFF000;
+static unsigned long* page_directory_phys_addr = 0;
 
 void install_paging(kernel_boot_info_t* info);
 
