@@ -12,11 +12,9 @@ void install_paging(kernel_boot_info_t* info)
      * **************************************************/
     page_directory_phys_addr = (unsigned long*)new_block();
     unsigned long* kernel_page_table = (unsigned long*)new_block();
-    unsigned long* recursive_page_table = (unsigned long*)new_block();
 
     unsigned long* v_page_directory = ADDR_TO_KERNEL_BASE(page_directory_phys_addr);
     unsigned long* v_kernel_page_table = ADDR_TO_KERNEL_BASE(kernel_page_table);
-    unsigned long* v_recursive_page_table = ADDR_TO_KERNEL_BASE(recursive_page_table);
 
     for(unsigned int i = 0; i < 1024; i++)
     {
@@ -31,19 +29,7 @@ void install_paging(kernel_boot_info_t* info)
     // Map Kernel
     v_page_directory[768] = ((unsigned long)kernel_page_table & 0xFFFFF000) | 3;
     // Recusrive Page Table
-    v_page_directory[1023] = ((unsigned long)recursive_page_table & 0xFFFFF000) | 3; 
-
-    /***************************************************
-     * This Block Sets the Last Index of the Page Table to Map to Page
-     * Directory*/
-    for(unsigned int i = 0; i < 1023; i++)
-    {
-        // Set the Address and Make it Present and Writable
-        v_recursive_page_table[i] = 2;
-    }
-    v_recursive_page_table[1023] = ((unsigned long)page_directory_phys_addr & 0xFFFFF000) | 3;
-    v_recursive_page_table[768] = ((unsigned long)kernel_page_table & 0xFFFFF000) | 3;
-    /***************************************************/
+    v_page_directory[1023] = ((unsigned long)page_directory_phys_addr & 0xFFFFF000) | 3; 
 
     switch_page_directory(page_directory_phys_addr);
 
@@ -88,7 +74,17 @@ void add_page_mapping(unsigned long* physical_addr, unsigned long* virtual_addr)
     if(page_table.present)
     {
         printk("Page Table Present\n");
-        /**** WIP | First Making the Not Present Case *////
+
+        unsigned long* virt_table = (unsigned long*)(0xFFC00000 + table_index * 0x1000);
+        pte_t page = *(pte_t*)&virt_table[page_index];
+        if(page.present)
+        {
+            printk("Page Already Mapped\n");
+        }
+        else
+        {
+            virt_table[page_index] = (unsigned long)physical_addr | 3;
+        }
     }
     else
     {
@@ -98,10 +94,7 @@ void add_page_mapping(unsigned long* physical_addr, unsigned long* virtual_addr)
         unsigned long* virt_table = (unsigned long*)(0xFFC00000 + table_index * 0x1000);
 
         page_directory[table_index] = (unsigned long)new_table | 3;
-        printk("Virtual Table: %x | Page Table: %x\n", virt_table, page_directory[table_index]);
-
         virt_table[page_index] = (unsigned long)physical_addr | 3;
-        printk("Page Table Created\n");
     }
 }
 
