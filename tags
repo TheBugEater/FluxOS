@@ -4,35 +4,35 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-ADDR_TO_KERNEL_BASE	src/include/utility.h	20;"	d
+ADDR_TO_KERNEL_BASE	src/include/utility/utility.h	20;"	d
 ASM_Flags	Makefile	/^ASM_Flags = -f elf32 $(ASM_EXTRA)$/;"	m
 ASM_OBJECTS	Makefile	/^ASM_OBJECTS = $(ASM_SOURCES:.s=.o)$/;"	m
 ASM_SOURCES	Makefile	/^ASM_SOURCES = $(wildcard $(SOURCEDIR)\/**\/*.s)$/;"	m
-BITS_PER_BYTE	src/include/utility.h	9;"	d
-BIT_CHECK	src/include/utility.h	13;"	d
-BIT_CLEAR	src/include/utility.h	15;"	d
-BIT_SET	src/include/utility.h	14;"	d
-BOOL	src/include/utility.h	/^typedef unsigned char           BOOL;$/;"	t
+BITS_PER_BYTE	src/include/utility/utility.h	9;"	d
+BIT_CHECK	src/include/utility/utility.h	13;"	d
+BIT_CLEAR	src/include/utility/utility.h	15;"	d
+BIT_SET	src/include/utility/utility.h	14;"	d
+BOOL	src/include/utility/utility.h	/^typedef unsigned char           BOOL;$/;"	t
 BUILDDIR	Makefile	/^BUILDDIR = build$/;"	m
 CC_ASM	Makefile	/^CC_ASM = nasm$/;"	m
 CC_C	Makefile	/^CC_C = gcc$/;"	m
 CC_CPP	Makefile	/^CC_CPP = g++ $/;"	m
-COLOR_BLACK	src/include/terminal.h	/^	COLOR_BLACK = 0,$/;"	e	enum:TERMINAL_COLOR
-COLOR_BLUE	src/include/terminal.h	/^	COLOR_BLUE = 1,$/;"	e	enum:TERMINAL_COLOR
-COLOR_BROWN	src/include/terminal.h	/^	COLOR_BROWN = 6,$/;"	e	enum:TERMINAL_COLOR
-COLOR_CYAN	src/include/terminal.h	/^	COLOR_CYAN = 3,$/;"	e	enum:TERMINAL_COLOR
-COLOR_DARK_GREY	src/include/terminal.h	/^	COLOR_DARK_GREY = 8,$/;"	e	enum:TERMINAL_COLOR
-COLOR_GREEN	src/include/terminal.h	/^	COLOR_GREEN = 2,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_BLUE	src/include/terminal.h	/^	COLOR_LIGHT_BLUE = 9,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_BROWN	src/include/terminal.h	/^	COLOR_LIGHT_BROWN = 14,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_CYAN	src/include/terminal.h	/^	COLOR_LIGHT_CYAN = 11,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_GREEN	src/include/terminal.h	/^	COLOR_LIGHT_GREEN = 10,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_GREY	src/include/terminal.h	/^	COLOR_LIGHT_GREY = 7,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_MAGENTA	src/include/terminal.h	/^	COLOR_LIGHT_MAGENTA = 13,$/;"	e	enum:TERMINAL_COLOR
-COLOR_LIGHT_RED	src/include/terminal.h	/^	COLOR_LIGHT_RED = 12,$/;"	e	enum:TERMINAL_COLOR
-COLOR_MAGENTA	src/include/terminal.h	/^	COLOR_MAGENTA = 5,$/;"	e	enum:TERMINAL_COLOR
-COLOR_RED	src/include/terminal.h	/^	COLOR_RED = 4,$/;"	e	enum:TERMINAL_COLOR
-COLOR_WHITE	src/include/terminal.h	/^	COLOR_WHITE = 15,$/;"	e	enum:TERMINAL_COLOR
+COLOR_BLACK	src/include/kernel/terminal.h	/^	COLOR_BLACK = 0,$/;"	e	enum:TERMINAL_COLOR
+COLOR_BLUE	src/include/kernel/terminal.h	/^	COLOR_BLUE = 1,$/;"	e	enum:TERMINAL_COLOR
+COLOR_BROWN	src/include/kernel/terminal.h	/^	COLOR_BROWN = 6,$/;"	e	enum:TERMINAL_COLOR
+COLOR_CYAN	src/include/kernel/terminal.h	/^	COLOR_CYAN = 3,$/;"	e	enum:TERMINAL_COLOR
+COLOR_DARK_GREY	src/include/kernel/terminal.h	/^	COLOR_DARK_GREY = 8,$/;"	e	enum:TERMINAL_COLOR
+COLOR_GREEN	src/include/kernel/terminal.h	/^	COLOR_GREEN = 2,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_BLUE	src/include/kernel/terminal.h	/^	COLOR_LIGHT_BLUE = 9,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_BROWN	src/include/kernel/terminal.h	/^	COLOR_LIGHT_BROWN = 14,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_CYAN	src/include/kernel/terminal.h	/^	COLOR_LIGHT_CYAN = 11,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_GREEN	src/include/kernel/terminal.h	/^	COLOR_LIGHT_GREEN = 10,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_GREY	src/include/kernel/terminal.h	/^	COLOR_LIGHT_GREY = 7,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_MAGENTA	src/include/kernel/terminal.h	/^	COLOR_LIGHT_MAGENTA = 13,$/;"	e	enum:TERMINAL_COLOR
+COLOR_LIGHT_RED	src/include/kernel/terminal.h	/^	COLOR_LIGHT_RED = 12,$/;"	e	enum:TERMINAL_COLOR
+COLOR_MAGENTA	src/include/kernel/terminal.h	/^	COLOR_MAGENTA = 5,$/;"	e	enum:TERMINAL_COLOR
+COLOR_RED	src/include/kernel/terminal.h	/^	COLOR_RED = 4,$/;"	e	enum:TERMINAL_COLOR
+COLOR_WHITE	src/include/kernel/terminal.h	/^	COLOR_WHITE = 15,$/;"	e	enum:TERMINAL_COLOR
 CPP_Flags	Makefile	/^CPP_Flags = -m32 -ffreestanding -O2 -Wall -Wextra -fno-builtin -fno-exceptions -fno-rtti $(EXTRA)$/;"	m
 CPP_OBJECTS	Makefile	/^CPP_OBJECTS = $(CPP_SOURCES:.cpp=.o)$/;"	m
 CPP_SOURCES	Makefile	/^CPP_SOURCES = $(wildcard $(SOURCEDIR)\/**\/*.cpp)$/;"	m
@@ -41,68 +41,56 @@ C_OBJECTS	Makefile	/^C_OBJECTS = $(C_SOURCES:.c=.o)$/;"	m
 C_SOURCES	Makefile	/^C_SOURCES = $(wildcard $(SOURCEDIR)\/**\/*.c)$/;"	m
 EXECUTABLE	Makefile	/^EXECUTABLE = FluxOS.bin$/;"	m
 EXECUTABLEDIR	Makefile	/^EXECUTABLEDIR = bin$/;"	m
-FALSE	src/include/utility.h	7;"	d
-GRAPHIC_DEVICE	src/include/terminal.h	6;"	d
-IDT_GATE	src/include/idt.h	6;"	d
-IDT_SIZE	src/include/idt.h	4;"	d
+FALSE	src/include/utility/utility.h	7;"	d
+GET_PAGE_INDEX	src/include/utility/utility.h	18;"	d
+GET_PAGE_OFFSET	src/include/utility/utility.h	19;"	d
+GET_PAGE_TABLE_INDEX	src/include/utility/utility.h	17;"	d
+GRAPHIC_DEVICE	src/include/kernel/terminal.h	6;"	d
+IDT_GATE	src/include/kernel/idt.h	6;"	d
+IDT_SIZE	src/include/kernel/idt.h	4;"	d
 INC	Makefile	/^INC =-I$(SOURCEDIR)\/include$/;"	m
-KERNEL_CODE_SEGMENT	src/include/idt.h	5;"	d
-KERNEL_DIR_INDEX	src/include/utility.h	11;"	d
+KERNEL_CODE_SEGMENT	src/include/kernel/idt.h	5;"	d
+KERNEL_DIR_INDEX	src/include/utility/utility.h	11;"	d
+KERNEL_HEAP_BASE	src/include/kernel/paging.h	8;"	d
+KERNEL_HEAP_SIZE	src/include/kernel/paging.h	9;"	d
 KERNEL_PAGE_NUM	src/boot/boot.s	/^KERNEL_PAGE_NUM     equ (KERNEL_VIRTUAL_BASE >> 22)$/;"	d
 KERNEL_VIRTUAL_BASE	src/boot/boot.s	/^KERNEL_VIRTUAL_BASE equ 0xC0000000$/;"	d
-KERNEL_VIRTUAL_BASE	src/include/utility.h	10;"	d
+KERNEL_VIRTUAL_BASE	src/include/utility/utility.h	10;"	d
 LNK_Flags	Makefile	/^LNK_Flags = -m elf_i386 $/;"	m
-MULTIBOOT_AOUT_KLUDGE	src/include/multiboot.h	55;"	d
-MULTIBOOT_BOOTLOADER_MAGIC	src/include/multiboot.h	32;"	d
+MULTIBOOT_AOUT_KLUDGE	src/include/boot/multiboot.h	55;"	d
+MULTIBOOT_BOOTLOADER_MAGIC	src/include/boot/multiboot.h	32;"	d
 MULTIBOOT_CHECKSUM	src/boot/boot.s	/^MULTIBOOT_CHECKSUM          equ -(MULTIBOOT_MAGIC_NUMBER + MULTIBOOT_FLAGS)$/;"	d
 MULTIBOOT_FLAGS	src/boot/boot.s	/^MULTIBOOT_FLAGS             equ MULTIBOOT_PAGE_ALIGN | MULTIBOOT_MEMORY_INFO$/;"	d
-MULTIBOOT_HEADER	src/include/multiboot.h	23;"	d
-MULTIBOOT_HEADER_MAGIC	src/include/multiboot.h	29;"	d
-MULTIBOOT_INFO_ALIGN	src/include/multiboot.h	41;"	d
-MULTIBOOT_INFO_AOUT_SYMS	src/include/multiboot.h	71;"	d
-MULTIBOOT_INFO_APM_TABLE	src/include/multiboot.h	88;"	d
-MULTIBOOT_INFO_BOOTDEV	src/include/multiboot.h	62;"	d
-MULTIBOOT_INFO_BOOT_LOADER_NAME	src/include/multiboot.h	85;"	d
-MULTIBOOT_INFO_CMDLINE	src/include/multiboot.h	64;"	d
-MULTIBOOT_INFO_CONFIG_TABLE	src/include/multiboot.h	82;"	d
-MULTIBOOT_INFO_DRIVE_INFO	src/include/multiboot.h	79;"	d
-MULTIBOOT_INFO_ELF_SHDR	src/include/multiboot.h	73;"	d
-MULTIBOOT_INFO_MEMORY	src/include/multiboot.h	60;"	d
-MULTIBOOT_INFO_MEM_MAP	src/include/multiboot.h	76;"	d
-MULTIBOOT_INFO_MODS	src/include/multiboot.h	66;"	d
-MULTIBOOT_INFO_VIDEO_INFO	src/include/multiboot.h	91;"	d
+MULTIBOOT_HEADER	src/include/boot/multiboot.h	23;"	d
+MULTIBOOT_HEADER_MAGIC	src/include/boot/multiboot.h	29;"	d
+MULTIBOOT_INFO_ALIGN	src/include/boot/multiboot.h	41;"	d
+MULTIBOOT_INFO_AOUT_SYMS	src/include/boot/multiboot.h	71;"	d
+MULTIBOOT_INFO_APM_TABLE	src/include/boot/multiboot.h	88;"	d
+MULTIBOOT_INFO_BOOTDEV	src/include/boot/multiboot.h	62;"	d
+MULTIBOOT_INFO_BOOT_LOADER_NAME	src/include/boot/multiboot.h	85;"	d
+MULTIBOOT_INFO_CMDLINE	src/include/boot/multiboot.h	64;"	d
+MULTIBOOT_INFO_CONFIG_TABLE	src/include/boot/multiboot.h	82;"	d
+MULTIBOOT_INFO_DRIVE_INFO	src/include/boot/multiboot.h	79;"	d
+MULTIBOOT_INFO_ELF_SHDR	src/include/boot/multiboot.h	73;"	d
+MULTIBOOT_INFO_MEMORY	src/include/boot/multiboot.h	60;"	d
+MULTIBOOT_INFO_MEM_MAP	src/include/boot/multiboot.h	76;"	d
+MULTIBOOT_INFO_MODS	src/include/boot/multiboot.h	66;"	d
+MULTIBOOT_INFO_VIDEO_INFO	src/include/boot/multiboot.h	91;"	d
 MULTIBOOT_MAGIC_NUMBER	src/boot/boot.s	/^MULTIBOOT_MAGIC_NUMBER      equ 0x1BADB002$/;"	d
-MULTIBOOT_MEMORY_AVAILABLE	src/include/multiboot.h	201;"	d
+MULTIBOOT_MEMORY_AVAILABLE	src/include/boot/multiboot.h	201;"	d
 MULTIBOOT_MEMORY_INFO	src/boot/boot.s	/^MULTIBOOT_MEMORY_INFO       equ 1<<1$/;"	d
-MULTIBOOT_MEMORY_INFO	src/include/multiboot.h	49;"	d
-MULTIBOOT_MEMORY_RESERVED	src/include/multiboot.h	202;"	d
-MULTIBOOT_MOD_ALIGN	src/include/multiboot.h	38;"	d
+MULTIBOOT_MEMORY_INFO	src/include/boot/multiboot.h	49;"	d
+MULTIBOOT_MEMORY_RESERVED	src/include/boot/multiboot.h	202;"	d
+MULTIBOOT_MOD_ALIGN	src/include/boot/multiboot.h	38;"	d
 MULTIBOOT_PAGE_ALIGN	src/boot/boot.s	/^MULTIBOOT_PAGE_ALIGN        equ 1<<0$/;"	d
-MULTIBOOT_PAGE_ALIGN	src/include/multiboot.h	46;"	d
-MULTIBOOT_SEARCH	src/include/multiboot.h	26;"	d
-MULTIBOOT_UNSUPPORTED	src/include/multiboot.h	35;"	d
-MULTIBOOT_VIDEO_MODE	src/include/multiboot.h	52;"	d
+MULTIBOOT_PAGE_ALIGN	src/include/boot/multiboot.h	46;"	d
+MULTIBOOT_SEARCH	src/include/boot/multiboot.h	26;"	d
+MULTIBOOT_UNSUPPORTED	src/include/boot/multiboot.h	35;"	d
+MULTIBOOT_VIDEO_MODE	src/include/boot/multiboot.h	52;"	d
 PAD_RIGHT	src/kernel/terminal.c	15;"	d	file:
 PAD_ZERO	src/kernel/terminal.c	16;"	d	file:
-PAGE_SIZE	src/include/paging.h	26;"	d
-PDE_4MB_PAGE	src/include/paging.h	21;"	d
-PDE_ACCESSED	src/include/paging.h	20;"	d
-PDE_CACHE_ENABLED	src/include/paging.h	19;"	d
-PDE_FRAME	src/include/paging.h	23;"	d
-PDE_GLOBAL_PAGE	src/include/paging.h	22;"	d
-PDE_KERNEL_WRITABLE	src/include/paging.h	24;"	d
-PDE_PRESENT	src/include/paging.h	15;"	d
-PDE_USER_MODE	src/include/paging.h	17;"	d
-PDE_WRITABLE	src/include/paging.h	16;"	d
-PDE_WRITE_THROUGH	src/include/paging.h	18;"	d
+PAGE_SIZE	src/include/kernel/paging.h	10;"	d
 PRINT_BUF_LEN	src/kernel/terminal.c	49;"	d	file:
-PTE_ACCESSED	src/include/paging.h	10;"	d
-PTE_DIRTY	src/include/paging.h	11;"	d
-PTE_FRAME	src/include/paging.h	12;"	d
-PTE_KERNEL_WRITABLE	src/include/paging.h	13;"	d
-PTE_PRESENT	src/include/paging.h	7;"	d
-PTE_USER_MODE	src/include/paging.h	9;"	d
-PTE_WRITABLE	src/include/paging.h	8;"	d
 SECTION	src/boot/boot.s	/^SECTION .bss$/;"	l
 SECTION	src/boot/boot.s	/^SECTION .data$/;"	l
 SECTION	src/boot/boot.s	/^SECTION .text$/;"	l
@@ -114,86 +102,86 @@ SECTION	src/utility/util.s	/^SECTION .data$/;"	l
 SECTION	src/utility/util.s	/^SECTION .text$/;"	l
 SOURCEDIR	Makefile	/^SOURCEDIR = src$/;"	m
 StackPointer	src/boot/boot.s	/^StackPointer:$/;"	l
-TERMINAL_COLOR	src/include/terminal.h	/^enum TERMINAL_COLOR$/;"	g
-TERMINAL_HEIGHT	src/include/terminal.h	9;"	d
-TERMINAL_WIDTH	src/include/terminal.h	8;"	d
-TRUE	src/include/utility.h	6;"	d
-TerminalVector	src/include/terminal.h	/^} TerminalVector;$/;"	t	typeref:struct:_TerminalVector
-VIRTUAL_ADDR_DIR	src/include/utility.h	17;"	d
-VIRTUAL_ADDR_OFFSET	src/include/utility.h	19;"	d
-VIRTUAL_ADDR_PAGE	src/include/utility.h	18;"	d
-X	src/include/terminal.h	/^    unsigned int X;$/;"	m	struct:_TerminalVector
-Y	src/include/terminal.h	/^    unsigned int Y;$/;"	m	struct:_TerminalVector
-_TerminalVector	src/include/terminal.h	/^typedef struct _TerminalVector$/;"	s
-__GDT_H__	src/include/gdt.h	2;"	d
-__IDT_H__	src/include/idt.h	2;"	d
-__KEYBOARD_H__	src/include/keyboard.h	2;"	d
-__MM_H__	src/include/mm.h	2;"	d
-__PAGING_H__	src/include/paging.h	2;"	d
-__TERMINAL_H__	src/include/terminal.h	2;"	d
-__UTILITY_H__	src/include/utility.h	2;"	d
-accesed	src/include/paging.h	/^    unsigned long accesed:1;$/;"	m	struct:__anon1
-accesed	src/include/paging.h	/^    unsigned long accesed:1;$/;"	m	struct:__anon2
-access	src/include/gdt.h	/^    unsigned char access;$/;"	m	struct:gdt_entry
+TERMINAL_COLOR	src/include/kernel/terminal.h	/^enum TERMINAL_COLOR$/;"	g
+TERMINAL_HEIGHT	src/include/kernel/terminal.h	9;"	d
+TERMINAL_WIDTH	src/include/kernel/terminal.h	8;"	d
+TRUE	src/include/utility/utility.h	6;"	d
+TerminalVector	src/include/kernel/terminal.h	/^} TerminalVector;$/;"	t	typeref:struct:_TerminalVector
+X	src/include/kernel/terminal.h	/^    unsigned int X;$/;"	m	struct:_TerminalVector
+Y	src/include/kernel/terminal.h	/^    unsigned int Y;$/;"	m	struct:_TerminalVector
+_TerminalVector	src/include/kernel/terminal.h	/^typedef struct _TerminalVector$/;"	s
+__GDT_H__	src/include/kernel/gdt.h	2;"	d
+__IDT_H__	src/include/kernel/idt.h	2;"	d
+__KEYBOARD_H__	src/include/kernel/keyboard.h	2;"	d
+__MM_H__	src/include/kernel/mm.h	2;"	d
+__PAGING_H__	src/include/kernel/paging.h	2;"	d
+__TERMINAL_H__	src/include/kernel/terminal.h	2;"	d
+__UTILITY_H__	src/include/utility/utility.h	2;"	d
+accesed	src/include/kernel/paging.h	/^    unsigned long accesed:1;$/;"	m	struct:__anon1
+accesed	src/include/kernel/paging.h	/^    unsigned long accesed:1;$/;"	m	struct:__anon2
+access	src/include/kernel/gdt.h	/^    unsigned char access;$/;"	m	struct:gdt_entry
 add_interrupt_handler	src/kernel/idt.c	/^void add_interrupt_handler(unsigned int interrupt_num, interrupt_handler_fn* function)$/;"	f
-add_page_for_virtual	src/kernel/paging.c	/^BOOL add_page_for_virtual(unsigned long* virtual_addr, unsigned long attribs)$/;"	f
-addr	src/include/multiboot.h	/^       multiboot_uint32_t addr;$/;"	m	struct:multiboot_aout_symbol_table
-addr	src/include/multiboot.h	/^       multiboot_uint32_t addr;$/;"	m	struct:multiboot_elf_section_header_table
-addr	src/include/multiboot.h	/^       multiboot_uint64_t addr;$/;"	m	struct:multiboot_mmap_entry
-aout_sym	src/include/multiboot.h	/^         multiboot_aout_symbol_table_t aout_sym;$/;"	m	union:multiboot_info::__anon4
-apm_table	src/include/multiboot.h	/^       multiboot_uint32_t apm_table;$/;"	m	struct:multiboot_info
+add_page_mapping	src/kernel/paging.c	/^void add_page_mapping(unsigned long* physical_addr, unsigned long* virtual_addr)$/;"	f
+addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t addr;$/;"	m	struct:multiboot_aout_symbol_table
+addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t addr;$/;"	m	struct:multiboot_elf_section_header_table
+addr	src/include/boot/multiboot.h	/^       multiboot_uint64_t addr;$/;"	m	struct:multiboot_mmap_entry
+aout_sym	src/include/boot/multiboot.h	/^         multiboot_aout_symbol_table_t aout_sym;$/;"	m	union:multiboot_info::__anon4
+apm_table	src/include/boot/multiboot.h	/^       multiboot_uint32_t apm_table;$/;"	m	struct:multiboot_info
 assert_interrupt	src/kernel/idt.c	/^void assert_interrupt(struct cpu_state cpu, struct stack_state stack)$/;"	f
-base	src/include/gdt.h	/^    unsigned int base;$/;"	m	struct:gdt_ptr
-base	src/include/idt.h	/^    unsigned int base;$/;"	m	struct:idt_ptr
-base_high	src/include/gdt.h	/^    unsigned char base_high;$/;"	m	struct:gdt_entry
-base_low	src/include/gdt.h	/^    unsigned short base_low;$/;"	m	struct:gdt_entry
-base_middle	src/include/gdt.h	/^    unsigned char base_middle;$/;"	m	struct:gdt_entry
-boot_device	src/include/multiboot.h	/^       multiboot_uint32_t boot_device;$/;"	m	struct:multiboot_info
-boot_loader_name	src/include/multiboot.h	/^       multiboot_uint32_t boot_loader_name;$/;"	m	struct:multiboot_info
+base	src/include/kernel/gdt.h	/^    unsigned int base;$/;"	m	struct:gdt_ptr
+base	src/include/kernel/idt.h	/^    unsigned int base;$/;"	m	struct:idt_ptr
+base_high	src/include/kernel/gdt.h	/^    unsigned char base_high;$/;"	m	struct:gdt_entry
+base_low	src/include/kernel/gdt.h	/^    unsigned short base_low;$/;"	m	struct:gdt_entry
+base_middle	src/include/kernel/gdt.h	/^    unsigned char base_middle;$/;"	m	struct:gdt_entry
+boot_device	src/include/boot/multiboot.h	/^       multiboot_uint32_t boot_device;$/;"	m	struct:multiboot_info
+boot_loader_name	src/include/boot/multiboot.h	/^       multiboot_uint32_t boot_loader_name;$/;"	m	struct:multiboot_info
 boot_time_pages	src/boot/boot.s	/^boot_time_pages:$/;"	l
-bss_end_addr	src/include/multiboot.h	/^       multiboot_uint32_t bss_end_addr;$/;"	m	struct:multiboot_header
-cache_disabled	src/include/paging.h	/^    unsigned long cache_disabled:1;$/;"	m	struct:__anon1
-checksum	src/include/multiboot.h	/^       multiboot_uint32_t checksum;$/;"	m	struct:multiboot_header
+bss_end_addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t bss_end_addr;$/;"	m	struct:multiboot_header
+cache_disabled	src/include/kernel/paging.h	/^    unsigned long cache_disabled:1;$/;"	m	struct:__anon1
+checksum	src/include/boot/multiboot.h	/^       multiboot_uint32_t checksum;$/;"	m	struct:multiboot_header
 clrscr	src/kernel/terminal.c	/^void clrscr()$/;"	f
-cmdline	src/include/multiboot.h	/^       multiboot_uint32_t cmdline;$/;"	m	struct:multiboot_info
-cmdline	src/include/multiboot.h	/^       multiboot_uint32_t cmdline;$/;"	m	struct:multiboot_mod_list
-config_table	src/include/multiboot.h	/^       multiboot_uint32_t config_table;$/;"	m	struct:multiboot_info
-cpu_state	src/include/idt.h	/^struct cpu_state$/;"	s
+cmdline	src/include/boot/multiboot.h	/^       multiboot_uint32_t cmdline;$/;"	m	struct:multiboot_info
+cmdline	src/include/boot/multiboot.h	/^       multiboot_uint32_t cmdline;$/;"	m	struct:multiboot_mod_list
+config_table	src/include/boot/multiboot.h	/^       multiboot_uint32_t config_table;$/;"	m	struct:multiboot_info
+cpu_state	src/include/kernel/idt.h	/^struct cpu_state$/;"	s
 create_idt_entry	src/kernel/idt.c	/^void create_idt_entry(unsigned short num, unsigned long handler, unsigned short selector, unsigned char type) $/;"	f
-cs	src/include/idt.h	/^    unsigned int eip, cs, eflags;$/;"	m	struct:stack_state
-currentCursor	src/include/terminal.h	/^static TerminalVector currentCursor = {.X = 0,.Y = 0};$/;"	v
-depth	src/include/multiboot.h	/^       multiboot_uint32_t depth;$/;"	m	struct:multiboot_header
-dirty	src/include/paging.h	/^    unsigned long dirty:1;$/;"	m	struct:__anon2
+create_new_pde_entry	src/kernel/paging.c	/^pde_t create_new_pde_entry(BOOL usr_mode, void* phys_addr)$/;"	f
+create_new_pte_entry	src/kernel/paging.c	/^pte_t create_new_pte_entry(BOOL usr_mode, void* phys_addr)$/;"	f
+cs	src/include/kernel/idt.h	/^    unsigned int eip, cs, eflags;$/;"	m	struct:stack_state
+currentCursor	src/include/kernel/terminal.h	/^static TerminalVector currentCursor = {.X = 0,.Y = 0};$/;"	v
+delete_page	src/kernel/paging.c	/^void delete_page(void* ptr)$/;"	f
+depth	src/include/boot/multiboot.h	/^       multiboot_uint32_t depth;$/;"	m	struct:multiboot_header
+dirty	src/include/kernel/paging.h	/^    unsigned long dirty:1;$/;"	m	struct:__anon2
 disable_interrupts	src/utility/util.s	/^disable_interrupts:$/;"	l
-drives_addr	src/include/multiboot.h	/^       multiboot_uint32_t drives_addr;$/;"	m	struct:multiboot_info
-drives_length	src/include/multiboot.h	/^       multiboot_uint32_t drives_length;$/;"	m	struct:multiboot_info
-eax	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
-ebp	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
-ebx	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
-ecx	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
-edi	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
-edx	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
-eflags	src/include/idt.h	/^    unsigned int eip, cs, eflags;$/;"	m	struct:stack_state
-eip	src/include/idt.h	/^    unsigned int eip, cs, eflags;$/;"	m	struct:stack_state
-elf_sec	src/include/multiboot.h	/^         multiboot_elf_section_header_table_t elf_sec;$/;"	m	union:multiboot_info::__anon4
+drives_addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t drives_addr;$/;"	m	struct:multiboot_info
+drives_length	src/include/boot/multiboot.h	/^       multiboot_uint32_t drives_length;$/;"	m	struct:multiboot_info
+eax	src/include/kernel/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+ebp	src/include/kernel/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+ebx	src/include/kernel/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+ecx	src/include/kernel/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+edi	src/include/kernel/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+edx	src/include/kernel/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+eflags	src/include/kernel/idt.h	/^    unsigned int eip, cs, eflags;$/;"	m	struct:stack_state
+eip	src/include/kernel/idt.h	/^    unsigned int eip, cs, eflags;$/;"	m	struct:stack_state
+elf_sec	src/include/boot/multiboot.h	/^         multiboot_elf_section_header_table_t elf_sec;$/;"	m	union:multiboot_info::__anon4
 enable_interrupts	src/utility/util.s	/^enable_interrupts:$/;"	l
-entry_addr	src/include/multiboot.h	/^       multiboot_uint32_t entry_addr;$/;"	m	struct:multiboot_header
-error_code	src/include/idt.h	/^    unsigned int interrupt_num, error_code;$/;"	m	struct:stack_state
-esi	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
-esp	src/include/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+entry_addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t entry_addr;$/;"	m	struct:multiboot_header
+error_code	src/include/kernel/idt.h	/^    unsigned int interrupt_num, error_code;$/;"	m	struct:stack_state
+esi	src/include/kernel/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
+esp	src/include/kernel/idt.h	/^    unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;$/;"	m	struct:cpu_state
 extern	src/boot/boot.s	/^extern kernel_end$/;"	l
 extern	src/boot/boot.s	/^extern kernel_start$/;"	l
 extern	src/boot/boot.s	/^extern kmain$/;"	l
 extern	src/kernel/core.s	/^extern kernel_idt_handler$/;"	l
-flags	src/include/multiboot.h	/^       multiboot_uint32_t flags;$/;"	m	struct:multiboot_header
-flags	src/include/multiboot.h	/^       multiboot_uint32_t flags;$/;"	m	struct:multiboot_info
-flags	src/include/paging.h	/^    unsigned long flags:4;$/;"	m	struct:__anon2
+flags	src/include/boot/multiboot.h	/^       multiboot_uint32_t flags;$/;"	m	struct:multiboot_header
+flags	src/include/boot/multiboot.h	/^       multiboot_uint32_t flags;$/;"	m	struct:multiboot_info
 flushjump	src/kernel/core.s	/^flushjump:$/;"	l
-gdt	src/include/gdt.h	/^struct gdt_entry gdt[3];$/;"	v	typeref:struct:gdt_entry
-gdt_entry	src/include/gdt.h	/^struct gdt_entry$/;"	s
+gdt	src/include/kernel/gdt.h	/^struct gdt_entry gdt[3];$/;"	v	typeref:struct:gdt_entry
+gdt_entry	src/include/kernel/gdt.h	/^struct gdt_entry$/;"	s
 gdt_flush	src/kernel/core.s	/^gdt_flush:$/;"	l
-gdt_ptr	src/include/gdt.h	/^struct gdt_ptr$/;"	s
+gdt_ptr	src/include/kernel/gdt.h	/^struct gdt_ptr$/;"	s
 gdt_set_gate	src/kernel/gdt.c	/^void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran)$/;"	f
+get_new_page	src/kernel/paging.c	/^void* get_new_page()$/;"	f
 get_page_fault_addr	src/utility/util.s	/^get_page_fault_addr:$/;"	l
 global	src/boot/boot.s	/^global start$/;"	l
 global	src/kernel/core.s	/^global gdt_flush    $/;"	l
@@ -211,17 +199,17 @@ global	src/utility/util.s	/^global outb$/;"	l
 global	src/utility/util.s	/^global switch_page_directory$/;"	l
 global	src/utility/util.s	/^global write_cr0$/;"	l
 global	src/utility/util.s	/^global write_cr3$/;"	l
-global_page	src/include/paging.h	/^    unsigned long global_page:1;$/;"	m	struct:__anon1
-global_page	src/include/paging.h	/^    unsigned long global_page:1;$/;"	m	struct:__anon2
-gp	src/include/gdt.h	/^struct gdt_ptr gp;$/;"	v	typeref:struct:gdt_ptr
-granularity	src/include/gdt.h	/^    unsigned char granularity;$/;"	m	struct:gdt_entry
-header_addr	src/include/multiboot.h	/^       multiboot_uint32_t header_addr;$/;"	m	struct:multiboot_header
-height	src/include/multiboot.h	/^       multiboot_uint32_t height;$/;"	m	struct:multiboot_header
-idt	src/include/idt.h	/^struct idt_entry idt[IDT_SIZE];$/;"	v	typeref:struct:idt_entry
-idt_entry	src/include/idt.h	/^struct idt_entry$/;"	s
+global_page	src/include/kernel/paging.h	/^    unsigned long global_page:1;$/;"	m	struct:__anon1
+global_page	src/include/kernel/paging.h	/^    unsigned long global_page:1;$/;"	m	struct:__anon2
+gp	src/include/kernel/gdt.h	/^struct gdt_ptr gp;$/;"	v	typeref:struct:gdt_ptr
+granularity	src/include/kernel/gdt.h	/^    unsigned char granularity;$/;"	m	struct:gdt_entry
+header_addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t header_addr;$/;"	m	struct:multiboot_header
+height	src/include/boot/multiboot.h	/^       multiboot_uint32_t height;$/;"	m	struct:multiboot_header
+idt	src/include/kernel/idt.h	/^struct idt_entry idt[IDT_SIZE];$/;"	v	typeref:struct:idt_entry
+idt_entry	src/include/kernel/idt.h	/^struct idt_entry$/;"	s
 idt_handle	src/kernel/core.s	/^idt_handle:$/;"	l
-idt_ptr	src/include/idt.h	/^struct idt_ptr$/;"	s
-idtp	src/include/idt.h	/^struct idt_ptr idtp;$/;"	v	typeref:struct:idt_ptr
+idt_ptr	src/include/kernel/idt.h	/^struct idt_ptr$/;"	s
+idtp	src/include/kernel/idt.h	/^struct idt_ptr idtp;$/;"	v	typeref:struct:idt_ptr
 inb	src/utility/util.s	/^inb:$/;"	l
 install_gdt	src/kernel/gdt.c	/^void install_gdt()$/;"	f
 install_idt	src/kernel/idt.c	/^void install_idt()$/;"	f
@@ -230,10 +218,10 @@ install_isr	src/kernel/idt.c	/^void install_isr()$/;"	f
 install_keyboard	src/kernel/keyboard.c	/^void install_keyboard()$/;"	f
 install_mm	src/kernel/mm.c	/^void install_mm(kernel_boot_info_t* info)$/;"	f
 install_paging	src/kernel/paging.c	/^void install_paging(kernel_boot_info_t* info)$/;"	f
-instruction_fetch	src/include/paging.h	/^    unsigned long instruction_fetch:1;$/;"	m	struct:__anon3
-interrupt_handler_fn	src/include/idt.h	/^typedef void (*interrupt_handler_fn)(struct cpu_state cpu, struct stack_state stack);$/;"	t
-interrupt_handlers	src/include/idt.h	/^interrupt_handler_fn interrupt_handlers[IDT_SIZE];$/;"	v
-interrupt_num	src/include/idt.h	/^    unsigned int interrupt_num, error_code;$/;"	m	struct:stack_state
+instruction_fetch	src/include/kernel/paging.h	/^    unsigned long instruction_fetch:1;$/;"	m	struct:__anon3
+interrupt_handler_fn	src/include/kernel/idt.h	/^typedef void (*interrupt_handler_fn)(struct cpu_state cpu, struct stack_state stack);$/;"	t
+interrupt_handlers	src/include/kernel/idt.h	/^interrupt_handler_fn interrupt_handlers[IDT_SIZE];$/;"	v
+interrupt_num	src/include/kernel/idt.h	/^    unsigned int interrupt_num, error_code;$/;"	m	struct:stack_state
 invalidate_addr	src/utility/util.s	/^invalidate_addr:$/;"	l
 irq_handle	src/kernel/core.s	/^irq_handle 0, 32$/;"	l
 irq_handle	src/kernel/core.s	/^irq_handle 1, 33$/;"	l
@@ -284,124 +272,128 @@ isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 5$/;"	l
 isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 6$/;"	l
 isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 7$/;"	l
 isr_without_error_code	src/kernel/core.s	/^isr_without_error_code 9$/;"	l
-kbdus	src/include/keyboard.h	/^static unsigned char kbdus[128] =$/;"	v
+kbdus	src/include/kernel/keyboard.h	/^static unsigned char kbdus[128] =$/;"	v
 kernel_assert	src/utility/utility.c	/^void kernel_assert(unsigned int condition)$/;"	f
-kernel_boot_info	src/include/utility.h	/^struct kernel_boot_info$/;"	s
-kernel_boot_info_t	src/include/utility.h	/^typedef struct kernel_boot_info kernel_boot_info_t;$/;"	t	typeref:struct:kernel_boot_info
-kernel_end	src/include/utility.h	/^    unsigned long kernel_end;$/;"	m	struct:kernel_boot_info
+kernel_boot_info	src/include/utility/utility.h	/^struct kernel_boot_info$/;"	s
+kernel_boot_info_t	src/include/utility/utility.h	/^typedef struct kernel_boot_info kernel_boot_info_t;$/;"	t	typeref:struct:kernel_boot_info
+kernel_end	src/include/utility/utility.h	/^    unsigned long kernel_end;$/;"	m	struct:kernel_boot_info
 kernel_idt_handler	src/kernel/idt.c	/^void kernel_idt_handler(struct cpu_state cpu, struct stack_state stack)$/;"	f
-kernel_info	src/include/paging.h	/^    unsigned long kernel_info:3;$/;"	m	struct:__anon1
-kernel_info	src/include/paging.h	/^    unsigned long kernel_info:3;$/;"	m	struct:__anon2
-kernel_page_table	src/include/paging.h	/^static unsigned long* kernel_page_table = (unsigned long *)0;$/;"	v
-kernel_start	src/include/utility.h	/^    unsigned long kernel_start;$/;"	m	struct:kernel_boot_info
+kernel_info	src/include/kernel/paging.h	/^    unsigned long kernel_info:3;$/;"	m	struct:__anon1
+kernel_info	src/include/kernel/paging.h	/^    unsigned long kernel_info:3;$/;"	m	struct:__anon2
+kernel_start	src/include/utility/utility.h	/^    unsigned long kernel_start;$/;"	m	struct:kernel_boot_info
 keyboard_handler	src/kernel/keyboard.c	/^void keyboard_handler(struct cpu_state cpu, struct stack_state stack)$/;"	f
 kmain	src/kernel/main.c	/^void kmain(kernel_boot_info_t info)$/;"	f
-large_pages	src/include/paging.h	/^    unsigned long large_pages:1;$/;"	m	struct:__anon1
-len	src/include/multiboot.h	/^       multiboot_uint64_t len;$/;"	m	struct:multiboot_mmap_entry
-limit	src/include/gdt.h	/^    unsigned short limit;$/;"	m	struct:gdt_ptr
-limit	src/include/idt.h	/^    unsigned short limit;$/;"	m	struct:idt_ptr
-limit_low	src/include/gdt.h	/^    unsigned short limit_low;$/;"	m	struct:gdt_entry
-load_addr	src/include/multiboot.h	/^       multiboot_uint32_t load_addr;$/;"	m	struct:multiboot_header
-load_end_addr	src/include/multiboot.h	/^       multiboot_uint32_t load_end_addr;$/;"	m	struct:multiboot_header
+large_pages	src/include/kernel/paging.h	/^    unsigned long large_pages:1;$/;"	m	struct:__anon1
+len	src/include/boot/multiboot.h	/^       multiboot_uint64_t len;$/;"	m	struct:multiboot_mmap_entry
+limit	src/include/kernel/gdt.h	/^    unsigned short limit;$/;"	m	struct:gdt_ptr
+limit	src/include/kernel/idt.h	/^    unsigned short limit;$/;"	m	struct:idt_ptr
+limit_low	src/include/kernel/gdt.h	/^    unsigned short limit_low;$/;"	m	struct:gdt_entry
+load_addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t load_addr;$/;"	m	struct:multiboot_header
+load_end_addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t load_end_addr;$/;"	m	struct:multiboot_header
 load_idt	src/kernel/core.s	/^load_idt:$/;"	l
-magic	src/include/multiboot.h	/^       multiboot_uint32_t magic;$/;"	m	struct:multiboot_header
-magic_number	src/include/utility.h	/^    unsigned long magic_number;$/;"	m	struct:kernel_boot_info
-mbi	src/include/utility.h	/^    multiboot_info_t* mbi;$/;"	m	struct:kernel_boot_info
-mem_lower	src/include/multiboot.h	/^       multiboot_uint32_t mem_lower;$/;"	m	struct:multiboot_info
-mem_map	src/include/mm.h	/^static unsigned long* mem_map = 0;$/;"	v
-mem_map_size	src/include/mm.h	/^static unsigned long mem_map_size = 0;$/;"	v
-mem_upper	src/include/multiboot.h	/^       multiboot_uint32_t mem_upper;$/;"	m	struct:multiboot_info
+magic	src/include/boot/multiboot.h	/^       multiboot_uint32_t magic;$/;"	m	struct:multiboot_header
+magic_number	src/include/utility/utility.h	/^    unsigned long magic_number;$/;"	m	struct:kernel_boot_info
+mbi	src/include/utility/utility.h	/^    multiboot_info_t* mbi;$/;"	m	struct:kernel_boot_info
+mem_lower	src/include/boot/multiboot.h	/^       multiboot_uint32_t mem_lower;$/;"	m	struct:multiboot_info
+mem_map	src/include/kernel/mm.h	/^static unsigned long* mem_map = 0;$/;"	v
+mem_map_size	src/include/kernel/mm.h	/^static unsigned long mem_map_size = 0;$/;"	v
+mem_upper	src/include/boot/multiboot.h	/^       multiboot_uint32_t mem_upper;$/;"	m	struct:multiboot_info
 memcpy	src/utility/utility.c	/^void* memcpy(void* dest, const void* src, int count)$/;"	f
 memset	src/utility/utility.c	/^void* memset(void* dest, unsigned char val, int count)$/;"	f
-mmap_addr	src/include/multiboot.h	/^       multiboot_uint32_t mmap_addr;$/;"	m	struct:multiboot_info
-mmap_length	src/include/multiboot.h	/^       multiboot_uint32_t mmap_length;$/;"	m	struct:multiboot_info
-mod_end	src/include/multiboot.h	/^       multiboot_uint32_t mod_end;$/;"	m	struct:multiboot_mod_list
-mod_start	src/include/multiboot.h	/^       multiboot_uint32_t mod_start;$/;"	m	struct:multiboot_mod_list
-mode_type	src/include/multiboot.h	/^       multiboot_uint32_t mode_type;$/;"	m	struct:multiboot_header
-mods_addr	src/include/multiboot.h	/^       multiboot_uint32_t mods_addr;$/;"	m	struct:multiboot_info
-mods_count	src/include/multiboot.h	/^       multiboot_uint32_t mods_count;$/;"	m	struct:multiboot_info
-multiboot_aout_symbol_table	src/include/multiboot.h	/^     struct multiboot_aout_symbol_table$/;"	s
-multiboot_aout_symbol_table_t	src/include/multiboot.h	/^     typedef struct multiboot_aout_symbol_table multiboot_aout_symbol_table_t;$/;"	t	typeref:struct:multiboot_aout_symbol_table
-multiboot_elf_section_header_table	src/include/multiboot.h	/^     struct multiboot_elf_section_header_table$/;"	s
-multiboot_elf_section_header_table_t	src/include/multiboot.h	/^     typedef struct multiboot_elf_section_header_table multiboot_elf_section_header_table_t;$/;"	t	typeref:struct:multiboot_elf_section_header_table
-multiboot_header	src/include/multiboot.h	/^     struct multiboot_header$/;"	s
-multiboot_info	src/include/multiboot.h	/^     struct multiboot_info$/;"	s
-multiboot_info_t	src/include/multiboot.h	/^     typedef struct multiboot_info multiboot_info_t;$/;"	t	typeref:struct:multiboot_info
-multiboot_memory_map_t	src/include/multiboot.h	/^     typedef struct multiboot_mmap_entry multiboot_memory_map_t;$/;"	t	typeref:struct:multiboot_mmap_entry
-multiboot_mmap_entry	src/include/multiboot.h	/^     struct multiboot_mmap_entry$/;"	s
-multiboot_mod_list	src/include/multiboot.h	/^     struct multiboot_mod_list$/;"	s
-multiboot_module_t	src/include/multiboot.h	/^     typedef struct multiboot_mod_list multiboot_module_t;$/;"	t	typeref:struct:multiboot_mod_list
-multiboot_uint16_t	src/include/multiboot.h	/^     typedef unsigned short          multiboot_uint16_t;$/;"	t
-multiboot_uint32_t	src/include/multiboot.h	/^     typedef unsigned int            multiboot_uint32_t;$/;"	t
-multiboot_uint64_t	src/include/multiboot.h	/^     typedef unsigned long long      multiboot_uint64_t;$/;"	t
+mmap_addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t mmap_addr;$/;"	m	struct:multiboot_info
+mmap_length	src/include/boot/multiboot.h	/^       multiboot_uint32_t mmap_length;$/;"	m	struct:multiboot_info
+mod_end	src/include/boot/multiboot.h	/^       multiboot_uint32_t mod_end;$/;"	m	struct:multiboot_mod_list
+mod_start	src/include/boot/multiboot.h	/^       multiboot_uint32_t mod_start;$/;"	m	struct:multiboot_mod_list
+mode_type	src/include/boot/multiboot.h	/^       multiboot_uint32_t mode_type;$/;"	m	struct:multiboot_header
+mods_addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t mods_addr;$/;"	m	struct:multiboot_info
+mods_count	src/include/boot/multiboot.h	/^       multiboot_uint32_t mods_count;$/;"	m	struct:multiboot_info
+multiboot_aout_symbol_table	src/include/boot/multiboot.h	/^     struct multiboot_aout_symbol_table$/;"	s
+multiboot_aout_symbol_table_t	src/include/boot/multiboot.h	/^     typedef struct multiboot_aout_symbol_table multiboot_aout_symbol_table_t;$/;"	t	typeref:struct:multiboot_aout_symbol_table
+multiboot_elf_section_header_table	src/include/boot/multiboot.h	/^     struct multiboot_elf_section_header_table$/;"	s
+multiboot_elf_section_header_table_t	src/include/boot/multiboot.h	/^     typedef struct multiboot_elf_section_header_table multiboot_elf_section_header_table_t;$/;"	t	typeref:struct:multiboot_elf_section_header_table
+multiboot_header	src/include/boot/multiboot.h	/^     struct multiboot_header$/;"	s
+multiboot_info	src/include/boot/multiboot.h	/^     struct multiboot_info$/;"	s
+multiboot_info_t	src/include/boot/multiboot.h	/^     typedef struct multiboot_info multiboot_info_t;$/;"	t	typeref:struct:multiboot_info
+multiboot_memory_map_t	src/include/boot/multiboot.h	/^     typedef struct multiboot_mmap_entry multiboot_memory_map_t;$/;"	t	typeref:struct:multiboot_mmap_entry
+multiboot_mmap_entry	src/include/boot/multiboot.h	/^     struct multiboot_mmap_entry$/;"	s
+multiboot_mod_list	src/include/boot/multiboot.h	/^     struct multiboot_mod_list$/;"	s
+multiboot_module_t	src/include/boot/multiboot.h	/^     typedef struct multiboot_mod_list multiboot_module_t;$/;"	t	typeref:struct:multiboot_mod_list
+multiboot_uint16_t	src/include/boot/multiboot.h	/^     typedef unsigned short          multiboot_uint16_t;$/;"	t
+multiboot_uint32_t	src/include/boot/multiboot.h	/^     typedef unsigned int            multiboot_uint32_t;$/;"	t
+multiboot_uint64_t	src/include/boot/multiboot.h	/^     typedef unsigned long long      multiboot_uint64_t;$/;"	t
 new_block	src/kernel/mm.c	/^void* new_block()$/;"	f
-num	src/include/multiboot.h	/^       multiboot_uint32_t num;$/;"	m	struct:multiboot_elf_section_header_table
-num_blocks	src/include/mm.h	/^static unsigned long num_blocks = 0;$/;"	v
-offset_high	src/include/idt.h	/^    unsigned short offset_high;$/;"	m	struct:idt_entry
-offset_low	src/include/idt.h	/^    unsigned short offset_low;$/;"	m	struct:idt_entry
+num	src/include/boot/multiboot.h	/^       multiboot_uint32_t num;$/;"	m	struct:multiboot_elf_section_header_table
+num_blocks	src/include/kernel/mm.h	/^static unsigned long num_blocks = 0;$/;"	v
+offset_high	src/include/kernel/idt.h	/^    unsigned short offset_high;$/;"	m	struct:idt_entry
+offset_low	src/include/kernel/idt.h	/^    unsigned short offset_low;$/;"	m	struct:idt_entry
 outb	src/utility/util.s	/^outb:$/;"	l
-pad	src/include/multiboot.h	/^       multiboot_uint32_t pad;$/;"	m	struct:multiboot_mod_list
-page_base_addr	src/include/paging.h	/^    unsigned long page_base_addr:20;$/;"	m	struct:__anon2
-page_directory	src/include/paging.h	/^static unsigned long* page_directory = (unsigned long *)0;$/;"	v
-page_fault_error_t	src/include/paging.h	/^}__attribute__((packked)) page_fault_error_t;$/;"	t	typeref:struct:__anon3
+pad	src/include/boot/multiboot.h	/^       multiboot_uint32_t pad;$/;"	m	struct:multiboot_mod_list
+page_base_addr	src/include/kernel/paging.h	/^    unsigned long page_base_addr:20;$/;"	m	struct:__anon2
+page_directory	src/include/kernel/paging.h	/^static unsigned long* page_directory = 0xFFFFF000;$/;"	v
+page_directory_phys_addr	src/include/kernel/paging.h	/^static unsigned long* page_directory_phys_addr = 0;$/;"	v
+page_fault_error_t	src/include/kernel/paging.h	/^}__attribute__((packked)) page_fault_error_t;$/;"	t	typeref:struct:__anon3
 page_fault_handler	src/kernel/paging.c	/^void page_fault_handler(struct cpu_state cpu, struct stack_state stack)$/;"	f
-page_present	src/include/paging.h	/^    unsigned long page_present:1;$/;"	m	struct:__anon3
-page_table_base_addr	src/include/paging.h	/^    unsigned long page_table_base_addr:20;$/;"	m	struct:__anon1
-pde_t	src/include/paging.h	/^}pde_t;$/;"	t	typeref:struct:__anon1
-phys_alloc_start	src/include/mm.h	/^static unsigned long* phys_alloc_start= 0;$/;"	v
-present	src/include/paging.h	/^    unsigned long present:1;$/;"	m	struct:__anon1
-present	src/include/paging.h	/^    unsigned long present:1;$/;"	m	struct:__anon2
+page_present	src/include/kernel/paging.h	/^    unsigned long page_present:1;$/;"	m	struct:__anon3
+page_table_base_addr	src/include/kernel/paging.h	/^    unsigned long page_table_base_addr:20;$/;"	m	struct:__anon1
+pde_t	src/include/kernel/paging.h	/^}pde_t;$/;"	t	typeref:struct:__anon1
+phys_alloc_start	src/include/kernel/mm.h	/^static unsigned long* phys_alloc_start= 0;$/;"	v
+present	src/include/kernel/paging.h	/^    unsigned long present:1;$/;"	m	struct:__anon1
+present	src/include/kernel/paging.h	/^    unsigned long present:1;$/;"	m	struct:__anon2
 print	src/kernel/terminal.c	/^int print(char **out, const char *format, va_list args )$/;"	f
 printchar	src/kernel/terminal.c	/^void printchar(char **str, int c)$/;"	f
 printi	src/kernel/terminal.c	/^int printi(char **out, int i, int b, int sg, int width, int pad, int letbase)$/;"	f
 printk	src/kernel/terminal.c	/^int printk(const char *format, ...)$/;"	f
 prints	src/kernel/terminal.c	/^int prints(char **out, const char *string, int width, int pad)$/;"	f
-pte_attribute	src/include/paging.h	/^    unsigned long pte_attribute:1;$/;"	m	struct:__anon2
-pte_t	src/include/paging.h	/^}pte_t;$/;"	t	typeref:struct:__anon2
+pte_attribute	src/include/kernel/paging.h	/^    unsigned long pte_attribute:1;$/;"	m	struct:__anon2
+pte_t	src/include/kernel/paging.h	/^}pte_t;$/;"	t	typeref:struct:__anon2
 putchar	src/kernel/terminal.c	/^int putchar(int character)$/;"	f
 puts	src/kernel/terminal.c	/^int puts ( const char * str )$/;"	f
-read_write	src/include/paging.h	/^    unsigned long read_write:1;$/;"	m	struct:__anon3
+read_write	src/include/kernel/paging.h	/^    unsigned long read_write:1;$/;"	m	struct:__anon3
 remove_block	src/kernel/mm.c	/^void remove_block(void* ptr)$/;"	f
+remove_page_mapping	src/kernel/paging.c	/^void remove_page_mapping(unsigned long* virtual_addr)$/;"	f
 resb	src/boot/boot.s	/^resb 16384$/;"	l
-reserved	src/include/multiboot.h	/^       multiboot_uint32_t reserved;$/;"	m	struct:multiboot_aout_symbol_table
-reserved	src/include/paging.h	/^    unsigned long reserved:1;$/;"	m	struct:__anon1
-reserved_overwrite	src/include/paging.h	/^    unsigned long reserved_overwrite:1;$/;"	m	struct:__anon3
+reserved	src/include/boot/multiboot.h	/^       multiboot_uint32_t reserved;$/;"	m	struct:multiboot_aout_symbol_table
+reserved	src/include/kernel/paging.h	/^    unsigned long reserved:1;$/;"	m	struct:__anon1
+reserved	src/include/kernel/paging.h	/^    unsigned long reserved:2;$/;"	m	struct:__anon2
+reserved_overwrite	src/include/kernel/paging.h	/^    unsigned long reserved_overwrite:1;$/;"	m	struct:__anon3
 round_next_page	src/kernel/mm.c	/^unsigned long round_next_page(unsigned long address)$/;"	f
 round_previous_page	src/kernel/mm.c	/^unsigned long round_previous_page(unsigned long address)$/;"	f
 scroll	src/kernel/terminal.c	/^void scroll()$/;"	f
-selector	src/include/idt.h	/^    unsigned short selector;$/;"	m	struct:idt_entry
+selector	src/include/kernel/idt.h	/^    unsigned short selector;$/;"	m	struct:idt_entry
 setcolor	src/kernel/terminal.c	/^void setcolor(enum TERMINAL_COLOR fg, enum TERMINAL_COLOR bg)$/;"	f
-shndx	src/include/multiboot.h	/^       multiboot_uint32_t shndx;$/;"	m	struct:multiboot_elf_section_header_table
-size	src/include/multiboot.h	/^       multiboot_uint32_t size;$/;"	m	struct:multiboot_elf_section_header_table
-size	src/include/multiboot.h	/^       multiboot_uint32_t size;$/;"	m	struct:multiboot_mmap_entry
+shndx	src/include/boot/multiboot.h	/^       multiboot_uint32_t shndx;$/;"	m	struct:multiboot_elf_section_header_table
+size	src/include/boot/multiboot.h	/^       multiboot_uint32_t size;$/;"	m	struct:multiboot_elf_section_header_table
+size	src/include/boot/multiboot.h	/^       multiboot_uint32_t size;$/;"	m	struct:multiboot_mmap_entry
 sprintk	src/kernel/terminal.c	/^int sprintk(char *out, const char *format, ...)$/;"	f
-stack_state	src/include/idt.h	/^struct stack_state$/;"	s
+stack_state	src/include/kernel/idt.h	/^struct stack_state$/;"	s
 start	src/boot/boot.s	/^start:$/;"	l
 strlen	src/kernel/terminal.c	/^unsigned int strlen(const char* message)$/;"	f
-strsize	src/include/multiboot.h	/^       multiboot_uint32_t strsize;$/;"	m	struct:multiboot_aout_symbol_table
+strsize	src/include/boot/multiboot.h	/^       multiboot_uint32_t strsize;$/;"	m	struct:multiboot_aout_symbol_table
 switch_page_directory	src/utility/util.s	/^switch_page_directory:$/;"	l
-tabsize	src/include/multiboot.h	/^       multiboot_uint32_t tabsize;$/;"	m	struct:multiboot_aout_symbol_table
-terminalColor	src/include/terminal.h	/^static unsigned char terminalColor;$/;"	v
+tabsize	src/include/boot/multiboot.h	/^       multiboot_uint32_t tabsize;$/;"	m	struct:multiboot_aout_symbol_table
+terminalColor	src/include/kernel/terminal.h	/^static unsigned char terminalColor;$/;"	v
 terminal_initialize	src/kernel/terminal.c	/^void terminal_initialize()$/;"	f
-type	src/include/multiboot.h	/^       multiboot_uint32_t type;$/;"	m	struct:multiboot_mmap_entry
-type_attr	src/include/idt.h	/^    unsigned char type_attr;$/;"	m	struct:idt_entry
-u	src/include/multiboot.h	/^       } u;$/;"	m	struct:multiboot_info	typeref:union:multiboot_info::__anon4
-uint16_t	src/include/utility.h	/^typedef unsigned short          uint16_t;$/;"	t
-uint32_t	src/include/utility.h	/^typedef unsigned int            uint32_t;$/;"	t
-uint64_t	src/include/utility.h	/^typedef unsigned long long      uint64_t;$/;"	t
-unused	src/include/paging.h	/^    unsigned long unused:27;$/;"	m	struct:__anon3
+type	src/include/boot/multiboot.h	/^       multiboot_uint32_t type;$/;"	m	struct:multiboot_mmap_entry
+type_attr	src/include/kernel/idt.h	/^    unsigned char type_attr;$/;"	m	struct:idt_entry
+u	src/include/boot/multiboot.h	/^       } u;$/;"	m	struct:multiboot_info	typeref:union:multiboot_info::__anon4
+uint16_t	src/include/utility/utility.h	/^typedef unsigned short          uint16_t;$/;"	t
+uint32_t	src/include/utility/utility.h	/^typedef unsigned int            uint32_t;$/;"	t
+uint64_t	src/include/utility/utility.h	/^typedef unsigned long long      uint64_t;$/;"	t
+unused	src/include/kernel/paging.h	/^    unsigned long unused:27;$/;"	m	struct:__anon3
 updatecursor	src/kernel/terminal.c	/^void updatecursor()$/;"	f
-user_mode	src/include/paging.h	/^    unsigned long user_mode:1;$/;"	m	struct:__anon1
-user_mode	src/include/paging.h	/^    unsigned long user_mode:1;$/;"	m	struct:__anon3
-var	src/kernel/paging.c	/^int var = 0;$/;"	v
-vbe_control_info	src/include/multiboot.h	/^       multiboot_uint32_t vbe_control_info;$/;"	m	struct:multiboot_info
-vbe_interface_len	src/include/multiboot.h	/^       multiboot_uint16_t vbe_interface_len;$/;"	m	struct:multiboot_info
-vbe_interface_off	src/include/multiboot.h	/^       multiboot_uint16_t vbe_interface_off;$/;"	m	struct:multiboot_info
-vbe_interface_seg	src/include/multiboot.h	/^       multiboot_uint16_t vbe_interface_seg;$/;"	m	struct:multiboot_info
-vbe_mode	src/include/multiboot.h	/^       multiboot_uint16_t vbe_mode;$/;"	m	struct:multiboot_info
-vbe_mode_info	src/include/multiboot.h	/^       multiboot_uint32_t vbe_mode_info;$/;"	m	struct:multiboot_info
+user_mode	src/include/kernel/paging.h	/^    unsigned long user_mode:1;$/;"	m	struct:__anon1
+user_mode	src/include/kernel/paging.h	/^    unsigned long user_mode:1;$/;"	m	struct:__anon2
+user_mode	src/include/kernel/paging.h	/^    unsigned long user_mode:1;$/;"	m	struct:__anon3
+vbe_control_info	src/include/boot/multiboot.h	/^       multiboot_uint32_t vbe_control_info;$/;"	m	struct:multiboot_info
+vbe_interface_len	src/include/boot/multiboot.h	/^       multiboot_uint16_t vbe_interface_len;$/;"	m	struct:multiboot_info
+vbe_interface_off	src/include/boot/multiboot.h	/^       multiboot_uint16_t vbe_interface_off;$/;"	m	struct:multiboot_info
+vbe_interface_seg	src/include/boot/multiboot.h	/^       multiboot_uint16_t vbe_interface_seg;$/;"	m	struct:multiboot_info
+vbe_mode	src/include/boot/multiboot.h	/^       multiboot_uint16_t vbe_mode;$/;"	m	struct:multiboot_info
+vbe_mode_info	src/include/boot/multiboot.h	/^       multiboot_uint32_t vbe_mode_info;$/;"	m	struct:multiboot_info
+virtual_heap_top	src/include/kernel/paging.h	/^static void* virtual_heap_top = 0;$/;"	v
 virtual_kernel	src/boot/boot.s	/^virtual_kernel:$/;"	l
-width	src/include/multiboot.h	/^       multiboot_uint32_t width;$/;"	m	struct:multiboot_header
-writable	src/include/paging.h	/^    unsigned long writable:1;$/;"	m	struct:__anon1
-write_through	src/include/paging.h	/^    unsigned long write_through:1;$/;"	m	struct:__anon1
-zero	src/include/idt.h	/^    unsigned char zero;$/;"	m	struct:idt_entry
+width	src/include/boot/multiboot.h	/^       multiboot_uint32_t width;$/;"	m	struct:multiboot_header
+writable	src/include/kernel/paging.h	/^    unsigned long writable:1;$/;"	m	struct:__anon1
+writable	src/include/kernel/paging.h	/^    unsigned long writable:1;$/;"	m	struct:__anon2
+write_through	src/include/kernel/paging.h	/^    unsigned long write_through:1;$/;"	m	struct:__anon1
+zero	src/include/kernel/idt.h	/^    unsigned char zero;$/;"	m	struct:idt_entry
