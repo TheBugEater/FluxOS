@@ -16,6 +16,6 @@ unsigned long round_next_page(unsigned long address);
 unsigned long round_previous_page(unsigned long address);
 
 void* new_block();
-void remove_block(void* ptr);
+void delete_block(void* ptr);
 
 #endif // __MM_H__

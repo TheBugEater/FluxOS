@@ -73,7 +73,7 @@ void* new_block()
     return 0;
 }
 
-void remove_block(void* ptr)
+void delete_block(void* ptr)
 {
     int frame = (((unsigned long)ptr - (unsigned long)phys_alloc_start) & 0xFFFFF000 ) / PAGE_SIZE;
 

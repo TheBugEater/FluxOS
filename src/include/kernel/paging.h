@@ -71,7 +71,7 @@ void* add_page_mapping(unsigned long* physical_addr, unsigned long* virtual_addr
 void remove_page_mapping(unsigned long* virtual_addr);
 
 // Returns a New Page from Kernel Heap
-void* get_new_page();
+void* new_page();
 
 // Removes a Page 
 void delete_page(void* ptr);

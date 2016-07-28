@@ -33,16 +33,17 @@ void install_paging(kernel_boot_info_t* info)
     switch_page_directory(page_directory_phys_addr);
 
     virtual_heap_top = KERNEL_HEAP_BASE;
+    printk("Virtual Heap : %x\n", virtual_heap_top);
 
     printk("##########################\n");
     printk("### TESTING ALLOCATION ###\n");
     printk("##########################\n");
     
-    void* p = new_block();
-    int* a = 0xAFF02220;
-    int* b = 0xAFF02224;
-    add_page_mapping(p, a);
+    int* c = (int*)new_page();
+    delete_page(c);
+    int* a = (int*)new_page();
     *a = 10;
+    int *b = a + 4;
     *b = 15;
     printk("Value is %d | B = %d\n",*a, *b);
 }
@@ -118,6 +119,7 @@ void remove_page_mapping(unsigned long* virtual_addr)
         pte_t page = *(pte_t*)&virt_table[page_index];
         if(page.present)
         {
+            delete_block(page.page_base_addr << 12);
             page.present = FALSE;
             page.page_base_addr &= 0;
             virt_table[page_index] = *(unsigned long*)&page;
@@ -126,38 +128,27 @@ void remove_page_mapping(unsigned long* virtual_addr)
     }
  }
 
-void* get_new_page()
+void* new_page()
 {
     // Convert it to a Virtual Block of Kernel Heap
-    unsigned long page_table = GET_PAGE_TABLE_INDEX(virtual_heap_top);
-    unsigned long page_index = GET_PAGE_INDEX(virtual_heap_top);
+    void* p = new_block();
+    void* new_page_addr = add_page_mapping(p, virtual_heap_top);
 
-    pde_t page_dir = *(pde_t*)&page_directory[page_table];
-    if(!page_dir.present)
-    {
-        // Page Dir not set, Create One
-        void* phys_dir_block = new_block();
-        page_dir = create_new_pde_entry(0, phys_dir_block);
-        page_directory[page_table] = *(unsigned long*)&page_dir;
-    }
-   
-    // Get A Physical Block
-    void* phys_block = new_block();
-    //void* new_page_addr = add_page_mapping(phys_block, virtual_heap_top);
+    printk("Virtual Heap: %x\n", virtual_heap_top);
 
     // Increase offset
     virtual_heap_top = (unsigned long)virtual_heap_top + PAGE_SIZE;
 
-    return 0;//new_page_addr;
+    return new_page_addr;
 }
 
 void delete_page(void* ptr)
 {
+    remove_page_mapping(ptr);
 }
 
 void page_fault_handler(struct cpu_state cpu, struct stack_state stack)
 {
-    
     page_fault_error_t* fault = (page_fault_error_t*)&stack.error_code;
     if(!fault->page_present)
     {
@@ -165,7 +156,7 @@ void page_fault_handler(struct cpu_state cpu, struct stack_state stack)
     }
 
     void* fault_addr = get_page_fault_addr();
-    printk("Page Fault Occurred! %x | Error Code %d\n",get_page_fault_addr(), stack.error_code);
+    printk("Page Fault Occurred! %x | Error Code %d\n",fault_addr, stack.error_code);
 
     unsigned long table_dir = GET_PAGE_TABLE_INDEX(fault_addr);
     unsigned long page_index = GET_PAGE_INDEX(fault_addr);
