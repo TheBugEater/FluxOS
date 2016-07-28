@@ -8,6 +8,7 @@
 #define KERNEL_HEAP_BASE    KERNEL_VIRTUAL_BASE + (128 << 20)
 #define KERNEL_HEAP_SIZE    (256 << 20)
 #define PAGE_SIZE           4096
+#define PAGE_ADDR_MASK      0xFFFFF000
 
 /*
  * Page directory entry datatype.
@@ -56,6 +57,7 @@ typedef struct
     unsigned long unused:27;
 }__attribute__((packked)) page_fault_error_t;
 
+static unsigned long* page_tables_start = 0xFFC00000;
 static unsigned long* page_directory = 0xFFFFF000;
 static unsigned long* page_directory_phys_addr = 0;
 
