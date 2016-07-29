@@ -33,19 +33,6 @@ void install_paging(kernel_boot_info_t* info)
     switch_page_directory(page_directory_phys_addr);
 
     virtual_heap_top = KERNEL_HEAP_BASE;
-    printk("Virtual Heap : %x\n", virtual_heap_top);
-
-    printk("##########################\n");
-    printk("### TESTING ALLOCATION ###\n");
-    printk("##########################\n");
-    
-    int* c = (int*)new_page();
-    delete_page(c);
-    int* a = (int*)new_page();
-    *a = 10;
-    int *b = a + 4;
-    *b = 15;
-    printk("Value is %d | B = %d\n",*a, *b);
 }
 
 pte_t create_new_pte_entry(BOOL usr_mode, void* phys_addr)
@@ -145,6 +132,16 @@ void* new_page()
 void delete_page(void* ptr)
 {
     remove_page_mapping(ptr);
+}
+
+void* get_pages(unsigned long blocks)
+{
+    //TODO: Alloc Linear Pages
+}
+
+void free_pages(void* ptr, unsigned long blocks)
+{
+    //TODO: Free Linear Pages
 }
 
 void page_fault_handler(struct cpu_state cpu, struct stack_state stack)

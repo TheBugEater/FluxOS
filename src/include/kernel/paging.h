@@ -72,6 +72,9 @@ void* create_virtual_addr(unsigned long page_table, unsigned long page_index, un
 void* add_page_mapping(unsigned long* physical_addr, unsigned long* virtual_addr);
 void remove_page_mapping(unsigned long* virtual_addr);
 
+void* get_pages(unsigned long blocks);
+void free_pages(void* ptr, unsigned long blocks);
+
 // Returns a New Page from Kernel Heap
 void* new_page();
 

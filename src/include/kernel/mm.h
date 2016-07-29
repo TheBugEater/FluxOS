@@ -15,6 +15,11 @@ unsigned long round_next_page(unsigned long address);
 
 unsigned long round_previous_page(unsigned long address);
 
+// Returns Linear Blocks
+void* get_blocks(unsigned long blocks);
+void free_blocks(void* ptr, unsigned long blocks);
+
+// Returns a New Block
 void* new_block();
 void delete_block(void* ptr);
 
