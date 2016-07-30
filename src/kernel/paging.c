@@ -136,7 +136,46 @@ void delete_page(void* ptr)
 
 void* get_pages(unsigned long blocks)
 {
-    //TODO: Alloc Linear Pages
+    void* phys_addr = get_blocks(blocks);
+    if(!phys_addr)
+        return 0;
+
+    void* virt_start = virtual_heap_top;
+
+    for(int i=0; i<blocks; i++)
+    {
+        unsigned long physical_addr = (unsigned long)phys_addr + (i * PAGE_SIZE);
+        unsigned long* virtual_addr  = (unsigned long)virt_start + (i * PAGE_SIZE);
+
+        printk("Mapping Phys:%x | Virt:%x\n",physical_addr, virtual_addr);
+
+        unsigned long table_index = GET_PAGE_TABLE_INDEX(virtual_addr);
+        unsigned long page_index = GET_PAGE_INDEX(virtual_addr);
+
+        pde_t page_table = *(pde_t*)&page_directory[table_index];
+        if(page_table.present)
+        {
+            unsigned long* virt_table = (unsigned long*)((unsigned long)page_tables_start + table_index * PAGE_SIZE);
+            pte_t page = *(pte_t*)&virt_table[page_index];
+            if(!page.present)
+            {
+                virt_table[page_index] = (unsigned long)physical_addr | 3;
+            }
+        }
+        else
+        {
+            printk("Creating New Page Table\n");
+            void* new_table = new_block();
+            unsigned long* virt_table = (unsigned long*)((unsigned long)page_tables_start + table_index * PAGE_SIZE);
+
+            page_directory[table_index] = (unsigned long)new_table | 3;
+            virt_table[page_index] = (unsigned long)physical_addr | 3;
+        }
+    }
+
+    virtual_heap_top = (unsigned long)virt_start + (blocks * PAGE_SIZE);
+
+    return virt_start;
 }
 
 void free_pages(void* ptr, unsigned long blocks)

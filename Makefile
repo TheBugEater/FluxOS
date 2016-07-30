@@ -59,7 +59,7 @@ create_grub:
 
 run:
 	@echo "Running..." $<
-	@qemu-system-i386 -m 32M -cdrom myos.iso
+	@qemu-system-i386 -cdrom myos.iso
 
 run_debug:
 	@echo "Running in Debug Mode..." $<

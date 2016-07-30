@@ -24,10 +24,3 @@ void* memset(void* dest, unsigned char val, int count)
     return dest;
 }
 
-void kernel_assert(unsigned int condition)
-{
-    if(condition == 0)
-    {
-        __asm__ __volatile__ ("int $129");
-    }
-}

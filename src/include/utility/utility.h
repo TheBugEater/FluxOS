@@ -19,6 +19,13 @@
 #define GET_PAGE_OFFSET(x) ((unsigned long)x & 0xFFF)
 #define ADDR_TO_KERNEL_BASE(x) ((unsigned long)x + KERNEL_VIRTUAL_BASE)
 
+#define kassert(x) { \
+    if(x == 0) { \
+        printk("ASSERT: File: %s | Line: %d\n", __FILE__,__LINE__);\
+        for(;;);\
+    }\
+}
+
 typedef unsigned short          uint16_t;
 typedef unsigned int            uint32_t;
 typedef unsigned long long      uint64_t;
@@ -38,7 +45,6 @@ void* memcpy(void* dest, const void* src, int count);
 
 void* memset(void* dest, unsigned char val, int count);
 
-void kernel_assert(unsigned int condition);
 
 struct kernel_boot_info
 {

@@ -25,8 +25,6 @@ void install_idt()
     install_isr();
     install_irq();
 
-    interrupt_handlers[81] = assert_interrupt;
-
     printk("IDT Installed Successfully...\n");
 }
 
@@ -108,7 +106,7 @@ void install_irq()
 
 void kernel_idt_handler(struct cpu_state cpu, struct stack_state stack)
 {
-    kernel_assert(stack.interrupt_num < IDT_SIZE);
+    kassert(stack.interrupt_num < IDT_SIZE);
 
     // If there is a seperate handle for the exception don't handle it here
     if(stack.interrupt_num < 32 && !(interrupt_handlers[stack.interrupt_num]))
@@ -132,13 +130,9 @@ void kernel_idt_handler(struct cpu_state cpu, struct stack_state stack)
 
 void add_interrupt_handler(unsigned int interrupt_num, interrupt_handler_fn* function)
 {
-    kernel_assert(interrupt_num < IDT_SIZE);
+    kassert(interrupt_num < IDT_SIZE);
 
     interrupt_handlers[interrupt_num] = function;
     printk("Added Interrupt Handler for %d\n",interrupt_num);
 }
 
-void assert_interrupt(struct cpu_state cpu, struct stack_state stack)
-{
-    printk("Asserted Kernel\n");
-}

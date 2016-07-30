@@ -106,6 +106,4 @@ void kernel_idt_handler(struct cpu_state, struct stack_state);
 
 void add_interrupt_handler(unsigned int interrupt_num, interrupt_handler_fn* function);
 
-void assert_interrupt(struct cpu_state cpu, struct stack_state stack);
-
 #endif

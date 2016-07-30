@@ -64,7 +64,7 @@ void* new_block()
                 mem_map[i] = current;
                 unsigned int frame = (i * 4 * BITS_PER_BYTE + j);
                 unsigned long* address = ((unsigned long)phys_alloc_start) + (frame * PAGE_SIZE);
-                printk("Found Empty Block At frame=%d Address:%x\n",frame, address);
+                //printk("Found Empty Block At frame=%d Address:%x\n",frame, address);
                 return address;
             }
         }
@@ -81,7 +81,7 @@ void delete_block(void* ptr)
     unsigned short bit_offset = frame % (BITS_PER_BYTE * 4);
 
     BIT_CLEAR(mem_map[mem_map_offset], bit_offset);
-    printk("Removed Block At frame=%d Address:%x\n",frame, ptr);
+    //printk("Removed Block At frame=%d Address:%x\n",frame, ptr);
 }
 
 void* get_blocks(unsigned long blocks)
@@ -134,7 +134,7 @@ void* get_blocks(unsigned long blocks)
         }
 
         unsigned long* address = ((unsigned long)phys_alloc_start) + (start_frame * PAGE_SIZE);
-        printk("Found Empty Blocks At frame=%d Address:%x | Blocks: %d\n",start_frame, address, blocks);
+        //printk("Found Empty Blocks At frame=%d Address:%x | Blocks: %d\n",start_frame, address, blocks);
         return address;
     }
 
@@ -154,6 +154,6 @@ void free_blocks(void* ptr, unsigned long blocks)
         BIT_CLEAR(mem_map[mem_map_offset], bit_offset);
     }
 
-    printk("Removed Blocks At frame=%d Address:%x | Blocks: %d\n",start_frame, ptr, blocks);
+    //printk("Removed Blocks At frame=%d Address:%x | Blocks: %d\n",start_frame, ptr, blocks);
 }
 
