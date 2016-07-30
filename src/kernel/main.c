@@ -5,6 +5,7 @@
 #include <kernel/paging.h>
 #include <kernel/mm.h>
 #include <utility/utility.h>
+#include <utility/alloc.h>
 
 void kmain(kernel_boot_info_t info)
 {
@@ -34,5 +35,10 @@ void kmain(kernel_boot_info_t info)
     install_mm(&info);
     install_paging(&info);
    
+/*    for(int i=0; i<1000; i++)
+    {
+        kmalloc(10);
+    }
+    */
     while(1);
 }

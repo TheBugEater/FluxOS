@@ -5,6 +5,7 @@
 
 #define TRUE    1
 #define FALSE   0
+#define NULL    0
 
 #define BITS_PER_BYTE   8
 #define KERNEL_VIRTUAL_BASE 0xC0000000
