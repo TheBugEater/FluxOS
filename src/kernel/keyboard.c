@@ -12,4 +12,5 @@ void keyboard_handler(struct cpu_state cpu, struct stack_state stack)
     {
         printk("%c", kbdus[scancode]);
     }
+    for(;;);
 }
