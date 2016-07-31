@@ -58,7 +58,7 @@ KERNEL_PAGE_NUM	src/boot/boot.s	/^KERNEL_PAGE_NUM     equ (KERNEL_VIRTUAL_BASE >
 KERNEL_VIRTUAL_BASE	src/boot/boot.s	/^KERNEL_VIRTUAL_BASE equ 0xC0000000$/;"	d
 KERNEL_VIRTUAL_BASE	src/include/utility/utility.h	11;"	d
 LNK_Flags	Makefile	/^LNK_Flags = -m elf_i386 $/;"	m
-MEM_BLOCK_SIZE	src/include/utility/alloc.h	29;"	d
+MEM_BLOCK_SIZE	src/include/utility/alloc.h	31;"	d
 MULTIBOOT_AOUT_KLUDGE	src/include/boot/multiboot.h	55;"	d
 MULTIBOOT_BOOTLOADER_MAGIC	src/include/boot/multiboot.h	32;"	d
 MULTIBOOT_CHECKSUM	src/boot/boot.s	/^MULTIBOOT_CHECKSUM          equ -(MULTIBOOT_MAGIC_NUMBER + MULTIBOOT_FLAGS)$/;"	d
@@ -133,7 +133,7 @@ addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t addr;$/;"	m	struct
 addr	src/include/boot/multiboot.h	/^       multiboot_uint64_t addr;$/;"	m	struct:multiboot_mmap_entry
 aout_sym	src/include/boot/multiboot.h	/^         multiboot_aout_symbol_table_t aout_sym;$/;"	m	union:multiboot_info::__anon1
 apm_table	src/include/boot/multiboot.h	/^       multiboot_uint32_t apm_table;$/;"	m	struct:multiboot_info
-available	src/include/utility/alloc.h	/^    unsigned long available;$/;"	m	struct:__anon5
+available	src/include/utility/alloc.h	/^    unsigned short available;$/;"	m	struct:__anon5
 base	src/include/kernel/gdt.h	/^    unsigned int base;$/;"	m	struct:gdt_ptr
 base	src/include/kernel/idt.h	/^    unsigned int base;$/;"	m	struct:idt_ptr
 base_high	src/include/kernel/gdt.h	/^    unsigned char base_high;$/;"	m	struct:gdt_entry
@@ -310,17 +310,19 @@ load_addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t load_addr;$/;
 load_end_addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t load_end_addr;$/;"	m	struct:multiboot_header
 load_idt	src/kernel/core.s	/^load_idt:$/;"	l
 magic	src/include/boot/multiboot.h	/^       multiboot_uint32_t magic;$/;"	m	struct:multiboot_header
-magic	src/include/utility/alloc.h	/^    unsigned long magic;$/;"	m	struct:__anon5
+magic	src/include/utility/alloc.h	/^    unsigned short magic;$/;"	m	struct:__anon5
 magic_number	src/include/utility/utility.h	/^    unsigned long magic_number;$/;"	m	struct:kernel_boot_info
 mbi	src/include/utility/utility.h	/^    multiboot_info_t* mbi;$/;"	m	struct:kernel_boot_info
-mem_block_info	src/include/utility/alloc.h	/^} mem_block_info;$/;"	t	typeref:struct:__anon5
+mem_block_info	src/include/utility/alloc.h	/^}mem_block_info;$/;"	t	typeref:struct:__anon5
 mem_lower	src/include/boot/multiboot.h	/^       multiboot_uint32_t mem_lower;$/;"	m	struct:multiboot_info
 mem_map	src/include/kernel/mm.h	/^static unsigned long* mem_map = 0;$/;"	v
 mem_map_size	src/include/kernel/mm.h	/^static unsigned long mem_map_size = 0;$/;"	v
 mem_upper	src/include/boot/multiboot.h	/^       multiboot_uint32_t mem_upper;$/;"	m	struct:multiboot_info
 memcpy	src/utility/utility.c	/^void* memcpy(void* dest, const void* src, int count)$/;"	f
 memset	src/utility/utility.c	/^void* memset(void* dest, unsigned char val, int count)$/;"	f
-merge_mem	src/utility/alloc.c	/^void merge_mem(mem_block_info* current)$/;"	f
+merge_mem_down	src/utility/alloc.c	/^mem_block_info* merge_mem_down(mem_block_info* current)$/;"	f
+merge_mem_up	src/utility/alloc.c	/^mem_block_info* merge_mem_up(mem_block_info* current)$/;"	f
+merge_next	src/include/utility/alloc.h	/^    struct mem_block_info* merge_next;$/;"	m	struct:__anon5	typeref:struct:__anon5::mem_block_info
 merge_prev	src/include/utility/alloc.h	/^    struct mem_block_info* merge_prev;$/;"	m	struct:__anon5	typeref:struct:__anon5::mem_block_info
 mmap_addr	src/include/boot/multiboot.h	/^       multiboot_uint32_t mmap_addr;$/;"	m	struct:multiboot_info
 mmap_length	src/include/boot/multiboot.h	/^       multiboot_uint32_t mmap_length;$/;"	m	struct:multiboot_info
@@ -375,7 +377,6 @@ putchar	src/kernel/terminal.c	/^int putchar(int character)$/;"	f
 puts	src/kernel/terminal.c	/^int puts ( const char * str )$/;"	f
 read_write	src/include/kernel/paging.h	/^    unsigned long read_write:1;$/;"	m	struct:__anon4
 remove_page_mapping	src/kernel/paging.c	/^void remove_page_mapping(unsigned long* virtual_addr)$/;"	f
-replace_merge_ref	src/utility/alloc.c	/^void replace_merge_ref(mem_block_info* current_block, mem_block_info* replacement)$/;"	f
 request_memory	src/utility/alloc.c	/^mem_block_info* request_memory(unsigned long size)$/;"	f
 resb	src/boot/boot.s	/^resb 16384$/;"	l
 reserved	src/include/boot/multiboot.h	/^       multiboot_uint32_t reserved;$/;"	m	struct:multiboot_aout_symbol_table

@@ -30,30 +30,16 @@ void kmain(kernel_boot_info_t info)
     // Enable Interrupts
     enable_interrupts();
 
-    install_keyboard();
-
     install_mm(&info);
     install_paging(&info);
-   
-    int *a = kmalloc(sizeof(int));
-    int *b = kmalloc(sizeof(int));
-    int *c = kmalloc(sizeof(int));
-    int *d = kmalloc(1000);
-    //int *e = kmalloc(40);
-
-    kfree(c);
-    printk("----------------\n");
-    kfree(b);
-    printk("----------------\n");
-    kfree(a);
-    printk("----------------\n");
-    kfree(d);
-    //kfree(e);
-    //printk("Address A:%x\n",a);
-    //printk("Address B:%x\n",b);
-    //printk("Address C:%x\n",c);
-    //printk("Address D:%x\n",d);
-    //printk("Address E:%x\n",e);
+ 
+    install_keyboard();
+  
+    for(int i=0; i<100; i++)
+    {
+        kmalloc(25);
+    }
     
+    printk("Finished.....[OK]");
     while(1);
 }

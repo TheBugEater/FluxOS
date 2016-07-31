@@ -159,33 +159,7 @@ void kfree(void* ptr)
 
     // Can we Merge ? 
     mem_block_info* modified_block = merge_mem_up(block);
-//    merge_mem_down(modified_block);
-}
-
-void replace_merge_ref_up(mem_block_info* current_block, mem_block_info* replacement)
-{
-    mem_block_info* current = block_head;
-    if(block_head->merge_prev == current_block)
-    {
-        block_head->merge_prev = replacement;
-        replacement->merge_next = block_head;
-        return;
-    }
-
-    while(current)
-    {
-        if(current->merge_prev == current_block)
-        {
-            printk("Merge Prev: %x->%x | Merge Next: %x->%x\n",current->merge_prev,replacement,replacement->merge_next, current);
-            current->merge_prev = replacement;
-            replacement->merge_next = current;
-        }
-        current = current->next;
-    }
-}
-
-void replace_merge_ref_down(mem_block_info* current_block, mem_block_info* replacement)
-{
+    merge_mem_down(modified_block);
 }
 
 void split_mem(mem_block_info* base, unsigned long remaining_size)
@@ -206,6 +180,7 @@ void split_mem(mem_block_info* base, unsigned long remaining_size)
     new_block->available = TRUE;
     new_block->magic = UNALLOCATED;
 
+//    printk("Split! : Base:%x, Base Size:%d | New:%x, New Size:%d\n",base,base->size,new_block,new_block->size);
     // Add New Block to the List
     list_add(new_block);
 }
@@ -225,15 +200,48 @@ mem_block_info* merge_mem_up(mem_block_info* current)
         return current;
 
     prev_block->size = prev_block->size + MEM_BLOCK_SIZE + current->size;
-    replace_merge_ref_up(current, prev_block);
+    mem_block_info* next_ref_block = current->merge_next;
+    if(next_ref_block != NULL)
+    {
+        next_ref_block->merge_prev = prev_block;
+    }
+    prev_block->merge_next = next_ref_block;
+
     list_remove(current);
 
     printk("Merged Memory: %x->%x, Size:%d, Merge Size:%d \n", (unsigned long)current,prev_block, current_size, prev_block->size);
-    // Recursively Merge Uphill
+
     return merge_mem_up(prev_block);
 }
 
 mem_block_info* merge_mem_down(mem_block_info* current)
 {
-}
+    // If Current is Null Return
+    if(current == NULL)
+        return NULL;
 
+    // Recursively Get Next Block
+    mem_block_info* next_block = merge_mem_down(current->merge_next);
+    if(next_block == NULL)
+        return current;
+
+    // If Next Block is not available to merge return current
+    if(next_block->available == FALSE)
+        return current;
+
+    unsigned long current_size = current->size;
+
+    // Increase the size merging the next block
+    current->size = current->size + MEM_BLOCK_SIZE + next_block->size;
+    mem_block_info* next_ref_block = next_block->merge_next;
+    if(next_ref_block != NULL)
+    {
+        next_ref_block->merge_prev = current;
+    }
+    current->merge_next = next_ref_block;
+    list_remove(next_block);
+
+    printk("Merged Memory: %x->%x, Size:%d, Merge Size:%d Merge Next:%x\n", next_block,current, current_size, current->size, current->merge_next);
+
+    return current;
+}
