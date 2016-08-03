@@ -2,13 +2,14 @@ CC_ASM = nasm
 CC_CPP = g++ 
 CC_C = gcc
 
-INC =-I$(SOURCEDIR)/include
+INC =-I $(SOURCEDIR)/include
 
 ASM_Flags = -f elf32 $(ASM_EXTRA)
 C_Flags = -fno-stack-protector -w -std=c99 -fno-builtin -m32 $(INC) $(EXTRA)
 CPP_Flags = -m32 -ffreestanding -O2 -Wall -Wextra -fno-builtin -fno-exceptions -fno-rtti $(EXTRA)
 LNK_Flags = -m elf_i386 
 
+TOOLSDIR = tools
 SOURCEDIR = src
 BUILDDIR = build
 EXECUTABLEDIR = bin
@@ -24,7 +25,7 @@ ASM_OBJECTS = $(ASM_SOURCES:.s=.o)
 
 EXECUTABLE = FluxOS.bin
 
-all: init compile create_grub
+all: init compile create_ramdisk create_grub
 
 compile:$(ASM_OBJECTS) $(C_OBJECTS) $(CPP_OBJECTS) 
 	@echo "Linking the Object files..."
@@ -50,6 +51,12 @@ init:
 	@mkdir -p $(BUILDDIR)
 	@mkdir -p $(EXECUTABLEDIR)
 
+create_ramdisk:
+	@echo "Building Ramdisk..."
+	@gcc $(TOOLSDIR)/ramdisk_creator.c -o $(BUILDDIR)/ramdisk
+	@echo "Running Ramdisk..."
+	@./$(BUILDDIR)/ramdisk
+
 create_grub:
 	@echo "Creating Bootable Image" $<
 	@mkdir -p $(BUILDDIR)/isodir/boot/grub
@@ -67,6 +74,7 @@ run_debug:
 
 clean:
 	@echo "Cleaning Build Directories and Files..." $<
+	@rm -f initrd.img
 	@rm -R -f $(BUILDDIR)
 	@rm -R -f $(EXECUTABLEDIR)
 
