@@ -2,6 +2,7 @@
 #include <kernel/idt.h>
 #include <kernel/gdt.h>
 #include <kernel/keyboard.h>
+#include <kernel/pit.h>
 #include <kernel/paging.h>
 #include <kernel/mm.h>
 #include <utility/utility.h>
@@ -34,12 +35,7 @@ void kmain(kernel_boot_info_t info)
     install_paging(&info);
  
     install_keyboard();
+    install_pit();
   
-    for(int i=0; i<100; i++)
-    {
-        kmalloc(25);
-    }
-    
-    printk("Finished.....[OK]");
     while(1);
 }
