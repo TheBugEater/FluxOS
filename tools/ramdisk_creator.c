@@ -127,8 +127,8 @@ int main(int argc, char *argv[])
     printf("Buffer Size %d\n", (int)buffer_size);
 
     printf("----------------------------------\n");
-    printf("Successfully Created Ram Disk.\n");
-    printf("Size of Ram Disk %d.\n", (int)ftell(fp));
+    printf("Successfully Created Ramdisk.\n");
+    printf("Size of Ramdisk %d.\n", (int)ftell(fp));
     printf("----------------------------------\n");
 
     free(file_buffer);
