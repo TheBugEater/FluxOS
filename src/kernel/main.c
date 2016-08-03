@@ -5,6 +5,7 @@
 #include <kernel/paging.h>
 #include <kernel/mm.h>
 #include <utility/utility.h>
+#include <utility/alloc.h>
 
 void kmain(kernel_boot_info_t info)
 {
@@ -29,10 +30,16 @@ void kmain(kernel_boot_info_t info)
     // Enable Interrupts
     enable_interrupts();
 
-    install_keyboard();
-
     install_mm(&info);
     install_paging(&info);
-   
+ 
+    install_keyboard();
+  
+    for(int i=0; i<100; i++)
+    {
+        kmalloc(25);
+    }
+    
+    printk("Finished.....[OK]");
     while(1);
 }
