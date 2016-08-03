@@ -53,7 +53,7 @@ init:
 
 create_ramdisk:
 	@echo "Building Ramdisk..."
-	@gcc $(TOOLSDIR)/ramdisk_creator.c -o $(BUILDDIR)/ramdisk
+	@gcc -std=gnu99 $(TOOLSDIR)/ramdisk_creator.c -o $(BUILDDIR)/ramdisk
 	@echo "Running Ramdisk..."
 	@./$(BUILDDIR)/ramdisk
 
