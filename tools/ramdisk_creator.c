@@ -3,14 +3,14 @@
 #include <dirent.h>
 #include <stdlib.h>
 #define MAX_FILES 32
-#define INITRD_DIR "../initrd/"
+#define INITRD_DIR "initrd/"
 
 typedef struct 
 {
     char name[128];
-    unsigned long start_offset;
-    unsigned long block_size;
-}file_block;
+    unsigned int start_offset;
+    unsigned int block_size;
+} file_block;
 
 // initrd file
 // |4 bytes|file_nodes|actual file data|

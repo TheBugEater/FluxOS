@@ -37,5 +37,6 @@ void kmain(kernel_boot_info_t info)
     install_keyboard();
     install_pit();
   
+    initialize_initrd(&info);
     while(1);
 }

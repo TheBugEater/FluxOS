@@ -60,8 +60,10 @@ create_ramdisk:
 create_grub:
 	@echo "Creating Bootable Image" $<
 	@mkdir -p $(BUILDDIR)/isodir/boot/grub
+	@mkdir -p $(BUILDDIR)/isodir/modules
 	@cp $(EXECUTABLEDIR)/$(EXECUTABLE) $(BUILDDIR)/isodir/boot/$(EXECUTABLE)
 	@cp grub.cfg $(BUILDDIR)/isodir/boot/grub/grub.cfg
+	@mv initrd.img $(BUILDDIR)/isodir/modules/initrd.img
 	grub-mkrescue -o myos.iso $(BUILDDIR)/isodir
 
 run:
