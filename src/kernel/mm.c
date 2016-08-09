@@ -16,11 +16,24 @@ unsigned long round_previous_page(unsigned long address)
     return next_addr;
 }
 
+unsigned long get_module_end(kernel_boot_info_t* info)
+{
+    if(info->mbi->mods_count <= 0)
+        return 0;
+
+    multiboot_module_t* mods = ADDR_TO_KERNEL_BASE(info->mbi->mods_addr);
+    return mods[info->mbi->mods_count - 1].mod_end;
+}
+
 void install_mm(kernel_boot_info_t* info)
 {
     // Convert it to Real Physical Address, We are in Higher Half Kernel
     unsigned long kernel_end = info->kernel_end - KERNEL_VIRTUAL_BASE;
-    kernel_end += 40960;
+    unsigned long module_end = get_module_end(info);
+    if(module_end > 0)
+    {
+        kernel_end = module_end;
+    }
     phys_alloc_start = round_next_page(kernel_end);
     printk("Allocation Starts at %x\n", phys_alloc_start);
 

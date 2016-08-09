@@ -14,6 +14,7 @@ void install_mm(kernel_boot_info_t* info);
 unsigned long round_next_page(unsigned long address);
 
 unsigned long round_previous_page(unsigned long address);
+unsigned long get_module_end(kernel_boot_info_t* info);
 
 // Returns Linear Blocks
 void* get_blocks(unsigned long blocks);
