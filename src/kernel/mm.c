@@ -20,6 +20,7 @@ void install_mm(kernel_boot_info_t* info)
 {
     // Convert it to Real Physical Address, We are in Higher Half Kernel
     unsigned long kernel_end = info->kernel_end - KERNEL_VIRTUAL_BASE;
+    kernel_end += 40960;
     phys_alloc_start = round_next_page(kernel_end);
     printk("Allocation Starts at %x\n", phys_alloc_start);
 

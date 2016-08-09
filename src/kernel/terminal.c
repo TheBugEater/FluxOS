@@ -305,9 +305,4 @@ void terminal_initialize()
     printk("\n");
 
     setcolor(COLOR_LIGHT_GREY, COLOR_BLACK);
-    while(1)
-    {
-        printk("\nroot@FluxOS:");
-        updatecursor();
-    }
 }
