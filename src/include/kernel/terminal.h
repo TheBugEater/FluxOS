@@ -1,12 +1,13 @@
 #ifndef __TERMINAL_H__
-#define __TERMINAL_H__
-
+#define __TERMINAL_H__ 
 #include <stdarg.h>
 
 #define GRAPHIC_DEVICE 0xC00B8000
 
 #define TERMINAL_WIDTH 80
 #define TERMINAL_HEIGHT 25
+
+#define LOGON_MESSAGE_HEIGHT 4
 
 // Type Declarations
 enum TERMINAL_COLOR

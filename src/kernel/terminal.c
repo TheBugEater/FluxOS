@@ -240,9 +240,9 @@ void clrscr()
 
  	unsigned short *pGraphicDevice = (unsigned short*)GRAPHIC_DEVICE;
 
-	for(unsigned int y = 0; y < TERMINAL_WIDTH; y++)
+	for(unsigned int y = 0; y < TERMINAL_HEIGHT; y++)
 	{
-		for(unsigned int x = 0; x < TERMINAL_HEIGHT; x++)
+		for(unsigned int x = 0; x < TERMINAL_WIDTH; x++)
 		{
 			int index = y * TERMINAL_WIDTH + x;
 			pGraphicDevice[index] = ' ' | terminalColor << 8;
@@ -260,11 +260,11 @@ void scroll()
     {
        // Get the array index after skipping the FluxOS ~10 lines:
         
-       unsigned int startPos = 9 * TERMINAL_WIDTH;
-       unsigned int copyStart = 10 * TERMINAL_WIDTH;
+       unsigned int startPos = LOGON_MESSAGE_HEIGHT * TERMINAL_WIDTH;
+       unsigned int copyStart = startPos + TERMINAL_WIDTH;
        unsigned int lastLine = TERMINAL_WIDTH * (TERMINAL_HEIGHT - 1);
         
-       memcpy(pGraphicDevice + startPos, pGraphicDevice + copyStart,2 * TERMINAL_WIDTH * (TERMINAL_HEIGHT - 9));
+       memcpy(pGraphicDevice + startPos, pGraphicDevice + copyStart,2 * TERMINAL_WIDTH * (TERMINAL_HEIGHT - LOGON_MESSAGE_HEIGHT));
        memset(pGraphicDevice + lastLine, 0, TERMINAL_WIDTH);
         
        currentCursor.Y = TERMINAL_HEIGHT - 2;
@@ -285,7 +285,7 @@ void terminal_initialize()
 {
    setcolor(COLOR_LIGHT_GREY, COLOR_BLACK);
    clrscr();
-
+/*
     char *logonMessage = 
       {
             "\t******************************************\n"
@@ -298,8 +298,14 @@ void terminal_initialize()
       };
    
     printk("%s", logonMessage);
-    printk("\n\n");
+*/
+    setcolor(COLOR_LIGHT_GREEN, COLOR_BLACK);
+    printk("FLUX OS - A Hobby Operating System Kernel\n");
+    printk("Copyrights (c) Dilhan Geeth. All Rights Reserved.\n");
+    printk("\n");
 
+    setcolor(COLOR_LIGHT_GREY, COLOR_BLACK);
+    while(1)
     {
         printk("\nroot@FluxOS:");
         updatecursor();
