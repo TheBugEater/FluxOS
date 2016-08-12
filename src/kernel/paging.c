@@ -121,8 +121,6 @@ void* new_page()
     void* p = new_block();
     void* new_page_addr = add_page_mapping(p, virtual_heap_top);
 
-    printk("Virtual Heap: %x\n", virtual_heap_top);
-
     // Increase offset
     virtual_heap_top = (unsigned long)virtual_heap_top + PAGE_SIZE;
 
@@ -147,8 +145,6 @@ void* get_pages(unsigned long blocks)
         unsigned long physical_addr = (unsigned long)phys_addr + (i * PAGE_SIZE);
         unsigned long* virtual_addr  = (unsigned long)virt_start + (i * PAGE_SIZE);
 
-        printk("Mapping Phys:%x | Virt:%x\n",physical_addr, virtual_addr);
-
         unsigned long table_index = GET_PAGE_TABLE_INDEX(virtual_addr);
         unsigned long page_index = GET_PAGE_INDEX(virtual_addr);
 
@@ -164,7 +160,6 @@ void* get_pages(unsigned long blocks)
         }
         else
         {
-            printk("Creating New Page Table\n");
             void* new_table = new_block();
             unsigned long* virt_table = (unsigned long*)((unsigned long)page_tables_start + table_index * PAGE_SIZE);
 
@@ -181,6 +176,10 @@ void* get_pages(unsigned long blocks)
 void free_pages(void* ptr, unsigned long blocks)
 {
     //TODO: Free Linear Pages
+}
+
+void* add_memory_range(unsigned long* physical_addr, unsigned long virtual_addr, unsigned long length)
+{
 }
 
 void page_fault_handler(struct cpu_state cpu, struct stack_state stack)

@@ -299,7 +299,7 @@ void terminal_initialize()
    
     printk("%s", logonMessage);
 */
-    setcolor(COLOR_LIGHT_GREEN, COLOR_BLACK);
+    setcolor(COLOR_GREEN, COLOR_BLACK);
     printk("FLUX OS - A Hobby Operating System Kernel\n");
     printk("Copyrights (c) Dilhan Geeth. All Rights Reserved.\n");
     printk("\n");

@@ -8,3 +8,8 @@ typedef struct
 } file_block;
 
 void initialize_initrd(kernel_boot_info_t* info);
+void list_all_files();
+
+file_block* files;
+unsigned int file_count;
+char* file_buffer;

@@ -1,5 +1,4 @@
-#ifndef __PAGING_H__
-#define __PAGING_H__
+#ifndef __PAGING_H__ #define __PAGING_H__
 
 #include <utility/utility.h>
 #include <kernel/idt.h>
@@ -74,6 +73,8 @@ void remove_page_mapping(unsigned long* virtual_addr);
 
 void* get_pages(unsigned long blocks);
 void free_pages(void* ptr, unsigned long blocks);
+
+void* add_memory_range(unsigned long* physical_addr, unsigned long virtual_addr, unsigned long length);
 
 // Returns a New Page from Kernel Heap
 void* new_page();
