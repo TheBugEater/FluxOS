@@ -25,7 +25,9 @@ ASM_OBJECTS = $(ASM_SOURCES:.s=.o)
 
 EXECUTABLE = FluxOS.bin
 
-all: init compile create_ramdisk create_grub
+all: init compile grub
+
+grub: create_ramdisk create_grub
 
 compile:$(ASM_OBJECTS) $(C_OBJECTS) $(CPP_OBJECTS) 
 	@echo "Linking the Object files..."
@@ -65,6 +67,7 @@ create_grub:
 	@cp grub.cfg $(BUILDDIR)/isodir/boot/grub/grub.cfg
 	@mv initrd.img $(BUILDDIR)/isodir/modules/initrd.img
 	grub-mkrescue -o myos.iso $(BUILDDIR)/isodir
+
 
 run:
 	@echo "Running..." $<
