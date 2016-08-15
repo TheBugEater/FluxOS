@@ -1,3 +1,6 @@
+#ifndef __INITRD_H__
+#define __INITRD_H__ 
+
 #include <utility/utility.h>
 
 typedef struct 
@@ -13,3 +16,5 @@ void list_all_files();
 file_block* files;
 unsigned int file_count;
 char* file_buffer;
+
+#endif //__INITRD_H__
