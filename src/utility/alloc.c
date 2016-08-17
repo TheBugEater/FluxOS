@@ -2,7 +2,7 @@
 #include <kernel/paging.h>
 #include <utility/utility.h>
 
-void list_add(mem_block_info* ptr)
+void list_add_mem_block(mem_block_info* ptr)
 {
     mem_block_info* current = block_head;
     if(block_head == NULL)
@@ -25,7 +25,7 @@ void list_add(mem_block_info* ptr)
 
 }
 
-void list_remove(mem_block_info* ptr)
+void list_remove_mem_block(mem_block_info* ptr)
 {
     mem_block_info* current = block_head;
     if(block_head == ptr)
@@ -89,7 +89,7 @@ mem_block_info* request_memory(unsigned long size)
 
     block->available = FALSE;
     block->magic = ALLOCATED;
-    list_add(block);
+    list_add_mem_block(block);
 
     // Add Remaining Bytes to Free Blocks
     if(remaining_size > MEM_BLOCK_SIZE)
@@ -182,7 +182,7 @@ void split_mem(mem_block_info* base, unsigned long remaining_size)
 
 //    printk("Split! : Base:%x, Base Size:%d | New:%x, New Size:%d\n",base,base->size,new_block,new_block->size);
     // Add New Block to the List
-    list_add(new_block);
+    list_add_mem_block(new_block);
 }
 
 mem_block_info* merge_mem_up(mem_block_info* current)
@@ -207,9 +207,9 @@ mem_block_info* merge_mem_up(mem_block_info* current)
     }
     prev_block->merge_next = next_ref_block;
 
-    list_remove(current);
+    list_remove_mem_block(current);
 
-    printk("Merged Memory: %x->%x, Size:%d, Merge Size:%d \n", (unsigned long)current,prev_block, current_size, prev_block->size);
+    //printk("Merged Memory: %x->%x, Size:%d, Merge Size:%d \n", (unsigned long)current,prev_block, current_size, prev_block->size);
 
     return merge_mem_up(prev_block);
 }
@@ -239,9 +239,9 @@ mem_block_info* merge_mem_down(mem_block_info* current)
         next_ref_block->merge_prev = current;
     }
     current->merge_next = next_ref_block;
-    list_remove(next_block);
+    list_remove_mem_block(next_block);
 
-    printk("Merged Memory: %x->%x, Size:%d, Merge Size:%d Merge Next:%x\n", next_block,current, current_size, current->size, current->merge_next);
+    //printk("Merged Memory: %x->%x, Size:%d, Merge Size:%d Merge Next:%x\n", next_block,current, current_size, current->size, current->merge_next);
 
     return current;
 }

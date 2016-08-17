@@ -7,6 +7,7 @@
 #include <kernel/mm.h>
 #include <utility/utility.h>
 #include <utility/alloc.h>
+#include <utility/list.h>
 
 void kmain(kernel_boot_info_t info)
 {
@@ -38,5 +39,6 @@ void kmain(kernel_boot_info_t info)
     install_pit();
   
     initialize_initrd(&info);
+
     while(1);
 }

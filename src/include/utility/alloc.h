@@ -19,7 +19,7 @@ static mem_block_info* block_head = 0;
 void* kmalloc(unsigned long size);
 void kfree(void* ptr);
 
-void list_add(mem_block_info* ptr);
+void list_add_mem_block(mem_block_info* ptr);
 mem_block_info* get_mem_block(void* ptr);
 mem_block_info* find_free_block(unsigned long size);
 mem_block_info* request_memory(unsigned long size);
