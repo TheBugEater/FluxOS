@@ -46,6 +46,9 @@ void* memcpy(void* dest, const void* src, int count);
 
 void* memset(void* dest, unsigned char val, int count);
 
+char* strcpy(char *strDest, const char *strSrc);
+int strcmp(const char * s1, const char * s2);
+int strlen(const char* str);
 
 struct kernel_boot_info
 {

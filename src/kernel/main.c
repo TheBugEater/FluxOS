@@ -40,5 +40,6 @@ void kmain(kernel_boot_info_t info)
   
     initialize_initrd(&info);
 
+    list_mount_points();
     while(1);
 }

@@ -24,3 +24,27 @@ void* memset(void* dest, unsigned char val, int count)
     return dest;
 }
 
+char* strcpy(char *strDest, const char *strSrc)
+{
+    kassert(strDest!=NULL && strSrc!=NULL);
+    char *temp = strDest;
+    while(*strDest++ = *strSrc++); 
+    return temp;
+}
+
+int strcmp(const char* s1, const char* s2)
+{
+    while(*s1 && (*s1==*s2))
+        s1++,s2++;
+    return *(const unsigned char*)s1-*(const unsigned char*)s2;
+}
+
+int strlen(const char* str)
+{
+    unsigned long count = 0;
+    while(*str++)
+    {
+        count++;
+    }
+    return count;
+}

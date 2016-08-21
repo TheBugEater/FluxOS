@@ -174,16 +174,6 @@ int sprintk(char *out, const char *format, ...)
 
 ///////////////////////////////////////////////////
 /////////// Terminal Functions ////////////////////
-unsigned int strlen(const char* message)
-{
-	unsigned int ret = 0;
-	while(message[ret] != 0)
-		ret++;
-
-	return ret;
-
-}
-
 int puts ( const char * str )
 {
     printk(str);

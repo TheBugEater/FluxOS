@@ -86,15 +86,15 @@ int main(int argc, char *argv[])
 
     for(int i = 0; i < file_count; i++)
     {
-        file_block block = files[i];
+        file_block* block = &files[i];
         int root_len = strlen(INITRD_DIR);
-        int name_len = strlen(block.name);
+        int name_len = strlen(block->name);
 
-        printf("Packing File %s...\n", block.name);
+        printf("Packing File %s...\n", block->name);
         
         char* complete_path = (char*)malloc(root_len + name_len + 1);
         memcpy(complete_path, INITRD_DIR, root_len);
-        memcpy(complete_path + root_len, block.name, name_len);
+        memcpy(complete_path + root_len, block->name, name_len);
         complete_path[root_len + name_len] = '\0';
 
         FILE* current_file = fopen(complete_path, "rb");
@@ -104,13 +104,13 @@ int main(int argc, char *argv[])
             return 1;
         }
         
-        block.start_offset = buffer_offset;
+        block->start_offset = buffer_offset;
 
-        char* file_content = (char*)malloc(block.block_size);
-        fread(file_content, block.block_size, 1, current_file);
-        memcpy(file_buffer + buffer_offset, file_content, block.block_size);
+        char* file_content = (char*)malloc(block->block_size);
+        fread(file_content, block->block_size, 1, current_file);
+        memcpy(file_buffer + buffer_offset, file_content, block->block_size);
 
-        buffer_offset += block.block_size;
+        buffer_offset += block->block_size;
 
         free(file_content);
         fclose(current_file);

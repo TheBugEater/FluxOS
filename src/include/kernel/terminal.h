@@ -7,7 +7,7 @@
 #define TERMINAL_WIDTH 80
 #define TERMINAL_HEIGHT 25
 
-#define LOGON_MESSAGE_HEIGHT 4
+#define LOGON_MESSAGE_HEIGHT 3
 
 // Type Declarations
 enum TERMINAL_COLOR
@@ -41,7 +41,6 @@ static TerminalVector currentCursor = {.X = 0,.Y = 0};
 static unsigned char terminalColor;
 
 // Function Declarations
-unsigned int strlen(const char* message);
 int putchar(int c);
 
 void printchar(char **str, int c);
