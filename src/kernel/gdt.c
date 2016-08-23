@@ -43,6 +43,11 @@ void install_gdt()
     *  this entry's access byte says it's a Data Segment */
     gdt_set_gate(2, 0, 0xFFFFFFFF, 0x92, 0xCF);
 
+    /* User Mode Code Segment */
+    gdt_set_gate(3, 0, 0xFFFFFFFF, 0xFA, 0xCF);
+    
+    /* User Mode Data Segment */
+    gdt_set_gate(4, 0, 0xFFFFFFFF, 0xF2, 0xCF);
     /* Flush out the old GDT and install the new changes! */
     gdt_flush((unsigned long*)&gp);
 }
